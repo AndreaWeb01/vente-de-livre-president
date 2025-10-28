@@ -13,7 +13,7 @@ import { Link, router } from '@inertiajs/react';
 import { LogOut, Settings } from 'lucide-react';
 
 interface UserMenuContentProps {
-    user: User;
+    user: User | null;
 }
 
 export function UserMenuContent({ user }: UserMenuContentProps) {
@@ -23,6 +23,46 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
         cleanup();
         router.flushAll();
     };
+
+    // Si l'utilisateur n'est pas connecté, afficher les options de connexion
+    if (!user) {
+        return (
+            <>
+                <DropdownMenuLabel className="p-0 font-normal">
+                    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                        <UserInfo user={null} showEmail={true} />
+                    </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                    <DropdownMenuItem asChild>
+                        <Link
+                            className="block w-full"
+                            href="/login"
+                            as="button"
+                            prefetch
+                            onClick={cleanup}
+                        >
+                            <Settings className="mr-2" />
+                            Se connecter
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Link
+                            className="block w-full"
+                            href="/register"
+                            as="button"
+                            prefetch
+                            onClick={cleanup}
+                        >
+                            <LogOut className="mr-2" />
+                            S'inscrire
+                        </Link>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+            </>
+        );
+    }
 
     return (
         <>

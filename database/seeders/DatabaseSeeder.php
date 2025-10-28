@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             [
                 'nom' => 'Test',
                 'prenom' => 'User',
+                'telephone' => '0123456789',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
@@ -28,5 +29,8 @@ class DatabaseSeeder extends Seeder
 
         // Exécuter le seeder des rôles et permissions
         $this->call(RolePermissionSeeder::class);
+        
+        // Exécuter le seeder de l'utilisateur admin
+        $this->call(AdminUserSeeder::class);
     }
 }

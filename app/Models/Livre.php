@@ -24,4 +24,9 @@ class Livre extends Model
     {
         return $this->belongsTo(Auteur::class, 'auteur_id');
     }
+
+    public function achats()
+    {
+        return $this->morphMany(Achat::class, 'achetable');
+    }
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('adresse')->nullable();
             $table->string('ville')->nullable();
             $table->string('quartier')->nullable();
-            $table->string('role')->default('user');
             $table->string('photo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

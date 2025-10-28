@@ -33,7 +33,31 @@ class User extends Authenticatable
     {
         return $this->hasMany(Auteur::class);
     }
-    //relation one to many avec la table commandes
+
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class);
+    }
+
+    public function achats()
+    {
+        return $this->hasMany(Achat::class);
+    }
+
+    public function formationsAchetees()
+    {
+        return $this->morphedByMany(Formation::class, 'achetable', 'achats');
+    }
+
+    public function livresAchetes()
+    {
+        return $this->morphedByMany(Livre::class, 'achetable', 'achats');
+    }
+
+    public function panier()
+    {
+        return $this->hasMany(Panier::class);
+    }
 
 
     /**

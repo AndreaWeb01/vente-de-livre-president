@@ -35,6 +35,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/react-formation.pdf',
                 'est_actif' => true,
                 'prix' => 299.99,
+                
             ],
             [
                 'user_id' => $users[0]->id,
@@ -49,6 +50,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/agile-formation.pdf',
                 'est_actif' => true,
                 'prix' => 450.00,
+              
             ],
             [
                 'user_id' => $users[1]->id ?? $users[0]->id,
@@ -63,6 +65,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/python-formation.pdf',
                 'est_actif' => true,
                 'prix' => 599.99,
+                'stock' => 25,
             ],
             [
                 'user_id' => $users[2]->id ?? $users[0]->id,
@@ -77,6 +80,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/marketing-formation.pdf',
                 'est_actif' => true,
                 'prix' => 399.99,
+                'stock' => 30,
             ],
             [
                 'user_id' => $users[0]->id,
@@ -91,6 +95,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/cybersecurite-formation.pdf',
                 'est_actif' => false,
                 'prix' => 350.00,
+                'stock' => 10,
             ],
             [
                 'user_id' => $users[1]->id ?? $users[0]->id,
@@ -105,6 +110,7 @@ class FormationSeeder extends Seeder
                 'url_zoom' => 'https://example.com/design-formation.pdf',
                 'est_actif' => true,
                 'prix' => 499.99,
+                'stock' => 18,
             ],
         ];
 

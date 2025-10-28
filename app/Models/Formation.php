@@ -12,16 +12,21 @@ class Formation extends Model
         'type',
         'formateur',
         'description',
-        'domaine',
         'date',
-        'image',
+        'photo',
         'url_video',
         'url_zoom',
         'est_actif',
-        'prix'
+        'prix',
+        'stock'
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function achats()
+    {
+        return $this->morphMany(Achat::class, 'achetable');
     }
 }

@@ -11,47 +11,38 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Show the registration page.
+     * Display the registration view.
      */
-    public function create(): Response
+    public function create()
     {
-        return Inertia::render('auth/register');
+        return Inertia::render('Inscription');
     }
-
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'telephone' => 'nullable|string|max:20',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $user = User::create([
-            'nom' => $request->nom,
             'prenom' => $request->prenom,
-            'telephone' => $request->telephone,
+            'nom' => $request->nom,
             'email' => $request->email,
+            'telephone' => $request->telephone,
             'password' => Hash::make($request->password),
         ]);
+
+        // Assigner le rôle utilisateur par défaut
+        $user->assignRole('user');
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        $request->session()->regenerate();
+        // Redirection basée sur le rôle
+        if ($user->hasRole('admin') || $user->hasRole('editor')) {
+            return redirect(route('admin.dashboard'));
+        }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect(route('dashboard'));
     }
 }

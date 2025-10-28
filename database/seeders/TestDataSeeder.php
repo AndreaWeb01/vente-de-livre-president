@@ -137,7 +137,7 @@ class TestDataSeeder extends Seeder
                 'auteur_id' => $auteurIds[0], // Hugo
                 'description' => 'Un roman historique français de Victor Hugo, publié en 1862. Il s\'agit d\'une des œuvres les plus connues de la littérature française.',
                 'page' => 1463,
-                'type' => 'Roman',
+                'type' => 'physique',
                 'langue' => 'Français',
                 'photo' => 'https://via.placeholder.com/300x400/4F46E5/FFFFFF?text=Les+Misérables',
                 'date_publication' => '1862-01-01',
@@ -150,7 +150,7 @@ class TestDataSeeder extends Seeder
                 'auteur_id' => $auteurIds[1], // Zola
                 'description' => 'Un roman d\'Émile Zola publié en 1885. C\'est le treizième volume de la série Les Rougon-Macquart.',
                 'page' => 592,
-                'type' => 'Roman',
+                'type' => 'physique',
                 'langue' => 'Français',
                 'photo' => 'https://via.placeholder.com/300x400/059669/FFFFFF?text=Germinal',
                 'date_publication' => '1885-01-01',
@@ -163,7 +163,7 @@ class TestDataSeeder extends Seeder
                 'auteur_id' => $auteurIds[2], // Camus
                 'description' => 'Un roman d\'Albert Camus, paru en 1942. Il fait partie du « cycle de l\'absurde », une trilogie d\'œuvres de Camus composée d\'un roman, d\'un essai et d\'une pièce de théâtre.',
                 'page' => 159,
-                'type' => 'Roman',
+                'type' => 'physique',
                 'langue' => 'Français',
                 'photo' => 'https://via.placeholder.com/300x400/DC2626/FFFFFF?text=L\'Étranger',
                 'date_publication' => '1942-01-01',
@@ -176,7 +176,7 @@ class TestDataSeeder extends Seeder
                 'auteur_id' => $auteurIds[3], // Sartre
                 'description' => 'Le premier roman de Jean-Paul Sartre, publié en 1938. C\'est un roman philosophique qui explore les thèmes de l\'existence et de l\'absurdité.',
                 'page' => 248,
-                'type' => 'Roman',
+                'type' => 'physique',
                 'langue' => 'Français',
                 'photo' => 'https://via.placeholder.com/300x400/7C3AED/FFFFFF?text=La+Nausée',
                 'date_publication' => '1938-01-01',
@@ -189,7 +189,7 @@ class TestDataSeeder extends Seeder
                 'auteur_id' => $auteurIds[0], // Hugo
                 'description' => 'Un roman de Victor Hugo publié en 1831. L\'histoire se déroule à Paris en 1482.',
                 'page' => 940,
-                'type' => 'Roman',
+                'type' => 'physique',
                 'langue' => 'Français',
                 'photo' => 'https://via.placeholder.com/300x400/4F46E5/FFFFFF?text=Notre-Dame',
                 'date_publication' => '1831-01-01',

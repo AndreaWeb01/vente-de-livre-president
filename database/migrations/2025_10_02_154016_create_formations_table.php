@@ -18,20 +18,18 @@ return new class extends Migration
             $table->string('type');
             $table->string('formateur');
             $table->text('description');
-            $table->string('domaine');
+            $table->string('url_video');
+            $table->string('photo');
             $table->date('date');
-            $table->string('image');
-            $table->string('url_video')->nullable();//lien de la video ou de l'enregistrement
-            $table->string('url_zoom')->nullable();//lien du pdf de la formation
-            $table->boolean('est_actif')->default(true);
+            $table->string('url_zoom'); 
             $table->decimal('prix', 8, 2);
-            $table->timestamps();
+            $table->unsignedInteger('stock');
+            $table->boolean('est_actif')->default(true);
+            $table->timestamps();   
         });
+        
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('formations');

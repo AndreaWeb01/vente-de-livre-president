@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('auteur_id')->constrained('auteurs')->onDelete('cascade');
             $table->text('description');
             $table->integer('page');
-            $table->string('type');
+            $table->enum('type', ['physique', 'numerique']);
             $table->string('langue');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('livrepdf')->nullable();
             $table->date('date_publication');
             $table->decimal('prix', 8, 2);

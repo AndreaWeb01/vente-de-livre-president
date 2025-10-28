@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('auteurs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('biographie', 1000 );
+            $table->longText('biographie')->nullable();
             $table->timestamps();
         });
     }
@@ -27,3 +27,4 @@ return new class extends Migration
         Schema::dropIfExists('auteurs');
     }
 };
+
