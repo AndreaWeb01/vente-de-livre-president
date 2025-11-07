@@ -81,7 +81,7 @@ export default function PhotoSection() {
   return (
     <div className="min-h-screen p-4">
       {/* <h1 className="text-3xl font-bold mb-6 text-center">Ma galerie</h1> */}
-      <Galerie photos={photos} />
+      <Galerie photos={photo} />
     </div>
   );
 }

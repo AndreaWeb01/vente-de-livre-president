@@ -7,6 +7,10 @@ import physicBook from "../assets/physicBook.png"
 import TestimonialCarousel from "../components/TestimonialCarousel"
 import Layout from "../components/Layout"
 import { usePage, router } from "@inertiajs/react"
+import { route } from 'ziggy-js';
+import { Ziggy } from '../ziggy';
+
+
 
 export default function Livres({ livres, livre }) {
     const { props } = usePage();
@@ -68,16 +72,23 @@ export default function Livres({ livres, livre }) {
                         className="text-2xl font-bold text-primary"
                         subtitle="✨ Toujours à portée de main"
                         description={livre.description}
-                        price={livre.prix + " FCFA"}
+                        price={livre.prix + " FCFA"}                       
                         buttons={[
-                        { text: "Je veux mon livre", color: "bg-secondary", to: `/public/panier/livres/${livre.id}`, quantite: 1 },
-                        { text: "Je veux une formation", color: "bg-primary", to: `/public/panier/livres/${livre.id}`, quantite: 1 },
-                        { text: "Voir détails", color: "bg-primary", to: `/public/livres/${livre.id}` },
+                            {
+                              text: "Je veux un livre",
+                              to: route('public.panier.add-livre', livre.id, false, Ziggy),
+                              color: "bg-primary",
+                              method: "post"
+                            },
+                            {
+                              text: "Je veux une formation",
+                              to: route('formations.show', livre.id, false, Ziggy),
+                              color: "bg-secondary",
+                             
+                            }
                         ]}
                         imageRight={false}
                         livre={livre}
-                                    
-                      
                     />
                     ))}
                 </div>

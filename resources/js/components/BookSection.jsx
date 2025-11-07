@@ -1,5 +1,10 @@
-import { Link } from "@inertiajs/react"
-import { usePage } from "@inertiajs/react"
+import { Link, router } from "@inertiajs/react"
+
+
+function addToCart(url, payload) {
+  router.post(url, payload)
+}
+
 export default function BookSection({ image, title, description, buttons, className, subtitle, price, imageRight = true, livre }) {
 
   // Utiliser les données du livre si disponibles, sinon utiliser les props
@@ -17,13 +22,24 @@ export default function BookSection({ image, title, description, buttons, classN
       <p className="text-secondary font-bold leading-relaxed">{displayPrice}</p>
       <div className="flex gap-4 flex-wrap">
         {buttons?.map((btn, idx) => (
-          <Link  
-            key={idx}
-            className={`${btn.color} text-white md:text-[18px] px-2 lg:px-4 py-2 font-[600] rounded-[5px] hover:opacity-90 transition`}
-            href={btn.to}
-          >
-            {btn.text}
-          </Link>
+          btn?.method === 'post' ? (
+            <button
+              key={idx}
+              type="button"
+              className={`${btn.color} text-white md:text-[18px] px-2 lg:px-4 py-2 font-[600] rounded-[5px] hover:opacity-90 transition`}
+              onClick={() => addToCart(btn.to, { quantite: btn.quantite ?? 1 })}
+            >
+              {btn.text}
+            </button>
+          ) : (
+            <Link  
+              key={idx}
+              className={`${btn.color} text-white md:text-[18px] px-2 lg:px-4 py-2 font-[600] rounded-[5px] hover:opacity-90 transition`}
+              href={(btn.to)}
+            >
+              {btn.text}
+            </Link>
+          )
         ))}
       </div>
     </div>

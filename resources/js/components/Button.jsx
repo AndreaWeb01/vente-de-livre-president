@@ -8,7 +8,7 @@ const colorClasses = {
   white: "bg-white border-1 border-textColor text-textColor"
 };
 
-function Button({ label, color = "green", href, to, onClick, ButtonClassName}) {
+function Button({ label, color = "green",methode, href, to, onClick, ButtonClassName}) {
  
   const baseClasses =
     `md:text-[18px] px-2 sm:px-3 py-2 rounded font-[600] transition duration-200 ${ButtonClassName}`;
@@ -18,7 +18,11 @@ function Button({ label, color = "green", href, to, onClick, ButtonClassName}) {
 
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link 
+        className={classes}
+        href={to}
+        method={methode}
+        >
         {label}
       </Link>
     );

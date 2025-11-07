@@ -3,9 +3,12 @@ import Sidebar from "../../components/Sidebar"
 import LectureDash from "../../components/LectureDash"
 import bookCover from "../../assets/bookCover.png"
 import {FaBook } from "react-icons/fa";
+import { usePage } from "@inertiajs/react"
 
 
-export default function Livre(){
+export default function Livre({ livres }){
+    const { props } = usePage()
+    const items = livres || props.livres || []
     return(
        <>
 
@@ -19,10 +22,22 @@ export default function Livre(){
                         </div>
 
                         <div className="mt-4 flex flex-col gap-3">
-                            <LectureDash titres="Acheter un terrain en toute sécurité en Côte d’Ivoire" images={bookCover} Auteur="Allou Nobel"></LectureDash>
-                            <LectureDash titres="Acheter un terrain en toute sécurité en Côte d’Ivoire" images={bookCover} Auteur="Allou Nobel"></LectureDash>
-                            <LectureDash titres="Acheter un terrain en toute sécurité en Côte d’Ivoire" images={bookCover} Auteur="Allou Nobel"></LectureDash>
-
+                            {items && items.length > 0 ? (
+                                items
+                                    .filter((livre) => !!livre?.id)
+                                    .map((livre, index) => (
+                                    <LectureDash
+                                        key={`${livre.id}-${index}`}
+                                        id={livre.id}
+                                        titres={livre.titre}
+                                        images={livre.photo ? `/storage/${livre.photo}` : bookCover}
+                                        Auteur={`${livre?.auteur?.user?.prenom ?? ''} ${livre?.auteur?.user?.nom ?? ''}`.trim()}
+                                        
+                                    />
+                                    ))
+                            ) : (
+                                <div className="text-sm text-gray-600">Aucun livre disponible.</div>
+                            )}
                         </div>
 
                     </div>

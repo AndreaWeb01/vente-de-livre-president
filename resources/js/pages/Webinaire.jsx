@@ -3,11 +3,23 @@ import webinarCover from "../assets/webinarCover.png"
 import TestimonialCarousel from "../components/TestimonialCarousel"
 import webinarIllustration from "../assets/webinarIllustration.jpg"
 import WebinarFullSection from "../components/webinarFullSection"
+import WebinarCard from "../components/WebinarCard"
+import webinar from "../assets/webinar.jpg"
 import WebinaireSection from "../components/WebinaireSection"
 import Icontext from "../components/Icontext"
 import { FaThumbtack } from "react-icons/fa"
 import Layout from "../components/Layout"
+import { usePage } from "@inertiajs/react"
 export default function Webinaire(){
+    const page = usePage();
+    const webinars = page.props.webinars || [];
+    console.log(webinars);
+ 
+   if(webinars.length === 0) {
+    return <div>Aucun webinaire disponible.</div>;
+   }
+
+    
     return(
         <>
         <Layout>
@@ -39,10 +51,29 @@ export default function Webinaire(){
                 />
                
             </section>
+ 
+
+        <section className="py-24 px-4">
+        <h2 className=" text-2xl md:text-4xl font-bold text-primary mb-16 md:mb-24 text-center md:w-[60%] w-[80%] mx-auto ">
+            Prochain webinaire
+        </h2>
+
+        <div className="lg:flex  md:gap-4 gap-4 md:items-center ">
+            <div className="flex flex-wrap lg:justify-between gap-4 lg:gap-3 w-[100%]">
+                {webinars.length > 0 ? (
+                    webinars.map((item) => (
+                        <WebinarCard key={item.id} {...item} />
+                    ))
+                ) : (
+                    <div className="w-full text-center py-10">
+                        <h3 className="text-xl text-gray-600 mb-4">Aucun webinaire disponible pour le moment</h3>
+                        <p className="text-gray-500">Revenez bientôt pour découvrir nos prochains webinaires.</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    </section>
         
-            <section className='mt-6 md:mt-10'>
-              <WebinarFullSection/>
-            </section>
 
             <section>
                 <TestimonialCarousel  title={

@@ -1,5 +1,6 @@
-export default function FormInput({  name, register, type = "text", placeholder = "", error, label }) {
+export default function FormInput({  name, type = "text", placeholder = "", error, label, autoComplete, register, value, onChange }) {
   const id = `input-${name}`;
+ 
   return (
     <div className="mb-3">
       <label htmlFor={id} className="block text-sm font-semibold mb-1">
@@ -8,13 +9,17 @@ export default function FormInput({  name, register, type = "text", placeholder 
 
       <input
         id={id}
-        {...register(name)}
+        name={name}
         type={type}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         className={`w-full border rounded-[5px] p-2 text-sm outline-none focus:ring-0 focus:ring-green-200
           ${error ? "border-red-500" : "border-gray-300"}`}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
+        {...(register ? register(name) : {})}
+        {...(value !== undefined ? { value } : {})}
+        {...(onChange ? { onChange } : {})}
       />
 
       {error && (

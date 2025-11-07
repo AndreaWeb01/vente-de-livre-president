@@ -3,9 +3,7 @@ import Icontext from '../../components/Icontext'
 import Sidebar from "../../components/Sidebar"
 import FormationDashCadre from "../../components/FormationDashCadre"
 import trainingImg from "../../assets/trainingImg.png"
-import WebinarDashCadre from "../../components/WebinarDashCadre"
-import happy from "../../assets/happy.png"
-import bookCover from "../../assets/bookCover.png"
+import { usePage } from "@inertiajs/react"
 import {
   FaUserCircle,
   FaBook,
@@ -17,7 +15,9 @@ import {
 } from "react-icons/fa";
 
 
-export default function Formation(){
+export default function Formation({ formations }){
+    const { props } = usePage()
+    const items = formations || props.formations || []
     return(
        <>
 
@@ -29,38 +29,20 @@ export default function Formation(){
                             <Icontext icon={FaGraduationCap} text="Mes Formations en cours" textClass="font-bold text-[22px]"></Icontext>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5">
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-                            <Cadre children={<>
-                                <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} buttonText="Continuer la formation"></FormationDashCadre> 
-                                </>}>
-                                
-                            </Cadre>
-                           
+                            {items && items.length > 0 ? (
+                                items.map((formation) => (
+                                    <Cadre key={formation.id} children={<>
+                                        <FormationDashCadre
+                                            id={formation.id}
+                                            titre={formation.titre}
+                                            image={formation.photo ? `/storage/${formation.photo}` : trainingImg}
+                                            buttonText="Continuer la formation"
+                                        />
+                                    </>} />
+                                ))
+                            ) : (
+                                <div className="text-sm text-gray-600">Aucune formation disponible.</div>
+                            )}
                         </div>
 
                     

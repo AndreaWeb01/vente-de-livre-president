@@ -5,8 +5,11 @@ import TrainingStatSection from "../components/trainingStatSection"
 import TrainingFullSection from "../components/TrainingFullSection"
 import Layout from "../components/Layout"
 import { usePage, router } from "@inertiajs/react"
+import Button from "../components/Button"
 
 export default function Formations({ formations, formation }){
+    console.log("Formations reçues:", formations);
+
     const { props } = usePage();
     
     // Si on a une formation spécifique (page de détail), on l'affiche
@@ -56,60 +59,7 @@ export default function Formations({ formations, formation }){
                 />
             </section>
 
-            {/* Section des formations dynamiques */}
-            {formations && formations.data && formations.data.length > 0 && (
-                <section className='py-12 px-4'>
-                    <div className="container mx-auto">
-                        <h2 className="text-3xl font-bold text-center mb-8">Nos Formations</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {formations.data.map((formation) => (
-                                <div key={formation.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                                    {formation.image && (
-                                        <img src={formation.image} alt={formation.titre} className="w-full h-48 object-cover" />
-                                    )}
-                                    <div className="p-4">
-                                        <h3 className="text-xl font-semibold mb-2">{formation.titre}</h3>
-                                        <p className="text-gray-600 mb-2">Type: {formation.type}</p>
-                                        <p className="text-sm text-gray-500 mb-3">{formation.description?.substring(0, 100)}...</p>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-2xl font-bold text-primary">{formation.prix} FCFA</span>
-                                            <a href={`/formations/${formation.id}`} className="bg-primary text-white px-4 py-2 rounded hover:bg-opacity-90">
-                                                Voir détails
-                                            </a>
-                                        </div>
-                                        {/* Bouton Acheter */}
-                                        <button
-                                            onClick={() => router.post(`/public/panier/formations/${formation.id}`, { quantite: 1 })}
-                                            className="w-full bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded mt-2">
-                                            Acheter
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        
-                        {/* Pagination */}
-                        {formations.links && (
-                            <div className="mt-8 flex justify-center">
-                                <nav className="flex space-x-2">
-                                    {formations.links.map((link, index) => (
-                                        <a
-                                            key={index}
-                                            href={link.url}
-                                            className={`px-3 py-2 rounded ${
-                                                link.active 
-                                                    ? 'bg-primary text-white' 
-                                                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                            }`}
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
-                                        />
-                                    ))}
-                                </nav>
-                            </div>
-                        )}
-                    </div>
-                </section>
-            )}
+           
 
             <section className='mt-20 md:mt-20 p-4'>
                 <TrainingStatSection 
@@ -142,12 +92,13 @@ export default function Formations({ formations, formation }){
                     <img src={formation.photo ? `/storage/${formation.photo}` : formationCover} alt={formation.titre} className="w-[100%] rounded-[8px]" />
                     <h3 className="font-semibold mb-2 mt-5 text-[18px]">{formation.titre}</h3>
                     <p className="text-[16px] mb-5">{formation.description}</p>
-                    <Button label="Voir la formation" color="orange" href={`/formations/${formation.id}`} ButtonClassName="text-white" />
-                    <button
-                                            onClick={() => router.post(`/public/panier/formations/${formation.id}`, { quantite: 1 })}
-                                            className="w-full bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded mt-2">
-                                            Acheter
-                                        </button>   
+                
+                    <Button
+                       to={`/formations/${formation.id}`}
+                       label="voir la formation"
+                       color="secondary"
+                       ButtonClassName="text-white w-full bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded mt-2"
+                    />   
                 </div>
             ))}
             </div>

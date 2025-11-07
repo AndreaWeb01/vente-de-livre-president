@@ -5,17 +5,7 @@ import openBook from "../assets/openBook.png"
 import BookSection from '../components/BookSection.jsx'
 import TrainingSection from '../components/TrainingSection.jsx'
 import webinar from '../assets/webinar.jpg'
-import Button from "../components/Button.jsx"
 import Layout from "../components/Layout.jsx"
-import Livres from "./Livres.jsx"
-import Formations from "./Formations.jsx"
-import Auteur from "./Auteur.jsx"
-import FormationDetail from "./FormationDetail.jsx"
-import Webinaire from "./Webinaire.jsx"
-import Phototheque from "./Phototheque.jsx"
-import PanierProduitPhysique from "./PanierProduitPhysique.jsx"
-import PanierProduitNumerique from "./PanierProduitNumerique.jsx"
-import { Outlet } from "react-router-dom"
 
 
 export default function Accueil(){
@@ -46,8 +36,8 @@ export default function Accueil(){
                     Il explique les règles qui permettent de comprendre le secteur du foncier ivoirien 
                     et donne des astuces aux lecteurs pour éviter les pièges des escrocs."
                     buttons={[
-                            { text: "Je veux mon livre physique", color: "bg-secondary", to: "/public/panier" },
-                            { text: "Je veux mon livre numérique", color: "bg-primary", to: "/public/panier" },
+                            { text: "Je veux mon livre physique", color: "bg-secondary", to: "/livres" },
+                            { text: "Je veux mon livre numérique", color: "bg-primary", to: "/livres" },
                     ]}
                     imageRight={false}
                 />

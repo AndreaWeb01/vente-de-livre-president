@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('type');
             $table->string('formateur');
             $table->text('description');
-            $table->string('url_video');
+            $table->string('url_video')->nullable();
             $table->string('photo');
             $table->date('date');
-            $table->string('url_zoom'); 
+            $table->string('url_zoom')->nullable(); 
             $table->decimal('prix', 8, 2);
             $table->unsignedInteger('stock');
             $table->boolean('est_actif')->default(true);

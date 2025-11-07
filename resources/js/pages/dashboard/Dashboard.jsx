@@ -21,16 +21,26 @@ import {
 } from "react-icons/fa";
 
 
-export default function Dashboard(){
-    return(
+import { usePage } from "@inertiajs/react"
+import Layout from "../../components/Layout"
+
+export default function Dashboard({ user, stats, dernieres_commandes, derniers_achats,formations,livres }){
+    const pageProps = usePage().props || {}
+    const currentUser = user || pageProps.user
+    const currentStats = stats || pageProps.stats
+    const currentLivres=livres || pageProps.livres
+    const currentFormations=formations || pageProps.formations
+
+    return( 
        <>
+       <Layout>
 
             <section className='p-4 mt-5  md:mt-5'>
                 <div className="flex gap-4 items-start">
                      <Sidebar/>
                     <div className="flex-1 w-full">
-                         <Hero
-                            title="Salut, Tabita"
+                        <Hero
+                           title={`Salut, ${currentUser?.prenom ?? currentUser?.name ?? ''}`}
                             textClassName="text-3xl md:text-4xl font-bold leading-tight"
                             subtitle="Bienvenue sur ton tableau de bord !"
                             gradient="from-[#2E7D32] to-[#4AA441]"
@@ -38,8 +48,8 @@ export default function Dashboard(){
                             imageClassName= "absolute right-0 -bottom-0 w-[35%] "
                             backgroundClass="h-[10rem] lg:h-[18rem]"
                         />
-                        <div class="mt-10">
-                            <CadreStatSection></CadreStatSection>
+                        <div className="mt-10">
+                            <CadreStatSection stats={currentStats} />
                         </div>
                         <h2 className=" my-6 text-[24px] font-bold">Activités en cours</h2>
                         <div className="grid grid-cols-1  lg:grid-cols-2  w-full gap-2 mt-5">
@@ -47,11 +57,18 @@ export default function Dashboard(){
                                     <div className="m-6 text-center text-secondary flex justify-center">
                                         <Icontext icon={FaGraduationCap} text="Mes Formations en cours" textClass="font-bold text-[18px]"></Icontext>
                                     </div>
+                                     {currentFormations.map((formation) => (
                                     <div className="flex flex-col gap-2 m-5">
-                                            <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} divClass=" bg-bodyColor" buttonText="Continuer la formation" ></FormationDashCadre>
-                                            <FormationDashCadre titre="Acquisition d’un bien immobilier en toute sécurité" image={trainingImg} divClass=" bg-bodyColor" buttonText="Continuer la formation" ></FormationDashCadre>
+                                       
+                                        <FormationDashCadre 
+                                        key={formation.id} 
+                                        image={formation.photo ? `/storage/${formation.photo}` : coverFormation}
+                                        titre={formation.titre} 
+                                        divClass=" bg-bodyColor" 
+                                        buttonText="Continuer la formation" />
+                                   
                                     </div>
-                                    
+                                      ))} 
                                 </>}>
                                 
                             </Cadre>
@@ -73,20 +90,19 @@ export default function Dashboard(){
                             </Cadre>
                            
                         </div>
-
+                        {currentLivres.map((livre) => (
                       <div className="mt-4">
-                        <LectureCadreDash titres="Acheter un terrain en toute sécurité en Côte d’Ivoire" images={bookCover}></LectureCadreDash>
 
-                      </div>
-
-                        
+                        <LectureCadreDash titres={livre.titre} images={livre.photo ? `/storage/${livre.photo}` : bookCover}></LectureCadreDash>
+  
                     </div>
                      
-
+                        ))}
                 </div>
-               
-
-            </section>
+                </div>
+                </section>
+            </Layout>
         </>
+            
     )
 }

@@ -122,17 +122,30 @@
             </div>
 
             <div class="space-y-2">
-                <label for="url_video" class="block text-sm font-medium text-gray-700">URL de la vidéo (optionnel)</label>
-                <input type="url"
+                <label for="url_video" class="block text-sm font-medium text-gray-700">la vidéo (optionnel)</label>
+                <input type="file"
                        id="url_video"
                        name="url_video"
                        value="{{ old('url_video') }}"
-                       placeholder="https://youtube.com/watch?v=..."
+                       accept="video/*"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('url_video') border-red-300 @enderror">
                 @error('url_video')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="space-y-2">
+                <label for="est_actif" class="block text-sm font-medium text-gray-700">url Zoom (optionnel)</label> 
+                <input type="url"
+                       id="url_zoom"
+                       name="url_zoom"
+                       value="{{ old('url_zoom') }}"
+                       placeholder="https://zoom.us/j/..."
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('url_zoom') border-red-300 @enderror">
+                @error('url_zoom')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
 
             <div class="space-y-2">
                 <label for="url_zoom" class="block text-sm font-medium text-gray-700">PDF de la formation (optionnel)</label>

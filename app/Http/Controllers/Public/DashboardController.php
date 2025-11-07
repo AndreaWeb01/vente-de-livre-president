@@ -8,6 +8,9 @@ use App\Models\Commande;
 use App\Models\Achat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+
+
 
 class DashboardController extends Controller
 {
@@ -17,18 +20,45 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $webinaires = $user->formationsAchetees()
+        ->where('type', 'webinaire')
+        ->where('est_actif', true)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return view('public.dashboard-simple', [
+        $formations = $user->formationsAchetees()
+        ->with(['user'])
+        ->where('est_actif', true)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $livres = $user->livresAchetes()
+        ->with(['auteur.user'])
+        ->where('est_actif', true)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        $webinaires = $user->formationsAchetees()
+            ->where('type', 'webinaire')
+            ->where('est_actif', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('dashboard/Dashboard', [
             'user' => $user,
             'stats' => [
-                'panier_count' => 0,
-                'panier_total' => 0,
-                'commandes_count' => 0,
-                'commandes_total' => 0,
-                'achats_count' => 0,
+                'panier_count' => $user->panier->count(),
+                'panier_total' => $user->panier->sum('prix_total'),
+                'commandes_count' => $user->commandes->count(),
+                'achats_count' => $user->achats->count(),
+                'formation_count'=>$formations->count(),
+                "livre_count"=>$user->livresAchetes->count(),
+                "webinaires_count()"=>$webinaires->count()
             ],
-            'dernieres_commandes' => collect(),
-            'derniers_achats' => collect(),
+            'formations'=>$formations,
+            'livres'=>$livres,
+            'webinaires'=>$webinaires,
+            'dernieres_commandes' => $user->commandes()->latest()->take(5)->get(),
+            'derniers_achats' => $user->achats()->latest()->take(5)->get(),
         ]);
     }
 }

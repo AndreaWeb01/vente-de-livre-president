@@ -43,8 +43,9 @@ export default function Lightbox({ photo, onClose, onPrev, onNext, hasPrev, hasN
       <div className="relative max-w-4xl w-full bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="flex items-center justify-between p-3 border-b">
           <div>
-            <div className="font-semibold">{photo.title}</div>
+            <div className="font-semibold">{photo.titre || photo.title}</div>
             <div className="text-sm text-gray-500">{formatDate(photo.date)}</div>
+            
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -76,7 +77,7 @@ export default function Lightbox({ photo, onClose, onPrev, onNext, hasPrev, hasN
         <div className="p-4 flex justify-center items-center">
           <img
             src={photo.src}
-            alt={photo.alt || photo.title}
+            alt={photo.alt || photo.titre || photo.title}
             className="max-h-[70vh] object-contain"
           />
         </div>

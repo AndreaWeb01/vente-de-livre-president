@@ -32,17 +32,14 @@ class RegisteredUserController extends Controller
         ]);
 
         // Assigner le rôle utilisateur par défaut
-        $user->assignRole('user');
+        $user->assignRole('admin');
 
         event(new Registered($user));
 
         Auth::login($user);
 
         // Redirection basée sur le rôle
-        if ($user->hasRole('admin') || $user->hasRole('editor')) {
-            return redirect(route('admin.dashboard'));
-        }
-
-        return redirect(route('dashboard'));
+        
+        return redirect(route('admin.dashboard'));
     }
 }

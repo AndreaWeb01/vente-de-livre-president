@@ -14,7 +14,7 @@ class FormationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Formation::where('est_actif', true);
+        $query = Formation::where('est_actif', true)->where('type', 'en_ligne');
 
         // Filtrage par type
         if ($request->filled('type')) {
@@ -36,10 +36,8 @@ class FormationController extends Controller
      */
     public function show(Formation $formation)
     {
-        if (!$formation->est_actif) {
-            abort(404);
-        }
+      
 
-        return Inertia::render('Formations', compact('formation'));
+        return Inertia::render('FormationDetail', compact('formation'));
     }
 }

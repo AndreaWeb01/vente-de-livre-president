@@ -1,10 +1,18 @@
 import { trainings } from "../data/Trainings";
 import TrainingCard from "../components/TrainingCard";
 import Button from "./Button";
+import { router } from "@inertiajs/react";
 
 export default function TrainingDetail({ formation, id }) {
     // Si formation n'est pas passée en props, chercher dans les données locales
     const trainingData = formation || trainings.find(item => item.id === parseInt(id));
+
+    const handleParticiper = () => {
+        if (!trainingData || !trainingData.id) return;
+        router.post(`/public/panier/formations/${trainingData.id}`, {
+            quantite: 1,
+        });
+    };
 
     if (!trainingData) {
         return <p>Formation introuvable</p>;
@@ -22,36 +30,15 @@ export default function TrainingDetail({ formation, id }) {
                     />
                 </div>
                 <div className="w-full lg:w-[70%]">
-                    <h2 className="text-2xl md:text-4xl font-bold text-primary mb-16 md:mb-12">
-                        Plan des formations
+                    <h2 className="text-2xl md:text-4xl font-bold text-primary mb-6 md:mb-8">
+                        Description de la formation
                     </h2>
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">01 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
-                    </p><br />
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">02 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
-                    </p><br />
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">03 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
-                    </p><br />
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">04 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
-                    </p><br />
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">05 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
-                    </p><br />
-                    <p className="text-textColor font-medium text-[16px] md:text-[18px]">
-                        <span className="text-primary font-semibold">06 </span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm ed do eiusm ed do eiusm ed do  
+                    <p className="text-textColor font-medium text-[16px] md:text-[18px] whitespace-pre-line">
+                        {trainingData.description}
                     </p>
                     <div className="flex flex-wrap gap-6 mt-10">
                         <div>
-                            <Button label="J'y participe" color="orange" to="/Paiement-ligne" ButtonClassName="text-white" />
+                            <Button label="J'y participe" color="orange" onClick={handleParticiper} ButtonClassName="text-white" />
                         </div>
                         <div>
                             <Button label="Je veux un livre" color="green" to="/livres" ButtonClassName="text-white"/>

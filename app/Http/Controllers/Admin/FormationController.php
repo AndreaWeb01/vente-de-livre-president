@@ -51,8 +51,8 @@ class FormationController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Sera stocké comme 'photo' dans la base de données
-            'url_video' => 'nullable|string|url',
-            'url_zoom' => 'nullable|file|mimes:pdf|max:10240',
+            'url_video' => 'nullable',
+            'url_zoom' => 'nullable|string|url',
             'est_actif' => 'boolean',
             'prix' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -68,12 +68,13 @@ class FormationController extends Controller
             $imagePath = $request->file('image')->store('formations/images', 'public');
             $data['photo'] = $imagePath;
         }
-
-        // Upload du PDF
-        if ($request->hasFile('url_zoom')) {
-            $pdfPath = $request->file('url_zoom')->store('formations/pdfs', 'public');
-            $data['url_zoom'] = $pdfPath;
+        
+        // Upload de la vidéo
+        if ($request->hasFile('url_video')) {
+            $videoPath = $request->file('url_video')->store('formations/videos', 'public');
+            $data['url_video'] = $videoPath;
         }
+        
         
         Formation::create($data);
         
@@ -112,29 +113,21 @@ class FormationController extends Controller
             'formateur' => 'required|string|max:255',
             'description' => 'required|string',
             'domaine' => 'required|string|max:100',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'date' => 'required|date',
-            'url_video' => 'nullable|string|url',
+            'url_video' => 'nullable|file|mimes:mp4,mov,avi',
             'est_actif' => 'boolean',
             'prix' => 'required|numeric|min:0|max:999999.99',
         ]);
-
+     
         // Validation des fichiers seulement s'ils sont fournis
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-        }
-
-        if ($request->hasFile('url_zoom')) {
-            $request->validate([
-                'url_zoom' => 'file|mimes:pdf|max:10240',
-            ]);
-        }
-
+        
         $data = $request->only([
-            'titre', 'type', 'formateur', 'description', 'domaine',
-            'date', 'url_video', 'est_actif', 'prix'
+            'titre', 'type', 'formateur', 'description',
+            'date', 'url_video', 'est_actif', 'prix', 'stock'
         ]);
+
 
         // Upload de la nouvelle image si fournie
         if ($request->hasFile('image')) {
@@ -145,16 +138,19 @@ class FormationController extends Controller
             $imagePath = $request->file('image')->store('formations/images', 'public');
             $data['image'] = $imagePath;
         }
-
-        // Upload du nouveau PDF si fourni
-        if ($request->hasFile('url_zoom')) {
-            // Supprimer l'ancien PDF
-            if ($formation->url_zoom && Storage::disk('public')->exists($formation->url_zoom)) {
-                Storage::disk('public')->delete($formation->url_zoom);
+        
+        // Upload de la nouvelle vidéo si fournie
+        if ($request->hasFile('url_video')) {
+            // Supprimer l'ancienne vidéo
+            if ($formation->url_video && Storage::disk('public')->exists($formation->url_video)) {
+                Storage::disk('public')->delete($formation->url_video);
             }
-            $pdfPath = $request->file('url_zoom')->store('formations/pdfs', 'public');
-            $data['url_zoom'] = $pdfPath;
+            $videoPath = $request->file('url_video')->store('formations/videos', 'public');
+            $data['url_video'] = $videoPath;
         }
+        
+
+     
 
         $formation->update($data);
 

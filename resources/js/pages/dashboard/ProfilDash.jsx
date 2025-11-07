@@ -4,32 +4,37 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormInput from "../../components/FormInput"
 import Button from "../../components/Button"
+import { router, usePage } from "@inertiajs/react";
 
 const schema = yup.object({
   nom: yup.string().required("Le nom est requis."),
   prenom: yup.string().required("Le prénom est requis."),
-  téléphone: yup
-    .string()
-    .matches(/^[0-9]{10}$/, "Téléphone invalide. Le numéro doit contenir 10 chiffres.")
-    .required("Le numéro de téléphone est requis."),
-  ville: yup.string().required("La ville ou la commune de livraison est requise."),
-  quartier: yup.string().required("Le quartier est requis."),
+  email: yup.string().email("Email invalide").required("L'email est requis."),
+  telephone: yup.string().nullable(),
+  adresse: yup.string().nullable(),
+  ville: yup.string().nullable(),
+  quartier: yup.string().nullable(),
 }).required();
 
 export default function ProfilDash() {
+  const { props } = usePage();
+  const currentUser = props?.auth?.user || {};
   const { register, handleSubmit, reset, formState: { errors, isSubmitting, isSubmitSuccessful } } = 
     useForm({
       resolver: yupResolver(schema),
-      defaultValues: { ville: "", nom: "", prenom: "", téléphone: "", quartier: "" }
+      defaultValues: {
+        nom: currentUser.nom || "",
+        prenom: currentUser.prenom || "",
+        email: currentUser.email || "",
+        telephone: currentUser.telephone || "",
+        adresse: currentUser.adresse || "",
+        ville: currentUser.ville || "",
+        quartier: currentUser.quartier || "",
+      }
     });
 
   const onSubmit = async (data) => {
-    try {
-      await new Promise((res) => setTimeout(res, 1000));
-      reset();
-    } catch (err) {
-      console.error(err);
-    }
+    router.patch('/settings/profile', data, { preserveScroll: true });
   };
 
   return (
@@ -44,8 +49,8 @@ export default function ProfilDash() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormInput name="email" register={register} type="email" error={errors.email} placeholder="Email" label="email"/>
-                <FormInput name="téléphone" register={register} type="tel" error={errors.téléphone} placeholder="Téléphone" label="Téléphone" /> 
+                <FormInput name="email" register={register} type="email" error={errors.email} placeholder="Email" label="Email"/>
+                <FormInput name="telephone" register={register} type="tel" error={errors.telephone} placeholder="Téléphone" label="Téléphone" /> 
             </div>
             <div className="mt-5 mb-5">
                 <h2 className="text-secondary text-[18px] font-semibold md:text-2xl">
@@ -66,7 +71,7 @@ export default function ProfilDash() {
                 <FormInput name="ville" register={register} error={errors.ville} placeholder="Ville ou Commune de livraison" label="Ville ou Commune de livraison" />
                 <FormInput name="quartier" register={register} error={errors.quartier} placeholder="Quartier" label="Quartier" />
             </div>
-            <FormInput name="téléphone" register={register} type="tel" error={errors.téléphone} placeholder="Téléphone" label="Téléphone" /> 
+            <FormInput name="adresse" register={register} error={errors.adresse} placeholder="Adresse" label="Adresse" /> 
 
             {isSubmitSuccessful && (
               <p className="text-green-600 text-sm mb-4">Message envoyé avec succès !</p>

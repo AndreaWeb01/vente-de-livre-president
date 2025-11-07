@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\phothotheque;
+
 use Inertia\Inertia;
 
 class PhotothequeController extends Controller
@@ -13,12 +15,9 @@ class PhotothequeController extends Controller
      */
     public function index(Request $request)
     {
-        // Pour l'instant, retournons une page vide
-        // Vous pouvez ajouter la logique pour récupérer les images de la photothèque
-        $images = []; // À remplacer par la logique de récupération des images
-        
+        $phototheques = phothotheque::all();
         return Inertia::render('Phototheque', [
-            'images' => $images,
+            'phototheques' => $phototheques->toArray(),
             'filters' => $request->only(['search', 'category'])
         ]);
     }

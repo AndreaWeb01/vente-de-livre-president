@@ -16,18 +16,29 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 bg-bodyColor p-4 hidden lg:block">
-      <ul>
-        <MenuItem
+      <ul className="rounded-lg space-y-2">
+        <MenuItem 
+          
           icon={<MdDashboard />}
           label="Dashboard"
-          to="/dashboard"
-          active={url === "/dashboard"}
+          to="/public/dashboard"
+          active={url === "public/dashboard"}
+
         />
-        <MenuItem icon={<FaClipboardList />} label="Commandes" to="/commandes" active={url === "/commandes"}/>
-        <MenuItem icon={<FaBook />} label="Livre" to="/livreDash" active={url === "/livreDash"}/>
-        <MenuItem icon={<FaGraduationCap />} label="Formation" to="/formationDash" active={url === "/formationDash"} />
-        <MenuItem icon={<FaChalkboard />} label="Webinaire" to="/webinaireDash" active={url === "/webinaireDash"}/>
-        <MenuItem icon={<FaUser />} label="Profil" to="/profil" active={url === "/profil"} />
+        <MenuItem 
+        icon={<FaClipboardList />}
+        label="Commandes" 
+        to="/public/commandes" 
+        active={url === "/public/commandes"}/>
+
+        <MenuItem 
+        icon={<FaBook />} 
+        label="Mes livres" 
+        to="/mes-livres" 
+        active={url === "/mes-livres"}/>
+        <MenuItem icon={<FaGraduationCap />} label="Mes formations" to="/mes-formations" active={url === "/mes-formations"} />
+        <MenuItem icon={<FaChalkboard />} label="Mes webinaires" to="/mes-webinaire" active={url === "/mes-webinaire"}/>
+        <MenuItem icon={<FaUser />} label="Profil" to="/settings/profile" active={url === "/settings/profile"} />
         <MenuItem icon={<FaSignOutAlt />} label="Déconnexion" to="/" active={url === "/"} />
       </ul>
     </aside>

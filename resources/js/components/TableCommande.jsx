@@ -1,59 +1,31 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import Cadre from "./Cadre";
 import Button from "./Button";
 
-export default function TableCommande() {
-  const commandes = [
-    {
-      id: 52214,
-      date: "25/08/2025",
-      etat: "En attente",
-      produits: [
-        { nom: "Livre version physique", quantite: 1, total: 15000 },
-        { nom: "Livre version numerique", quantite: 0, total: 0 },
-        { nom: "Formation", quantite: 0, total: 0 },
-        
-      ],
-      livraison: 1500,
-      moyenPaiement: "Mobile money"
-    },
-    {
-      id: 52215,
-      date: "25/08/2025",
-      etat: "Terminé",
-      produits: [
-        { nom: "Livre version physique", quantite: 1, total: 15000 },
-        { nom: "Livre version numerique", quantite: 0, total: 0 },
-        { nom: "Formation", quantite: 0, total: 0 },
-      ],
-      livraison: 1500,
-      moyenPaiement: "Livraison"
 
-    },
-    {
-      id: 52216,
-      date: "26/08/2025",
-      etat: "En cours",
-      produits: [
-        { nom: "Livre version numerique", quantite: 0, total: 0 },
-        { nom: "Livre version numerique", quantite: 0, total: 0 },
-        { nom: "Formation", quantite: 1, total: 30000 },
-        
-      ],
-     livraison: 1500,
-     moyenPaiement: "Mobile money"
-    },
-  ];
-    const calculerTotal = (produits, livraison) => {
-        const sousTotal = produits.reduce((acc, produit) => acc + produit.total, 0);
-        const totalAvecLivraison = sousTotal + livraison;
-        return totalAvecLivraison.toLocaleString("fr-FR") + " Fcfa";
-    };
+export default function TableCommande({ commandes: commandesProp }) {
+  const { props } = usePage();
+  const pagination = commandesProp || props?.commandes || [];
+  const commandes = Array.isArray(pagination?.data) ? pagination.data : (Array.isArray(pagination) ? pagination : []);
+
+  const formatTotal = (cmd) => {
+    const total = cmd?.total ?? cmd?.prix_total ?? 0;
+    return Number(total).toLocaleString("fr-FR") + " Fcfa";
+  };
+
+  const formatDate = (cmd) => {
+    const dateStr = cmd?.created_at || cmd?.date;
+    if (!dateStr) return "-";
+    const d = new Date(dateStr);
+    return isNaN(d.getTime()) ? String(dateStr) : d.toLocaleDateString("fr-FR");
+  };
+
+  const statut = (cmd) => cmd?.statut || cmd?.etat || "-";
 
   return (
     <>
       <Cadre>
-        {/* ... (votre table pour écrans moyens et plus) */}
+        {/* Table desktop */}
         <div className="hidden md:block overflow-x-auto p-4 py-4">
           <table className="min-w-full text-left text-sm md:text-base border-collapse">
             <thead>
@@ -68,22 +40,26 @@ export default function TableCommande() {
             <tbody>
               {commandes.map((cmd) => (
                 <tr key={cmd.id} className="border-b last:border-none hover:bg-gray-50 transition">
-                  <td className="py-3 px-4 text-textColor text-center">n°{cmd.id}</td>
-                  <td className="py-3 px-4 text-textColor text-center">{cmd.date}</td>
-                  <td className="py-3 px-4 text-secondary font-medium text-center">{cmd.etat}</td>
+                  <td className="py-3 px-4 text-textColor text-center">{cmd.reference}</td>
+                  <td className="py-3 px-4 text-textColor text-center">{formatDate(cmd)}</td>
+                  <td className="py-3 px-4 text-secondary font-medium text-center">{statut(cmd)}</td>
                   <td className="py-3 px-4 text-primary font-semibold text-center">
-                    {calculerTotal(cmd.produits, cmd.livraison)}
+                    {formatTotal(cmd)}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <Link 
-                      to={`/detail-commande/${cmd.id}`} 
-                      state={{ commande: cmd }} // Passe l'objet commande via l'état du routeur
+                      href={`/public/commande/${cmd.id}`}
                     >
                       <Button label="voir" color="orange" ButtonClassName="text-white">Voir</Button>
                     </Link>
                   </td>
                 </tr>
               ))}
+              {commandes.length === 0 && (
+                <tr>
+                  <td className="py-3 px-4 text-center text-sm text-gray-600" colSpan={5}>Aucune commande.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -94,25 +70,28 @@ export default function TableCommande() {
             <div key={cmd.id} className="border border-gray-300 rounded-lg p-4 shadow-sm">
               <div className="flex gap-4 items-center mb-2">
                 <span className="text-textColor font-semibold">Commande :</span>
-                <span className="text-textColor">n°{cmd.id}</span>
+                <span className="text-textColor">{cmd.reference}</span>
               </div>
               <div className="flex gap-4 items-center mb-2">
                 <span className="text-textColor font-semibold">Date :</span>
-                <span>{cmd.date}</span>
+                <span>{formatDate(cmd)}</span>
               </div>
               <div className="flex gap-4 items-center mb-2">
                 <span className="text-textColor font-semibold">État :</span>
-                <span className="text-secondary">{cmd.etat}</span>
+                <span className="text-secondary">{statut(cmd)}</span>
               </div>
               <div className="flex gap-4 items-center mb-3">
                 <span className="text-textColor font-semibold">Total :</span>
-                <span className="text-primary font-semibold">{calculerTotal(cmd.produits, cmd.livraison)}</span>
+                <span className="text-primary font-semibold">{formatTotal(cmd)}</span>
               </div>
-              <Link to={`/detail-commande/${cmd.id}`} state={{ commande: cmd }}>
+              <Link href={`/public/commande/${cmd.id}`}>
                 <Button label="voir" color="orange" ButtonClassName="text-white">Voir</Button>
               </Link>
             </div>
           ))}
+          {commandes.length === 0 && (
+            <div className="text-sm text-gray-600">Aucune commande.</div>
+          )}
         </div>
       </Cadre>
     </>

@@ -10,12 +10,19 @@ class Commande extends Model
 {
     protected $fillable = [
         'user_id',
+        'nom',
+        'prenom',
+        'email',
+        'telephone',
+        'adresse',
+        'ville',
+        'quartier',
         'total',
         'statut',
         'reference',
-        'date_paiement',
         'mode_paiement',
         'notes',
+        'date_paiement',
     ];
 
     protected $casts = [

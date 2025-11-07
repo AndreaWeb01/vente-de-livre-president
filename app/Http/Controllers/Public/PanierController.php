@@ -23,16 +23,27 @@ class PanierController extends Controller
 
         $total = $panier->sum('prix_total');
 
-        return Inertia::render('public/panier/index', [
+        $user = Auth::user();
+
+        return Inertia::render('PanierProduitNumerique', [
             'panier' => $panier,
             'total' => $total,
+            'user' => [
+                'nom' => $user->nom,
+                'prenom' => $user->prenom,
+                'email' => $user->email,
+                'telephone' => $user->telephone,
+                'adresse' => $user->adresse,
+                'ville' => $user->ville,
+                'quartier' => $user->quartier,
+            ],
         ]);
     }
 
     /**
      * Ajouter un livre au panier
      */
-    public function addLivre(Request $request, $id)
+   public function addLivre(Request $request, $id)
     {
         $request->validate([
             'quantite' => 'integer|min:1|max:10',
@@ -65,15 +76,14 @@ class PanierController extends Controller
                 'prix_unitaire' => $livre->prix,
             ]);
         }
-
-        return redirect()->back()->with('success', 'Livre ajouté au panier !');
-}
+        return redirect()->route('public.panier.index')->with('success', 'Livre ajouté au panier !');
+    }
 
 
     /**
      * Ajouter une formation au panier
      */
-    public function addFormation(Request $request, $id)
+  public function addFormation(Request $request, $id)
     {
         $request->validate([
             'quantite' => 'integer|min:1|max:1', // Les formations sont généralement limitées à 1
@@ -104,7 +114,7 @@ class PanierController extends Controller
             ]);
         }
 
-        return Inertia::render('public/panier/index');
+        return redirect()->route('public.panier.index')->with('success', 'Formation ajoutée au panier !');
     }
 
     /**
@@ -187,7 +197,9 @@ class PanierController extends Controller
             ]);
         }
 
-        return redirect()->route('public.commande.create')->with('success', 'Livre ajouté au panier ! Vous pouvez maintenant finaliser votre commande.');
+        return Inertia::render('PanierProduitNumerique', [
+            'success' => 'Livre ajouté au panier ! Vous pouvez maintenant finaliser votre commande.',
+        ]);
     }
 
     /**
@@ -212,7 +224,9 @@ class PanierController extends Controller
             ->first();
 
         if ($panierItem) {
-            return redirect()->route('public.commande.create')->with('info', 'Cette formation est déjà dans votre panier !');
+            return Inertia::render('PanierProduitNumerique', [
+                'info' => 'Cette formation est déjà dans votre panier !',
+            ]);
         } else {
             // Créer un nouvel élément
             Panier::create([
@@ -224,6 +238,8 @@ class PanierController extends Controller
             ]);
         }
 
-        return redirect()->route('public.commande.create')->with('success', 'Formation ajoutée au panier ! Vous pouvez maintenant finaliser votre commande.');
+        return Inertia::render('PanierProduitNumerique', [
+            'success' => 'Formation ajoutée au panier ! Vous pouvez maintenant finaliser votre commande.',
+        ]);
     }
 }

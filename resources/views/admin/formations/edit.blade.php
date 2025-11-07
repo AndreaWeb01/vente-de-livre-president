@@ -132,7 +132,7 @@
                        name="image"
                        accept="image/*"
                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 @error('image') border-red-300 @enderror">
-                @if($formation->image)
+                @if($formation->image)  
                     <div class="mt-2">
                         <p class="text-sm text-gray-600 mb-2">Image actuelle :</p>
                         <img src="{{ str_starts_with($formation->image, 'http') ? $formation->image : asset('storage/' . $formation->image) }}"
@@ -147,8 +147,8 @@
             </div>
 
             <div class="space-y-2">
-                <label for="url_video" class="block text-sm font-medium text-gray-700">URL de la vidéo (optionnel)</label>
-                <input type="url"
+                <label for="url_video" class="block text-sm font-medium text-gray-700">Nouvelle vidéo (optionnel)</label>
+                <input type="file"
                        id="url_video"
                        name="url_video"
                        value="{{ old('url_video', $formation->url_video) }}"

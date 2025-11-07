@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use App\Models\Livre;
+use App\Models\Formation as Webinaire;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -22,10 +23,11 @@ class AccessController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return Inertia::render('Formations/MesFormations', [
+        return Inertia::render('dashboard/Formations', [
             'formations' => $formations
         ]);
     }
+    
 
     /**
      * Afficher les livres achetés par l'utilisateur connecté
@@ -40,7 +42,7 @@ class AccessController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return Inertia::render('Livres/MesLivres', [
+        return Inertia::render('dashboard/Livre', [
             'livres' => $livres
         ]);
     }
@@ -55,8 +57,9 @@ class AccessController extends Controller
             ->where('est_actif', true)
             ->firstOrFail();
 
-        return Inertia::render('Formations/Show', [
-            'formation' => $formation
+        return Inertia::render('dashboard/ShowFormation', [
+            'formation' => $formation,
+            'player' => route('video.stream', $formation->id),
         ]);
     }
 
@@ -69,9 +72,45 @@ class AccessController extends Controller
             ->where('id', $id)
             ->where('est_actif', true)
             ->firstOrFail();
+       
+        return Inertia::render('dashboard/ReadBook', [
+            'livre' => $livre,
+            
+        ]);
+    }
 
-        return Inertia::render('Livres/Show', [
-            'livre' => $livre
+    /**
+     * Lire la vidéo d'une formation achetée (page lecteur)
+     */
+    public function voirVideoFormation($id)
+    {
+        $formation = Formation::with(['user'])
+            ->where('id', $id)
+            ->where('est_actif', true)
+            ->firstOrFail();
+
+        return Inertia::render('dashboard/FormPlayerVideo', [
+            'formation' => $formation,
+            'player' => $formation->url_video,
+        ]);
+    }
+
+    /**
+     * Afficher les webinaires (formations de type webinaire) achetés par l'utilisateur
+     */
+    public function mesWebinaire()
+    {
+        $user = auth()->user();
+        $webinaires = $user->formationsAchetees()
+            ->where('type', 'webinaire')
+            ->where('est_actif', true)
+            ->withCount('achats')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('dashboard/Webinaires', [
+            'webinaires' => $webinaires,
+            'payer'=>$webinaires->url_video,
         ]);
     }
 }

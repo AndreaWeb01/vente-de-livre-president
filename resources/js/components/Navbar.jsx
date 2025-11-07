@@ -46,7 +46,7 @@ export default function Navbar() {
 
   const handleMonCompteClick = () => {
     sessionStorage.setItem("previousPage", url);
-    router.visit("/register");
+    router.visit("/public/dashboard");
   };
 
   return (

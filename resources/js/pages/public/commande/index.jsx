@@ -1,8 +1,10 @@
-import React from 'react';
+  import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import Layout from '../../../components/Layout';
 
 export default function CommandesIndex({ commandes }) {
+    const items = Array.isArray(commandes) ? commandes : (commandes?.data || []);
+    const totalCount = Array.isArray(commandes) ? commandes.length : (commandes?.total ?? items.length);
     const getStatusBadge = (statut) => {
         const statusConfig = {
             'en_attente': { color: 'bg-yellow-100 text-yellow-800', text: 'En attente' },
@@ -37,11 +39,11 @@ export default function CommandesIndex({ commandes }) {
                         </Link>
                     </div>
                     
-                    {commandes && commandes.length > 0 ? (
+                    {items && items.length > 0 ? (
                         <div className="bg-white shadow-md rounded-lg overflow-hidden">
                             <div className="px-6 py-4 bg-gray-50 border-b">
                                 <h2 className="text-lg font-semibold text-gray-900">
-                                    Historique des commandes ({commandes.length})
+                                    Historique des commandes ({totalCount})
                                 </h2>
                             </div>
                             
@@ -70,7 +72,7 @@ export default function CommandesIndex({ commandes }) {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                        {commandes.map((commande) => (
+                                        {items.map((commande) => (
                                             <tr key={commande.id} className="hover:bg-gray-50">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {commande.reference}
@@ -100,6 +102,18 @@ export default function CommandesIndex({ commandes }) {
                                     </tbody>
                                 </table>
                             </div>
+                            {commandes?.links && (
+                                <div className="px-6 py-3 border-t bg-gray-50 flex flex-wrap gap-2">
+                                    {commandes.links.map((link, i) => (
+                                        <Link
+                                            key={i}
+                                            href={link.url || '#'}
+                                            className={`px-3 py-1 rounded ${link.active ? 'bg-blue-600 text-white' : 'bg-white border text-gray-700 hover:bg-gray-100'}`}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <div className="text-center py-12">

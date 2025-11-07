@@ -26,10 +26,10 @@ class WebinaireController extends Controller
             $query->where('domaine', $request->domaine);
         }
 
-        $webinaires = $query->orderBy('created_at', 'desc')->paginate(12);
+        $webinaires = $query->orderBy('created_at', 'desc')->get();
 
         return Inertia::render('Webinaire', [
-            'webinaires' => $webinaires,
+            'webinars' => $webinaires,
             'filters' => $request->only(['search', 'domaine'])
         ]);
     }

@@ -3,10 +3,20 @@ import coverFormation from "../assets/coverFormation.png";
 import Button from "../components/Button";
 import TrainingDetail from "../components/TrainingDetail";
 import AccordionList from "../components/AccordionList";
+import Layout from "../components/Layout";
 
 export default function FormationDetail({ formation, id }) {
+  const normalizedFormation = formation
+    ? {
+        id: formation.id,
+        image: formation.photo ? `/storage/${formation.photo}` : coverFormation,
+        title: formation.titre,
+        description: formation.description,
+      }
+    : null;
+
   return (
-    <>
+    <Layout>
         <section className='p-4'>
             <Hero
                 title="Nos formations"
@@ -26,18 +36,19 @@ export default function FormationDetail({ formation, id }) {
         </section>
 
         <section className="mt-20 md:mt-20 p-4">
-            <TrainingDetail formation={formation} id={id}/>
+            {normalizedFormation ? (
+              <TrainingDetail formation={normalizedFormation} id={id} />
+            ) : (
+              <p>Chargement de la formation...</p>
+            )}
         </section>
-
 
         <section className="mt-20 md:mt-20 p-4">
-        <AccordionList title="Trois (3) grandes raisons pour lesquelles tout le monde participe à notre formation"
-        />
-
-        <div className="flex justify-center mt-10">
-            <Button label="Je m'inscris maintenant" color="orange"/>
-        </div>
+          <AccordionList title="Trois (3) grandes raisons pour lesquelles tout le monde participe à notre formation" />
+          <div className="flex justify-center mt-10">
+              <Button label="Je m'inscris maintenant" color="orange" />
+          </div>
         </section>
-    </>
+    </Layout>
   );
 }

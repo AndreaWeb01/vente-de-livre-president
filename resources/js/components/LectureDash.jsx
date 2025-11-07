@@ -2,7 +2,7 @@ import { FaBook } from "react-icons/fa"
 import Icontext from "./Icontext"
 import Button from "./Button"
 import Cadre from "./Cadre"
-export default function LectureDash({images, titres, Auteur}){
+export default function LectureDash({ id, images, titres, Auteur }){
     return(
         <Cadre>
           <div className="px-6 py-6 flex md:gap-33 justify-between items-center">
@@ -13,10 +13,18 @@ export default function LectureDash({images, titres, Auteur}){
                 <div>
                     <h2 className="text-textColor text-[16px] md:text-[22px] font-bold">{titres}</h2>
                     <h2 className="text-textColor">Auteur: <span className="text-primary">{Auteur}</span></h2>
+                    <h1>{}</h1>
                 </div>
             </div>
             <div className="">
-                <Button label="Poursuivre la lecture" color="orange" ButtonClassName="text-white"></Button>
+                {id ? (
+                    <Button 
+                        to={`/read-book/${id}`}
+                        label="Poursuivre la lecture" 
+                        color="orange" 
+                        ButtonClassName="text-white"
+                    />
+                ) : null}
             </div>
           </div>
         </Cadre>
