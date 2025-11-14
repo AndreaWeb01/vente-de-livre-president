@@ -1,0 +1,259 @@
+{
+  "common": {
+    "books": "Libros",
+    "authors": "Autor",
+    "trainings": "Formaciones",
+    "webinar": "Seminario web",
+    "phototheque": "Fototeca",
+    "account": "Mi cuenta",
+    "close": "Cerrar",
+    "menu": "Menú",
+    "description": "Descripción"
+  },
+  "footer": {
+    "intro": "Invertir en la tierra es invertir en el futuro. Con nuestro libro y servicios, te damos las claves para construir un patrimonio sólido, protegido y conforme a la ley. Tu seguridad territorial empieza aquí.",
+    "usefulLinks": "Enlaces útiles",
+    "newsletterTitle": "¡Únete a nuestro boletín para no perderte nada!",
+    "copyright": "Todos los derechos reservados. Firme Attou & Co © 2025"
+  },
+  "reader": {
+    "page": "Página",
+    "of": "de",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "loading": "Cargando…",
+    "pdfError": "Error al cargar el PDF.",
+    "noBook": "No hay libro para mostrar."
+  },
+  "stats": {
+    "orders": "Pedidos"
+  },
+  "menu": {
+    "dashboard": "Panel",
+    "orders": "Pedidos",
+    "book": "Libro",
+    "training": "Formación",
+    "webinar": "Seminario web",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión"
+  },
+  "dashboard": {
+    "hello": "Hola",
+    "welcome": "¡Bienvenido a tu panel!",
+    "activities": "Actividades en curso",
+    "myOngoingTrainings": "Mis formaciones en curso",
+    "continueTraining": "Continuar la formación",
+    "nextWebinars": "Próximos seminarios",
+    "upcoming": "Próximo",
+    "join": "Unirse",
+    "webinars": "Seminarios"
+  },
+  "books": {
+    "myDigitalBook": "Mi libro digital",
+    "noneAvailable": "Ningún libro disponible.",
+    "byAuthor": "Por {{firstName}} {{lastName}}",
+    "price": "{{price}} FCFA"
+  },
+  "trainings": {
+    "loading": "Cargando la formación...",
+    "type": "Tipo",
+    "previewVideo": "Video de presentación",
+    "videoUnsupported": "Tu navegador no soporta la reproducción de video.",
+    "heroTitle": "Nuestras formaciones",
+    "heroSubtitle": "Fórmate para asegurar tus proyectos. Nuestras formaciones especializadas ofrecen conocimientos prácticos y jurídicos esenciales para comprender el sector inmobiliario. Desarrolla los reflejos correctos, domina los documentos clave y evita trampas con conocimientos accesibles y aplicables de inmediato.",
+    "heroCTA": "Descubre nuestras formaciones",
+    "statTitle": "Ofrecemos formaciones de calidad",
+    "statDescription": "El sector inmobiliario en Côte d’Ivoire es complejo. Nuestras formaciones, diseñadas por expertos, cubren la adquisición, verificación de documentos (ACD, ADU, registros, certificados, etc.), gestión de litigios y prevención de fraudes. Interactivas y adaptadas a cada público, brindan una visión clara y operativa para decisiones seguras.",
+    "discover": "Descubre nuestras formaciones",
+    "view": "Ver la formación",
+    "testimonialsLine1": "Participaron en nuestras formaciones",
+    "testimonialsLine2": "escucha lo que dicen",
+    "reasonsTitle": "Tres grandes razones por las que todos participan en nuestra formación",
+    "statImageAlt": "Formación",
+    "statPeople": "Personas formadas",
+    "noVideo": "No hay video disponible para esta formación."
+  },
+  "author": {
+    "field": "Área",
+    "booksBy": "Libros de este autor",
+    "noBooksForThisAuthor": "Ningún libro disponible para este autor.",
+    "heroTitle": "Allou Boigny Nobel",
+    "heroSubtitle": "Escritor y Especialista en Derecho Inmobiliario",
+    "contactMe": "Contáctame",
+    "biography": "Biografía",
+    "isAuthorOf": "Es autor del libro Comprar un terreno con seguridad en Côte d’Ivoire",
+    "bookDescription": "“Comprar un terreno con seguridad en Côte d’Ivoire” es una obra de referencia que destaca los problemas de la tierra, reglas esenciales de adquisición, mecanismos de resolución de conflictos y trampas a evitar. Estructurada en 7 capítulos y 155 páginas, presenta claramente documentos clave como ADU, registros, ACD, CMPF y más.",
+    "wantBook": "Quiero el libro",
+    "wantTraining": "Quiero una formación",
+    "contactParagraph": "¿Tienes una pregunta sobre el libro? ¿Quieres saber más sobre nuestras formaciones u organizar una conferencia? Escríbenos y avancemos juntos hacia una Côte d’Ivoire más protegida contra fraudes inmobiliarios."
+  },
+  "webinar": {
+    "noneAvailable": "No hay webinarios disponibles.",
+    "heroTitleLine1": "Participa en nuestros",
+    "heroTitleLine2": "webinarios exclusivos",
+    "heroSubtitle": "Únete a nuestras sesiones interactivas y enriquece tus conocimientos",
+    "heroCTA": "Inscríbete al próximo webinario",
+    "participateIs": "Participar en un webinario es",
+    "bullet1": "Aprendizaje en directo",
+    "bullet2": "Interacción con los formadores",
+    "bullet3": "Replay disponible",
+    "nextTitle": "Próximo webinario",
+    "emptyTitle": "No hay webinarios disponibles por el momento",
+    "emptyDesc": "Vuelve pronto para descubrir nuestros próximos webinarios.",
+    "testimonialsLine1": "Participaron en nuestros webinarios",
+    "testimonialsLine2": "escucha lo que dicen"
+  },
+  "webinarsPage": {
+    "myUpcoming": "Mis webinarios próximos",
+    "live": "En vivo",
+    "upcoming": "Próximo",
+    "join": "Unirse",
+    "register": "Inscribirse",
+    "noneUpcoming": "Ningún webinario próximo",
+    "replaysTitle": "Replays de webinarios",
+    "followReplay": "Ver el replay",
+    "noReplayYet": "Ningún replay disponible por ahora"
+  },
+  "webinars": {
+    "type": "Tipo: {{type}}",
+    "price": "{{price}} FCFA",
+    "previewVideo": "Video de presentación",
+    "videoUnsupported": "Tu navegador no soporta la reproducción de video.",
+    "zoomLink": "Enlace de Zoom",
+    "joinZoom": "Unirse al webinario",
+    "heroTitle": "Nuestros webinarios",
+    "heroSubtitle": "Participa en nuestros webinarios interactivos. Descubre sesiones en directo sobre el sector inmobiliario, haz tus preguntas y aprende en un entorno colaborativo.",
+    "heroCTA": "Descubre nuestros webinarios",
+    "statTitle": "Webinarios pensados para ti",
+    "statDescription": "Únete a nuestros webinarios temáticos dirigidos por expertos. Aprovecha casos prácticos, preguntas en vivo y consejos para asegurar tus proyectos.",
+    "availableTitle": "Webinarios disponibles",
+    "availableSubtitle": "Únete a nuestros expertos en sesiones de aprendizaje interactivas"
+  },
+  "nav": {
+    "adminDashboard": "Panel Admin",
+    "dashboard": "Panel",
+    "orders": "Pedidos",
+    "users": "Usuarios",
+    "authors": "Autores",
+    "statistics": "Estadísticas",
+    "myTrainings": "Mis formaciones",
+    "myBooks": "Mis libros",
+    "home": "Inicio",
+    "cart": "Mi carrito",
+    "myAccount": "Mi cuenta",
+    "elearning": "E-Learning",
+    "elearningSubtitle": "Formaciones y Libros",
+    "adminPanel": "Panel Admin",
+    "siteManagement": "Gestión del sitio"
+  },
+  "phototheque": {
+    "heroTitle": "Galería de eventos",
+    "heroSubtitle": "Descubre en imágenes nuestras firmas de libros, formaciones y más momentos destacados",
+    "empty": "No hay fotos disponibles por el momento.",
+    "count": "Número de fototecas recibidas: {{count}}"
+  },
+  "bookLearn": {
+    "title": "Lo que aprenderás con el libro",
+    "items": [
+      {
+        "title": "Comprender las bases jurídicas",
+        "description": "Descubre los documentos esenciales del sector inmobiliario explicados de forma clara y accesible."
+      },
+      {
+        "title": "Dominar los trámites administrativos",
+        "description": "Aprende paso a paso los procedimientos para asegurar la compra de tu terreno."
+      },
+      {
+        "title": "Detectar estafas inmobiliarias",
+        "description": "Gracias a casos prácticos y consejos concretos, identifica documentos falsos y protege tus ahorros."
+      }
+    ]
+  },
+  "trainingsSection": {
+    "title": "Formaciones que te ayudarán a alcanzar tus objetivos",
+    "description": "Formaciones interactivas adaptadas a cada público que ofrecen una visión clara y operativa del sector inmobiliario. Nuestro objetivo: ayudarte a tomar decisiones seguras e informadas.",
+    "cta": "Descubre todas nuestras formaciones",
+    "items": [
+      {
+        "title": "Coaching personal",
+        "description": "Descubre las reglas esenciales para comprar un terreno sin riesgos."
+      },
+      {
+        "title": "Coaching personal",
+        "description": "Comprende las trampas del sector inmobiliario y cómo evitarlas."
+      },
+      {
+        "title": "Seminario inmobiliario",
+        "description": "Profundiza tus conocimientos jurídicos."
+      },
+      {
+        "title": "Seminario inmobiliario",
+        "description": "Profundiza tus conocimientos jurídicos."
+      }
+    ]
+  },
+  "booksPage": {
+    "heroTitle": "Descubre los secretos legales y administrativos para ser propietario con seguridad",
+    "heroCTA": "Quiero un libro",
+    "trainingTitle": "Formaciones que te ayudarán a alcanzar tus objetivos",
+    "trainingDescription": "Este libro es una guía que facilita la compra de terrenos en Côte d’Ivoire. Explica las reglas y ofrece consejos para evitar estafas.",
+    "digitalTitle": "Versión digital (ebook)",
+    "digitalSubtitle": "✨ Siempre a mano",
+    "wantBook": "Quiero un libro",
+    "wantTraining": "Quiero una formación",
+    "physicalTitle": "Versión física (libro impreso)",
+    "physicalSubtitle": "📖 Una obra de prestigio para tu biblioteca",
+    "wantMyBook": "Quiero mi libro",
+    "testimonialsTitle": "Lo que dicen nuestros lectores"
+  },
+  "home": {
+    "heroTitle": "Compra un terreno con seguridad en Côte d'Ivoire",
+    "heroSubtitle": "¡Los secretos por fin revelados para ser propietario!",
+    "bookSectionTitle": "Compra un terreno con seguridad en Côte d'Ivoire",
+    "bookSectionDescription": "Este libro facilita la compra de terrenos. Explica las reglas del sector y ofrece consejos para evitar engaños.",
+    "bookSectionPhysical": "Quiero mi libro físico",
+    "bookSectionDigital": "Quiero mi libro digital",
+    "webinarTitle": "Únete a nuestro próximo webinario",
+    "webinarDescription": "Este jueves a las 13 h.",
+    "webinarCTA": "Únete a nuestro próximo webinario"
+  },
+  "accordion": {
+    "item1": {
+      "title": "Una experiencia creíble y reconocida",
+      "content": "Nuestras formaciones están diseñadas por especialistas en derecho inmobiliario. Recibes conocimientos fiables y actualizados."
+    },
+    "item2": {
+      "title": "Conocimientos aplicables de inmediato",
+      "content": "Cada módulo responde a necesidades concretas: documentos que pedir, pasos a seguir, trampas que evitar."
+    },
+    "item3": {
+      "title": "Una inversión que te protege a largo plazo",
+      "content": "Nuestras formaciones evitan errores costosos y te aseguran tranquilidad para construir tu futuro."
+    }
+  },
+  "auth": {
+    "loginTitle": "Conexión",
+    "welcomeBack": "Bienvenido",
+    "emailPlaceholder": "Correo o número de teléfono",
+    "emailLabel": "Correo o número de teléfono",
+    "passwordPlaceholder": "Contraseña",
+    "passwordLabel": "Contraseña",
+    "loggingIn": "Conexión...",
+    "loginCTA": "Conectarse",
+    "forgotPrompt": "Olvidé mi contraseña.",
+    "resetLink": "Restablecer",
+    "registerCTA": "Registrarse",
+    "errors": {
+      "invalidEmail": "Correo inválido.",
+      "emailRequired": "El correo es obligatorio."
+    },
+    "forgotTitle": "Contraseña olvidada",
+    "resetIntro": "Restablezco mi contraseña",
+    "sending": "Enviando...",
+    "sendResetLink": "Enviar enlace de restablecimiento",
+    "rememberPrompt": "Recuerdo mi contraseña.",
+    "loginLink": "Conectarme"
+  }
+}
+
+

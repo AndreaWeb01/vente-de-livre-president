@@ -24,43 +24,16 @@ import {
     ShoppingCart
 } from 'lucide-react';
 import AppLogo from './app-logo';
+import { useTranslation } from "react-i18next";
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Accueil',
-        href: '/',
-        icon: Home,
-    },
-    {
-        title: 'Formations',
-        href: '/formations',
-        icon: BookOpen,
-    },
-    {
-        title: 'Livres',
-        href: '/livres',
-        icon: BookAIcon,
-    },
-    {
-        title: 'Mon Panier',
-        href: '/panier',
-        icon: ShoppingCart,
-    },
-    {
-        title: 'Mes Formations',
-        href: '/mes-formations',
-        icon: ShoppingBag,
-    },
-    {
-        title: 'Mes Livres',
-        href: '/mes-livres',
-        icon: Library,
-    },
-    {
-        title: 'Mon Compte',
-        href: '/dashboard',
-        icon: User,
-    },
+const buildMainNavItems = (t: (k: string) => string): NavItem[] => [
+    { title: t('nav.home'), href: '/', icon: Home },
+    { title: t('common.trainings'), href: '/formations', icon: BookOpen },
+    { title: t('common.books'), href: '/livres', icon: BookAIcon },
+    { title: t('nav.cart'), href: '/panier', icon: ShoppingCart },
+    { title: t('nav.myTrainings'), href: '/mes-formations', icon: ShoppingBag },
+    { title: t('nav.myBooks'), href: '/mes-livres', icon: Library },
+    { title: t('nav.myAccount'), href: '/dashboard', icon: User },
 ];
 
 const footerNavItems: NavItem[] = [
@@ -78,6 +51,8 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function PublicSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const { t } = useTranslation();
+    const mainNavItems = buildMainNavItems(t);
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
@@ -89,8 +64,8 @@ export function PublicSidebar({ ...props }: React.ComponentProps<typeof Sidebar>
                                     <AppLogo className="size-4" />
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
-                                    <span className="truncate font-semibold">E-Learning</span>
-                                    <span className="truncate text-xs">Formations & Livres</span>
+                                    <span className="truncate font-semibold">{t('nav.elearning')}</span>
+                                    <span className="truncate text-xs">{t('nav.elearningSubtitle')}</span>
                                 </div>
                             </Link>
                         </SidebarMenuButton>

@@ -1,23 +1,22 @@
 import { useState } from "react";
 import AccordionItem from "./AccordionItem";
+import { useTranslation } from "react-i18next";
 export default function AccordionList({title}) {
   const [openIndex, setOpenIndex] = useState(null);
+  const { t } = useTranslation();
 
   const items = [
     {
-      title: "Une expertise crédible et reconnue",
-      content:
-        "Nos formations sont conçues par des spécialistes du droit foncier et immobilier, avec l’expérience pratique des tribunaux, des notaires et du ministère de la Construction. Vous recevez un savoir fiable, à jour et validé.",
+      title: t("accordion.item1.title"),
+      content: t("accordion.item1.content"),
     },
     {
-      title: "Des connaissances immédiatement applicables",
-      content:
-        "Chaque module est pensé pour répondre à vos besoins concrets : quels documents exiger, quelles démarches entreprendre, comment éviter les pièges… Vous repartez avec des outils pratiques pour sécuriser vos projets.",
+      title: t("accordion.item2.title"),
+      content: t("accordion.item2.content"),
     },
     {
-      title: "Un investissement qui vous protège durablement",
-      content:
-        "Acquérir un terrain ou un bien immobilier représente une étape majeure. Nos formations vous évitent les erreurs coûteuses et vous assurent une tranquillité d’esprit pour bâtir sereinement votre avenir.",
+      title: t("accordion.item3.title"),
+      content: t("accordion.item3.content"),
     },
   ];
 

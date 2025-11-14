@@ -14,7 +14,7 @@ export default function VideoJSPlayer({ src, type = "video/mp4", poster, classNa
       autoplay: false,
       preload: "auto",
       fluid,
-      aspectRatio: fluid ? aspectRatio : undefined,
+      aspectRatio: fluid ? aspectRatio : 16/9,
       fill: fluid ? true : undefined,
       width: fluid ? undefined : width,
       height: fluid ? undefined : height,

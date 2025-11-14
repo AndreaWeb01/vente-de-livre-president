@@ -29,6 +29,7 @@ class DashboardController extends Controller
         $formations = $user->formationsAchetees()
         ->with(['user'])
         ->where('est_actif', true)
+        ->where('type', 'en_ligne')
         ->orderBy('created_at', 'desc')
         ->get();
 
@@ -42,6 +43,7 @@ class DashboardController extends Controller
             ->where('est_actif', true)
             ->orderBy('created_at', 'desc')
             ->get();
+          
 
         return Inertia::render('dashboard/Dashboard', [
             'user' => $user,
@@ -52,7 +54,7 @@ class DashboardController extends Controller
                 'achats_count' => $user->achats->count(),
                 'formation_count'=>$formations->count(),
                 "livre_count"=>$user->livresAchetes->count(),
-                "webinaires_count()"=>$webinaires->count()
+                "webinairescomp"=>$webinaires->count(),
             ],
             'formations'=>$formations,
             'livres'=>$livres,

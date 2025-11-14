@@ -1,12 +1,14 @@
 // src/components/PdfReader.jsx
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { useTranslation } from "react-i18next";
 
 pdfjs.GlobalWorkerOptions.workerSrc =  "/pdf.worker.min.mjs";
 
 export default function PdfReader({ pdfFile }) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const { t } = useTranslation();
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -46,17 +48,17 @@ export default function PdfReader({ pdfFile }) {
             disabled={pageNumber <= 1}
             onClick={() => setPageNumber(pageNumber - 1)}
           >
-            Précédent
+            {t("reader.previous")}
           </button>
           <p>
-            Page {pageNumber} / {numPages}
+            {t("reader.page")} {pageNumber} / {numPages}
           </p>
           <button
             className="bg-blue-500 text-white px-3 py-1 rounded"
             disabled={pageNumber >= numPages}
             onClick={() => setPageNumber(pageNumber + 1)}
           >
-            Suivant
+            {t("reader.next")}
           </button>
         </div>
       )}

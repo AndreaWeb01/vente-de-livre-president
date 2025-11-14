@@ -10,6 +10,7 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+import Layout from "../../components/Layout";
 
 export default function DetailCommandes({ commande, commandeId }) {
     // Si la commande n'est pas passée en props, utiliser commandeId pour la récupérer
@@ -18,6 +19,8 @@ export default function DetailCommandes({ commande, commandeId }) {
     
     if (!commande) {
         return (
+           
+
             <section className='p-4 mt-5 md:mt-5'>
                 <div className="flex gap-4 items-start">
                      <Sidebar/>
@@ -32,7 +35,7 @@ export default function DetailCommandes({ commande, commandeId }) {
     }
 
     return(
-       <>
+       <> <Layout>
             <section className='p-4 mt-5 md:mt-5'>
                 <div className="flex gap-4 items-start">
                      <Sidebar/>
@@ -41,6 +44,7 @@ export default function DetailCommandes({ commande, commandeId }) {
                     </div>
                 </div>
             </section>
+            </Layout>
         </>
     )
 }

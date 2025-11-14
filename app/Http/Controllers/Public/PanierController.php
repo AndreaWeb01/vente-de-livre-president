@@ -202,9 +202,7 @@ class PanierController extends Controller
         ]);
     }
 
-    /**
-     * Achat direct d'une formation (ajouter au panier et rediriger vers commande)
-     */
+
     public function buyFormationDirect(Request $request, $id)
     {
         $request->validate([

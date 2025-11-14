@@ -13,6 +13,7 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+import Layout from "../../components/Layout"
 
 
 export default function Formation({ formations }){
@@ -20,7 +21,7 @@ export default function Formation({ formations }){
     const items = formations || props.formations || []
     return(
        <>
-
+       <Layout>
             <section className='p-4 mt-5  md:mt-5'>
                 <div className="flex gap-4 items-start">
                      <Sidebar/>
@@ -44,17 +45,11 @@ export default function Formation({ formations }){
                                 <div className="text-sm text-gray-600">Aucune formation disponible.</div>
                             )}
                         </div>
-
-                    
-
-                        
                     </div>
-                     
 
                 </div>
-               
-
             </section>
+            </Layout>
         </>
     )
 }

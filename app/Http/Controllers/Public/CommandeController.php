@@ -9,6 +9,7 @@ use App\Models\Achat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class CommandeController extends Controller
@@ -52,6 +53,11 @@ class CommandeController extends Controller
     {
         $request->validate([
             'mode_paiement' => 'required|string|in:mobile_money,card,cash',
+            'moneroo_method' => [
+                'nullable',
+                Rule::requiredIf(fn () => $request->input('mode_paiement') === 'mobile_money'),
+                Rule::in(['orange_ci', 'mtn_ci', 'wave_ci', 'moov_ci']),
+            ],
             'notes' => 'nullable|string|max:500',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -128,7 +134,22 @@ class CommandeController extends Controller
             $panier->each->delete();
     
             DB::commit();
-    
+
+            if (in_array($modePaiement, ['mobile_money', 'card'], true)) {
+                $params = ['commande_id' => $commande->id];
+
+                if ($modePaiement === 'card') {
+                    $params['method'] = 'card';
+                }
+
+                if ($modePaiement === 'mobile_money') {
+                    $defaultMethod = config('moneroo.default_methods.0', 'orange_ci');
+                    $params['method'] = $request->input('moneroo_method', $defaultMethod);
+                }
+
+                return redirect()->route('payment.init', $params);
+            }
+
             return redirect()
                 ->route('public.commande.success', $commande->id)
                 ->with('success', 'Commande passée avec succès !');

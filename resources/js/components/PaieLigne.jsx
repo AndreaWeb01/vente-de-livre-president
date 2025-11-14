@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,20 +10,40 @@ import Button from "./Button";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 
-const schema = yup.object({
-  nom: yup.string().required("Le nom est requis."),
-  prenom: yup.string().required("Le prénom est requis."),
-  telephone: yup
-    .string()
-    .required("Le téléphone est requis")
-    .matches(/^\d{8,15}$/, "Téléphone invalide. (8 à 15 chiffres)"),
-  email: yup.string().email("Email invalide").required("L'email est requis."),
-  adresse: yup.string().nullable(),
-  ville: yup.string().nullable(),
-  quartier: yup.string().nullable(),
-  mode_paiement: yup.string().oneOf(["mobile_money", "card", "cash"]).required(),
-  notes: yup.string().nullable(),
-}).required();
+const MOBILE_METHODS = [
+  { value: "orange_ci", label: "Orange Money" },
+  { value: "mtn_ci", label: "MTN Mobile Money" },
+  { value: "wave_ci", label: "Wave" },
+  { value: "moov_ci", label: "Moov Money" },
+];
+
+const schema = yup
+  .object({
+    nom: yup.string().required("Le nom est requis."),
+    prenom: yup.string().required("Le prénom est requis."),
+    telephone: yup
+      .string()
+      .required("Le téléphone est requis")
+      .matches(/^\d{8,15}$/, "Téléphone invalide. (8 à 15 chiffres)"),
+    email: yup.string().email("Email invalide").required("L'email est requis."),
+    adresse: yup.string().nullable(),
+    ville: yup.string().nullable(),
+    quartier: yup.string().nullable(),
+    mode_paiement: yup.string().oneOf(["mobile_money", "card", "cash"]).required(),
+    moneroo_method: yup
+      .string()
+      .nullable()
+      .when("mode_paiement", {
+        is: "mobile_money",
+        then: (schema) =>
+          schema
+            .required("Choisissez un opérateur Mobile Money")
+            .oneOf(MOBILE_METHODS.map((m) => m.value)),
+        otherwise: (schema) => schema.nullable(),
+      }),
+    notes: yup.string().nullable(),
+  })
+  .required();
 
 export default function PaieLigne({ user }) {
   const {
@@ -45,9 +65,23 @@ export default function PaieLigne({ user }) {
       ville: user?.ville || "",
       quartier: user?.quartier || "",
       mode_paiement: "mobile_money",
+      moneroo_method: MOBILE_METHODS[0]?.value || "orange_ci",
       notes: "",
     },
   });
+
+  const modePaiement = watch("mode_paiement");
+  const currentMethod = watch("moneroo_method");
+
+  useEffect(() => {
+    if (modePaiement !== "mobile_money") {
+      setValue("moneroo_method", null, { shouldValidate: true });
+    } else if (!currentMethod) {
+      setValue("moneroo_method", MOBILE_METHODS[0]?.value || "orange_ci", {
+        shouldValidate: true,
+      });
+    }
+  }, [modePaiement, currentMethod, setValue]);
 
   const onSubmit = (data) => {
     // Envoyer uniquement des chiffres (aucun E.164)
@@ -95,6 +129,36 @@ export default function PaieLigne({ user }) {
           { value: "cash", label: "Espèces" },
         ]}
       />
+
+      {watch("mode_paiement") === "mobile_money" && (
+        <div>
+          <p className="block text-sm font-medium mb-2">Sélectionnez l’opérateur Mobile Money</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {MOBILE_METHODS.map((option) => {
+              const checked = currentMethod === option.value;
+              return (
+                <label
+                  key={option.value}
+                  className={`flex items-center gap-2 border rounded px-3 py-2 cursor-pointer hover:border-secondary ${
+                    checked ? "border-secondary bg-secondary/10" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={option.value}
+                    {...register("moneroo_method")}
+                    className="cursor-pointer"
+                  />
+                  <span>{option.label}</span>
+                </label>
+              );
+            })}
+          </div>
+          {errors.moneroo_method && (
+            <p className="text-red-600 text-xs mt-1">{errors.moneroo_method.message}</p>
+          )}
+        </div>
+      )}
 
       <FormInput name="adresse" register={register} error={errors.adresse} label="Adresse" />
       <FormInput name="ville" register={register} error={errors.ville} label="Ville" />

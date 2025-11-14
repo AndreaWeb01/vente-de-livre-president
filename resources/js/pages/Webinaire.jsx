@@ -10,13 +10,15 @@ import Icontext from "../components/Icontext"
 import { FaThumbtack } from "react-icons/fa"
 import Layout from "../components/Layout"
 import { usePage } from "@inertiajs/react"
+import { useTranslation } from "react-i18next";
 export default function Webinaire(){
     const page = usePage();
     const webinars = page.props.webinars || [];
     console.log(webinars);
+    const { t } = useTranslation();
  
    if(webinars.length === 0) {
-    return <div>Aucun webinaire disponible.</div>;
+    return <div>{t("webinar.noneAvailable")}</div>;
    }
 
     
@@ -26,10 +28,10 @@ export default function Webinaire(){
             <section className='p-4'>
                 <Hero
                     title={<>
-                    Participer à nos <br /> webinaires exclusifs
+                    {t("webinar.heroTitleLine1")} <br /> {t("webinar.heroTitleLine2")}
                     </>}
-                    subtitle="Rejoignez nos sessions interactives et enrichissez vos connaissances"
-                    ctaText="S’inscrire au prochain webinaire"
+                    subtitle={t("webinar.heroSubtitle")}
+                    ctaText={t("webinar.heroCTA")}
                     gradient="from-[#2E7D32] to-[#4AA441]"
                     image={webinarCover}
                     imageClassName= "absolute right-6  w-[35%] hidden lg:block z-20"
@@ -41,11 +43,11 @@ export default function Webinaire(){
 
             <section className='mt-20 md:mt-20 p-4'>
                 <WebinaireSection
-                title="Participer à un webinaire c’est" 
+                title={t("webinar.participateIs")} 
                 children={<>
-                    <Icontext icon={FaThumbtack} text="Apprentissage en direct" />
-                    <Icontext icon={FaThumbtack} text="Interaction avec les formateurs " />
-                    <Icontext icon={FaThumbtack} text="Replay disponible" />
+                    <Icontext icon={FaThumbtack} text={t("webinar.bullet1")} />
+                    <Icontext icon={FaThumbtack} text={t("webinar.bullet2")} />
+                    <Icontext icon={FaThumbtack} text={t("webinar.bullet3")} />
                 </>}
                 image={webinarIllustration}
                 />
@@ -55,7 +57,7 @@ export default function Webinaire(){
 
         <section className="py-24 px-4">
         <h2 className=" text-2xl md:text-4xl font-bold text-primary mb-16 md:mb-24 text-center md:w-[60%] w-[80%] mx-auto ">
-            Prochain webinaire
+            {t("webinar.nextTitle")}
         </h2>
 
         <div className="lg:flex  md:gap-4 gap-4 md:items-center ">
@@ -66,8 +68,8 @@ export default function Webinaire(){
                     ))
                 ) : (
                     <div className="w-full text-center py-10">
-                        <h3 className="text-xl text-gray-600 mb-4">Aucun webinaire disponible pour le moment</h3>
-                        <p className="text-gray-500">Revenez bientôt pour découvrir nos prochains webinaires.</p>
+                        <h3 className="text-xl text-gray-600 mb-4">{t("webinar.emptyTitle")}</h3>
+                        <p className="text-gray-500">{t("webinar.emptyDesc")}</p>
                     </div>
                 )}
             </div>
@@ -78,7 +80,7 @@ export default function Webinaire(){
             <section>
                 <TestimonialCarousel  title={
                     <>
-                   Ils ont participé à nos webinaires <br /> écoutez ce qu’ils disent
+                   {t("webinar.testimonialsLine1")} <br /> {t("webinar.testimonialsLine2")}
                     </>
                 }/>
             </section>

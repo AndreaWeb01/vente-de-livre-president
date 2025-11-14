@@ -5,9 +5,11 @@ import TrainingStatSection from "../components/trainingStatSection"
 import TrainingFullSection from "../components/TrainingFullSection"
 import Layout from "../components/Layout"
 import { usePage } from "@inertiajs/react"
+import { useTranslation } from "react-i18next";
 
 export default function Webinaires({ webinaires, webinaire }){
     const { props } = usePage();
+    const { t } = useTranslation();
     
     // Si on a un webinaire spécifique (page de détail), on l'affiche
     if (webinaire) {
@@ -15,26 +17,26 @@ export default function Webinaires({ webinaires, webinaire }){
             <Layout>
                 <div className="container mx-auto px-4 py-8">
                     <h1 className="text-3xl font-bold mb-4">{webinaire.titre}</h1>
-                    <p className="text-gray-600 mb-4">Type: {webinaire.type}</p>
+                    <p className="text-gray-600 mb-4">{t("webinars.type", { type: webinaire.type })}</p>
                     <p className="text-lg mb-4">{webinaire.description}</p>
                     <div className="mt-6">
-                        <span className="text-2xl font-bold text-primary">{webinaire.prix} FCFA</span>
+                        <span className="text-2xl font-bold text-primary">{t("webinars.price", { price: webinaire.prix })}</span>
                     </div>
                     {webinaire.url_video && (
                         <div className="mt-6">
-                            <h3 className="text-xl font-semibold mb-2">Vidéo de présentation</h3>
+                            <h3 className="text-xl font-semibold mb-2">{t("webinars.previewVideo")}</h3>
                             <video controls className="w-full max-w-md">
                                 <source src={webinaire.url_video} type="video/mp4" />
-                                Votre navigateur ne supporte pas la lecture vidéo.
+                                {t("webinars.videoUnsupported")}
                             </video>
                         </div>
                     )}
                     {webinaire.url_zoom && (
                         <div className="mt-6">
-                            <h3 className="text-xl font-semibold mb-2">Lien Zoom</h3>
+                            <h3 className="text-xl font-semibold mb-2">{t("webinars.zoomLink")}</h3>
                             <a href={webinaire.url_zoom} target="_blank" rel="noopener noreferrer" 
                                className="text-blue-600 hover:text-blue-800 underline">
-                                Rejoindre le webinaire
+                                {t("webinars.joinZoom")}
                             </a>
                         </div>
                     )}
@@ -49,21 +51,17 @@ export default function Webinaires({ webinaires, webinaire }){
         <Layout>
             <section className='p-4'>
                 <Hero
-                    title="Nos Webinaires"
-                    subtitle="Participez à nos webinaires interactifs
-                             Découvrez nos webinaires en direct sur les technologies émergentes, 
-                             les tendances du marché et les compétences professionnelles essentielles. 
-                             Interagissez avec nos experts, posez vos questions et développez vos connaissances 
-                             dans un environnement d'apprentissage collaboratif et dynamique."
-                    ctaText="Découvrez nos webinaires"
+                    title={t("webinars.heroTitle")}
+                    subtitle={t("webinars.heroSubtitle")}
+                    ctaText={t("webinars.heroCTA")}
                     gradient="from-[#2E7D32] to-[#4AA441]"
                     image={coverFormation}
                 />
             </section>
-            <TrainingStatSection />
+            <TrainingStatSection title={t("webinars.statTitle")} description={t("webinars.statDescription")} />
             <TrainingFullSection 
-                title="Webinaires Disponibles"
-                subtitle="Rejoignez nos experts pour des sessions d'apprentissage interactives"
+                title={t("webinars.availableTitle")}
+                subtitle={t("webinars.availableSubtitle")}
                 formations={webinaires?.data || []}
                 showFilters={true}
                 filters={props?.filters || {}}

@@ -1,7 +1,16 @@
 import Layout from "../../../components/Layout";
 import { useForm, Link } from "@inertiajs/react";
 
+const METHOD_OPTIONS = [
+  { value: "orange_ci", label: "Orange Money" },
+  { value: "mtn_ci", label: "MTN Mobile Money" },
+  { value: "wave_ci", label: "Wave" },
+  { value: "moov_ci", label: "Moov Money" },
+];
+
 export default function CreateCommande({ panier, total, user }) {
+  const defaultMobileMethod = METHOD_OPTIONS[0]?.value || "orange_ci";
+
   const { data, setData, post, processing, errors } = useForm({
     nom: user?.nom || "",
     prenom: user?.prenom || "",
@@ -11,12 +20,15 @@ export default function CreateCommande({ panier, total, user }) {
     ville: user?.ville || "",
     quartier: user?.quartier || "",
     mode_paiement: "mobile_money",
+    moneroo_method: defaultMobileMethod,
     notes: "",
   });
 
   const submit = (e) => {
     e.preventDefault();
-    post("/public/commande", { preserveScroll: true });
+    post("/public/commande", {
+      preserveScroll: true,
+    });
   };
 
   return (
@@ -107,7 +119,14 @@ export default function CreateCommande({ panier, total, user }) {
                 <label className="block text-sm font-medium mb-1">Mode de paiement</label>
                 <select
                   value={data.mode_paiement}
-                  onChange={(e) => setData("mode_paiement", e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setData((prev) => ({
+                      ...prev,
+                      mode_paiement: value,
+                      moneroo_method: value === "mobile_money" ? prev.moneroo_method || defaultMobileMethod : null,
+                    }));
+                  }}
                   className="w-full border rounded px-3 py-2"
                 >
                   <option value="mobile_money">Mobile Money</option>
@@ -116,6 +135,31 @@ export default function CreateCommande({ panier, total, user }) {
                 </select>
                 {errors.mode_paiement && <p className="text-red-600 text-sm mt-1">{errors.mode_paiement}</p>}
               </div>
+              {data.mode_paiement === "mobile_money" && (
+                <div className="md:col-span-2">
+                  <p className="block text-sm font-medium mb-2">Sélectionnez l’opérateur Mobile Money</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {METHOD_OPTIONS.map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-center gap-2 border rounded px-3 py-2 cursor-pointer hover:border-secondary ${
+                          data.moneroo_method === option.value ? "border-secondary bg-secondary/10" : ""
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="moneroo_method"
+                          value={option.value}
+                          checked={data.moneroo_method === option.value}
+                          onChange={(e) => setData("moneroo_method", e.target.value)}
+                        />
+                        <span>{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {errors.moneroo_method && <p className="text-red-600 text-sm mt-2">{errors.moneroo_method}</p>}
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium mb-1">Notes</label>
                 <textarea

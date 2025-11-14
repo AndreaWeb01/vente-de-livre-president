@@ -1,0 +1,260 @@
+{
+  "common": {
+    "books": "Livres",
+    "authors": "Auteur",
+    "trainings": "Formations",
+    "webinar": "Webinaire",
+    "phototheque": "Photothèque",
+    "account": "Mon compte",
+    "close": "Fermer",
+    "menu": "Menu",
+    "description": "Description"
+  },
+  "footer": {
+    "intro": "Investir dans la terre, c’est investir dans l’avenir. Avec notre livre et nos services, nous vous donnons les clés pour bâtir un patrimoine solide, protégé et conforme aux lois en vigueur. Votre sécurité foncière commence ici.",
+    "usefulLinks": "Liens utile",
+    "newsletterTitle": "Rejoignez notre newsletter pour ne rater aucune nouvelle !",
+    "copyright": "Touts droits réservés. Firme Attou & Co © 2025"
+  },
+  "reader": {
+    "page": "Page",
+    "of": "sur",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "loading": "Chargement…",
+    "pdfError": "Erreur de chargement du PDF.",
+    "noBook": "Aucun livre à afficher."
+  },
+  "stats": {
+    "orders": "Commandes"
+  },
+  "menu": {
+    "dashboard": "Tableau de bord",
+    "orders": "Commandes",
+    "book": "Livre",
+    "training": "Formation",
+    "webinar": "Webinaire",
+    "profile": "Profil",
+    "logout": "Déconnexion"
+  },
+  "dashboard": {
+    "hello": "Salut",
+    "welcome": "Bienvenue sur ton tableau de bord !",
+    "activities": "Activités en cours",
+    "myOngoingTrainings": "Mes Formations en cours",
+    "continueTraining": "Continuer la formation",
+    "nextWebinars": "Prochains webinaires",
+    "upcoming": "À venir",
+    "join": "Rejoindre",
+    "webinars": "Webinaires"
+  },
+  "books": {
+    "myDigitalBook": "Mon livre en numérique",
+    "noneAvailable": "Aucun livre disponible.",
+    "byAuthor": "Par {{firstName}} {{lastName}}",
+    "price": "{{price}} FCFA"
+  },
+  "trainings": {
+    "loading": "Chargement de la formation...",
+    "type": "Type",
+    "previewVideo": "Vidéo de présentation",
+    "videoUnsupported": "Votre navigateur ne supporte pas la lecture vidéo.",
+    "heroTitle": "Nos formations",
+    "heroSubtitle": "Formez-vous pour sécuriser vos projets fonciers. Nos formations spécialisées vous offrent des connaissances pratiques et juridiques indispensables pour comprendre le secteur foncier et immobilier en Côte d’Ivoire. Développez les bons réflexes, maîtrisez les documents clés et évitez les pièges grâce à un savoir accessible et immédiatement applicable.",
+    "heroCTA": "Découvrez nos formations",
+    "statTitle": "Nous offrons des formations de qualité",
+    "statDescription": "Le secteur foncier et immobilier en Côte d’Ivoire est un univers complexe. Nos formations, conçues par des experts du droit foncier et de l’immobilier, couvrent l’acquisition, la vérification des documents (ACD, ADU, état foncier, certificats, etc.), la gestion des litiges et la prévention des arnaques. Interactives et adaptées à chaque public, elles offrent une vision claire et opérationnelle pour prendre des décisions sûres.",
+    "discover": "Découvrez nos formations",
+    "view": "Voir la formation",
+    "testimonialsLine1": "Ils ont participé à nos formations",
+    "testimonialsLine2": "écoutez ce qu’ils disent",
+    "reasonsTitle": "Trois (3) grandes raisons pour lesquelles tout le monde participe à notre formation",
+    "statImageAlt": "Formation",
+    "statPeople": "Personnes formées"
+   
+  },
+  "author": {
+    "field": "Domaine",
+    "booksBy": "Livres de cet auteur",
+    "noBooksForThisAuthor": "Aucun livre disponible pour cet auteur.",
+    "heroTitle": "Allou Boigny Nobel",
+    "heroSubtitle": "Écrivain et Spécialiste du Droit Foncier et Immobilier !",
+    "contactMe": "Contactez-Moi",
+    "biography": "Biographie",
+    "isAuthorOf": "Il est l’auteur du livre Achetez un terrain en toute sécurité en Côte d’Ivoire",
+    "bookDescription": "« Achetez un terrain en toute sécurité en Côte d’Ivoire » est un ouvrage de référence qui met en lumière les enjeux du foncier, les règles essentielles d’acquisition, les mécanismes de résolution des conflits et les pièges à éviter. Structuré en 7 chapitres et 155 pages, ce livre présente de manière claire et accessible des documents clés du secteur tels que l’Attestation de Droit d’Usage (ADU), l’état foncier historique, l’Arrêté de Concession Définitive (ACD), le Certificat de Mutation de la Propriété Foncière (CMPF), ainsi que d’autres pièces fondamentales de la chaîne foncière. Fruit d’un travail collaboratif, il bénéficie de la contribution d’experts du domaine : conservateurs de la propriété foncière, chefs de services de cadastre, cadres du ministère de la Construction, notaires et avocats. L’ouvrage se conclut par un tableau récapitulatif inédit qui rassemble l’ensemble des dispositions légales du foncier ivoirien, en faisant un outil pratique et complet pour tout acquéreur, investisseur ou professionnel du secteur.",
+    "wantBook": "Je veux mon livre",
+    "wantTraining": "Je veux une formation",
+    "contactParagraph": "Vous avez une question sur le livre ? Vous souhaitez en savoir plus sur nos formations ou organiser une conférence ? Écrivez-nous et avançons ensemble vers une Côte d’Ivoire mieux protégée contre les arnaques foncières."
+  },
+  "webinar": {
+    "noneAvailable": "Aucun webinaire disponible.",
+    "heroTitleLine1": "Participer à nos",
+    "heroTitleLine2": "webinaires exclusifs",
+    "heroSubtitle": "Rejoignez nos sessions interactives et enrichissez vos connaissances",
+    "heroCTA": "S’inscrire au prochain webinaire",
+    "participateIs": "Participer à un webinaire c’est",
+    "bullet1": "Apprentissage en direct",
+    "bullet2": "Interaction avec les formateurs",
+    "bullet3": "Replay disponible",
+    "nextTitle": "Prochain webinaire",
+    "emptyTitle": "Aucun webinaire disponible pour le moment",
+    "emptyDesc": "Revenez bientôt pour découvrir nos prochains webinaires.",
+    "testimonialsLine1": "Ils ont participé à nos webinaires",
+    "testimonialsLine2": "écoutez ce qu’ils disent"
+  },
+  "webinarsPage": {
+    "myUpcoming": "Mes webinaires à venir",
+    "live": "Live",
+    "upcoming": "À venir",
+    "join": "Rejoindre",
+    "register": "S’inscrire",
+    "noneUpcoming": "Aucun webinaire à venir",
+    "replaysTitle": "Replays des webinaires",
+    "followReplay": "Suivre le replay",
+    "noReplayYet": "Aucun replay disponible pour le moment"
+  },
+  "webinars": {
+    "type": "Type : {{type}}",
+    "price": "{{price}} FCFA",
+    "previewVideo": "Vidéo de présentation",
+    "videoUnsupported": "Votre navigateur ne supporte pas la lecture vidéo.",
+    "zoomLink": "Lien Zoom",
+    "joinZoom": "Rejoindre le webinaire",
+    "heroTitle": "Nos Webinaires",
+    "heroSubtitle": "Participez à nos webinaires interactifs. Découvrez nos sessions en direct sur les enjeux fonciers, posez vos questions et enrichissez vos connaissances dans un cadre collaboratif.",
+    "heroCTA": "Découvrez nos webinaires",
+    "statTitle": "Des webinaires pensés pour vous",
+    "statDescription": "Rejoignez nos webinaires thématiques animés par des experts du foncier. Bénéficiez de retours d’expérience concrets, de sessions de questions-réponses et d’un accompagnement pratique pour sécuriser vos démarches.",
+    "availableTitle": "Webinaires disponibles",
+    "availableSubtitle": "Rejoignez nos experts pour des sessions d'apprentissage interactives"
+  },
+  "nav": {
+    "adminDashboard": "Dashboard Admin",
+    "dashboard": "Dashboard",
+    "orders": "Commandes",
+    "users": "Utilisateurs",
+    "authors": "Auteurs",
+    "statistics": "Statistiques",
+    "myTrainings": "Mes Formations",
+    "myBooks": "Mes Livres",
+    "home": "Accueil",
+    "cart": "Mon Panier",
+    "myAccount": "Mon Compte",
+    "elearning": "E-Learning",
+    "elearningSubtitle": "Formations & Livres",
+    "adminPanel": "Admin Panel",
+    "siteManagement": "Gestion du site"
+  },
+  "phototheque": {
+    "heroTitle": "Galerie d'événements",
+    "heroSubtitle": "Découvrez en images nos événements de dédicaces, formations et bien d'autres moments forts",
+    "empty": "Aucune photo disponible pour le moment.",
+    "count": "Nombre de photothèques reçues : {{count}}"
+  },
+  "bookLearn": {
+    "title": "Ce que vous allez apprendre du livre",
+    "items": [
+      {
+        "title": "Comprendre les bases juridiques",
+        "description": "Découvrez les documents essentiels du foncier ivoirien (ACD, ADU, certificat de mutation, etc.) expliqués de manière claire et accessible."
+      },
+      {
+        "title": "Maîtriser les démarches administratives",
+        "description": "Apprenez pas à pas les procédures nécessaires pour sécuriser l’achat de votre terrain, du lotissement approuvé à la mutation foncière."
+      },
+      {
+        "title": "Déjouer les arnaques foncières",
+        "description": "Grâce à des cas pratiques et des conseils concrets, identifiez les faux documents et protégez vos économies des escroqueries courantes."
+      }
+    ]
+  },
+  "trainingsSection": {
+    "title": "Des formations qui vous aideront à atteindre vos objectifs",
+    "description": "Ces formations, interactives et adaptées à chaque public (particuliers, entreprises, professionnels du secteur), offrent une vision claire et opérationnelle du foncier ivoirien. Notre objectif : faire de vous des acteurs avertis, capables de prendre des décisions sûres et éclairées.",
+    "cta": "Découvrez toutes nos formations",
+    "items": [
+      {
+        "title": "Coaching personnel",
+        "description": "Découvrez les règles essentielles pour acheter un terrain sans risque."
+      },
+      {
+        "title": "Coaching personnel",
+        "description": "Comprenez les pièges du foncier ivoirien et comment les éviter."
+      },
+      {
+        "title": "Séminaire foncier",
+        "description": "Approfondissez vos connaissances juridiques."
+      },
+      {
+        "title": "Séminaire foncier",
+        "description": "Approfondissez vos connaissances juridiques."
+      }
+    ]
+  },
+  "booksPage": {
+    "heroTitle": "Découvrez les secrets juridiques et administratifs pour devenir propriétaire en toute sécurité",
+    "heroCTA": "Je veux un livre",
+    "trainingTitle": "Des formations qui vous aideront à atteindre vos objectifs",
+    "trainingDescription": "Ce livre est un guide qui facilite l’achat des terrains en Côte d’Ivoire. Il explique les règles pour comprendre le foncier ivoirien et donne des astuces pour éviter les pièges.",
+    "digitalTitle": "Version numérique (ebook)",
+    "digitalSubtitle": "✨ Toujours à portée de main",
+    "wantBook": "Je veux un livre",
+    "wantTraining": "Je veux une formation",
+    "physicalTitle": "Version physique (livre papier)",
+    "physicalSubtitle": "📖 Un ouvrage de prestige à conserver dans votre bibliothèque",
+    "wantMyBook": "Je veux mon livre",
+    "testimonialsTitle": "Ce que disent nos lecteurs"
+  },
+  "home": {
+    "heroTitle": "Achetez un terrain en toute sécurité en Côte d'Ivoire",
+    "heroSubtitle": "Les secrets enfin dévoilés pour être propriétaire !",
+    "bookSectionTitle": "Achetez un terrain en toute sécurité en Côte d'Ivoire",
+    "bookSectionDescription": "Ce livre est un guide qui facilite l’achat des terrains en Côte d’Ivoire. Il explique les règles du foncier ivoirien et donne des astuces pour éviter les pièges.",
+    "bookSectionPhysical": "Je veux mon livre physique",
+    "bookSectionDigital": "Je veux mon livre numérique",
+    "webinarTitle": "Rejoignez notre prochain webinaire",
+    "webinarDescription": "Ce jeudi à 13H.",
+    "webinarCTA": "Rejoignez notre prochain webinaire"
+  },
+  "accordion": {
+    "item1": {
+      "title": "Une expertise crédible et reconnue",
+      "content": "Nos formations sont conçues par des spécialistes du droit foncier et immobilier. Vous recevez un savoir fiable, à jour et validé."
+    },
+    "item2": {
+      "title": "Des connaissances immédiatement applicables",
+      "content": "Chaque module répond à vos besoins concrets : documents à exiger, démarches à entreprendre, pièges à éviter."
+    },
+    "item3": {
+      "title": "Un investissement qui vous protège durablement",
+      "content": "Nos formations vous évitent les erreurs coûteuses et vous assurent une tranquillité d’esprit pour bâtir sereinement votre avenir."
+    }
+  }
+  ,
+  "auth": {
+    "loginTitle": "Connexion",
+    "welcomeBack": "Bienvenue",
+    "emailPlaceholder": "Email ou Numéro de téléphone",
+    "emailLabel": "Email ou Numéro de téléphone",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "loggingIn": "Connexion...",
+    "loginCTA": "Connexion",
+    "forgotPrompt": "J’ai oublié mon mot de passe.",
+    "resetLink": "Réinitialiser",
+    "registerCTA": "S'inscrire",
+    "errors": {
+      "invalidEmail": "Email invalide.",
+      "emailRequired": "L'email est requis."
+    },
+    "forgotTitle": "Mot de passe oublié",
+    "resetIntro": "Je réinitialise mon mot de passe",
+    "sending": "Envoi en cours...",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "rememberPrompt": "Je me souviens de mon mot de passe.",
+    "loginLink": "Je me connecte"
+  }
+}
+
+
