@@ -1,5 +1,7 @@
 import Layout from "../../../components/Layout";
 import { useForm, Link } from "@inertiajs/react";
+import { route } from "ziggy-js";
+import { Ziggy } from "../../../ziggy";
 
 const METHOD_OPTIONS = [
   { value: "orange_ci", label: "Orange Money" },
@@ -26,7 +28,11 @@ export default function CreateCommande({ panier, total, user }) {
 
   const submit = (e) => {
     e.preventDefault();
-    post("/public/commande", {
+    let postUrl = "/public/commande-livres-physique";
+    try {
+      postUrl = route("public.commande.physique.store", [], false, Ziggy);
+    } catch (_) {}
+    post(postUrl, {
       preserveScroll: true,
     });
   };
@@ -130,8 +136,8 @@ export default function CreateCommande({ panier, total, user }) {
                   className="w-full border rounded px-3 py-2"
                 >
                   <option value="mobile_money">Mobile Money</option>
-                  <option value="card">Carte</option>
-                  <option value="cash">Espèces</option>
+                  <option value="carte_credit">Carte</option>
+                  <option value="espece">Espèces</option>
                 </select>
                 {errors.mode_paiement && <p className="text-red-600 text-sm mt-1">{errors.mode_paiement}</p>}
               </div>
@@ -184,7 +190,6 @@ export default function CreateCommande({ panier, total, user }) {
               <Link href="/public/panier" className="text-primary underline">Retour au panier</Link>
             </div>
           </form>
-
           <aside className="bg-white p-6 rounded-md shadow">
             <h3 className="text-lg font-semibold mb-4">Récapitulatif</h3>
             <div className="space-y-3">
@@ -207,4 +212,3 @@ export default function CreateCommande({ panier, total, user }) {
     </Layout>
   );
 }
-

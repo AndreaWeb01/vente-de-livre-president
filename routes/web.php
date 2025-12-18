@@ -14,6 +14,8 @@ use App\Http\Controllers\Public\CommandeController as PublicCommandeController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\PhotothequeController as AdminPhothothequeController;
+use App\Http\Controllers\inviterCommandeController;
+use App\Http\Controllers\panierCommandeController;
 use App\Http\Controllers\Public\AuthenticatedPublicController;
 use App\Http\Controllers\Public\DashboardController as PublicDashboardController;
 use App\Models\Formation;
@@ -23,7 +25,6 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', function () {
     return Inertia::render('Accueil');
 })->name('home');
-
 Route::prefix('public')->name('public.')->group(function () {
     Route::get('formations', [PublicFormationController::class, 'index'])->name('formations.index');
     Route::get('formations/{formation}', [PublicFormationController::class, 'show'])->name('formations.show');
@@ -34,6 +35,15 @@ Route::prefix('public')->name('public.')->group(function () {
     Route::get('webinaires', [App\Http\Controllers\Public\WebinaireController::class, 'index'])->name('webinaires.index');
     Route::get('webinaires/{id}', [App\Http\Controllers\Public\WebinaireController::class, 'show'])->name('webinaires.show');
     Route::get('phototheque', [App\Http\Controllers\Public\PhotothequeController::class, 'index'])->name('phototheque.index');
+
+
+    Route::post('panier/livres-physique/{id}', [panierCommandeController::class, 'addLivre'])->name('panier.add-pysique.livre');
+    Route::get('panier/livres-physique', [panierCommandeController::class, 'index'])->name('panier.index-pysique.livre');
+    Route::post('commande-livres-physique', [inviterCommandeController::class, 'store'])->name('commande.physique.store');
+    Route::post('commande', [PublicCommandeController::class, 'store'])->name('commande.store');
+    Route::get('commande-livres-physique/create', [inviterCommandeController::class, 'create'])->name('commande.physique.create');
+    Route::get('commande/{id}/success', [PublicCommandeController::class, 'success'])->name('commande.success');
+    Route::get('commande/{id}', [PublicCommandeController::class, 'show'])->name('commande.show');
 
 });
 
@@ -54,32 +64,24 @@ Route::get('webinaires/{id}', [App\Http\Controllers\Public\WebinaireController::
 Route::get('phototheque', [App\Http\Controllers\Public\PhotothequeController::class, 'index'])->name('phototheque.index');
 
 
+
+
 Route::get('/pay', [PaymentController::class, 'initPayment'])->name('payment.init');
 Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 
-// Routes de paiement
-/*Route::get('paieproduitphysique', function () {
-    return Inertia::render('PaieProduitPhysique');
-})->name('paie.produit-physique');
-Route::get('paieproduitnumerique', function () {
-    return Inertia::render('PaieProduitNumerique');
-})->name('paie.produit-numerique');*/
 
-Route::post('panier/livres/{id}', [PublicPanierController::class, 'addLivre'])->name('panier.add.livre');
 Route::prefix('public')->name('public.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [PublicDashboardController::class, 'index'])->name('dashboard');
+    Route::delete('panier/{id}', [PublicPanierController::class, 'destroy'])->name('panier.destroy');
+    Route::delete('panier', [PublicPanierController::class, 'clear'])->name('panier.clear'); 
+    Route::get('commandes', [PublicCommandeController::class, 'index'])->name('commandes.index');
     Route::get('panier', [PublicPanierController::class, 'index'])->name('panier.index');
     Route::post('panier/livres/{id}', [PublicPanierController::class, 'addLivre'])->name('panier.add.livre');
     Route::post('panier/formations/{id}', [PublicPanierController::class, 'addFormation'])->name('panier.add.formation');
-    Route::put('panier/{id}', [PublicPanierController::class, 'update'])->name('panier.update');
-    Route::delete('panier/{id}', [PublicPanierController::class, 'destroy'])->name('panier.destroy');
-    Route::delete('panier', [PublicPanierController::class, 'clear'])->name('panier.clear');
+    Route::put('panier/{id}', [PublicPanierController::class, 'update'])->name('panier.update'); 
     Route::get('commande/create', [PublicCommandeController::class, 'create'])->name('commande.create');
-    Route::post('commande', [PublicCommandeController::class, 'store'])->name('commande.store');
-    Route::get('commande/{id}/success', [PublicCommandeController::class, 'success'])->name('commande.success');
-    Route::get('commande/{id}', [PublicCommandeController::class, 'show'])->name('commande.show');
-    Route::get('commandes', [PublicCommandeController::class, 'index'])->name('commandes.index');
 });
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', AdminUserController::class);

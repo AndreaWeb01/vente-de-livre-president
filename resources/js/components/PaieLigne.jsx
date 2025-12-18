@@ -6,6 +6,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { router } from "@inertiajs/react";
+import { route } from "ziggy-js";
+import { Ziggy } from "../ziggy";
 import Button from "./Button";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
@@ -29,7 +31,7 @@ const schema = yup
     adresse: yup.string().nullable(),
     ville: yup.string().nullable(),
     quartier: yup.string().nullable(),
-    mode_paiement: yup.string().oneOf(["mobile_money", "card", "cash"]).required(),
+    mode_paiement: yup.string().oneOf(["mobile_money", "carte_credit", "espece"]).required(),
     moneroo_method: yup
       .string()
       .nullable()
@@ -90,7 +92,11 @@ export default function PaieLigne({ user }) {
     console.log("Payload envoyé :", payload);
 
     // Soumettre le formulaire au contrôleur
-    router.post("/public/commande", payload, { preserveScroll: true });
+    let postUrl = "/public/commande-livres-physique";
+    try {
+      postUrl = route("public.commande.physique.store", [], false, Ziggy);
+    } catch (_) {}
+    router.post(postUrl, payload, { preserveScroll: true });
   };
 
   return (
@@ -125,11 +131,10 @@ export default function PaieLigne({ user }) {
         error={errors.mode_paiement}
         options={[
           { value: "mobile_money", label: "Mobile Money" },
-          { value: "card", label: "Carte" },
-          { value: "cash", label: "Espèces" },
+          { value: "carte_credit", label: "Carte" },
+          { value: "espece", label: "Espèces" },
         ]}
       />
-
       {watch("mode_paiement") === "mobile_money" && (
         <div>
           <p className="block text-sm font-medium mb-2">Sélectionnez l’opérateur Mobile Money</p>
@@ -159,7 +164,6 @@ export default function PaieLigne({ user }) {
           )}
         </div>
       )}
-
       <FormInput name="adresse" register={register} error={errors.adresse} label="Adresse" />
       <FormInput name="ville" register={register} error={errors.ville} label="Ville" />
       <FormInput name="quartier" register={register} error={errors.quartier} label="Quartier" />

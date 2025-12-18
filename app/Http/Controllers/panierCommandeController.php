@@ -1,41 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Panier;
-use App\Models\Livre;
 use App\Models\Formation;
+use App\Models\Livre;
+use App\Models\Panierinviter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class PanierController extends Controller
+class panierCommandeController extends Controller
 {
-    /**
-     * Afficher le panier de l'utilisateur
-     */
     public function index()
     {
-        $panier = Panier::with(['achetable'])
-            ->where('user_id', Auth::id())
+        $panier = Panierinviter::with(['achetable'])
             ->get();
 
         $total = $panier->sum('prix_total');
 
         $user = Auth::user();
 
-        return Inertia::render('PanierProduitNumerique', [
+        return Inertia::render('public/commande/create', [
             'panier' => $panier,
             'total' => $total,
             'user' => [
-                'nom' => $user->nom,
-                'prenom' => $user->prenom,
-                'email' => $user->email,
-                'telephone' => $user->telephone,
-                'adresse' => $user->adresse,
-                'ville' => $user->ville,
-                'quartier' => $user->quartier,
+                'nom' => $user->nom ?? '',
+                'prenom' => $user->prenom ?? '',
+                'email' => $user->email ?? '',
+                'telephone' => $user->telephone ?? '',
+                'adresse' => $user->adresse ?? '',
+                'ville' => $user->ville ?? '',
+                'quartier' => $user->quartier ?? '',    
             ],
         ]);
     }
@@ -57,8 +52,8 @@ class PanierController extends Controller
         $quantite = $request->input('quantite', 1);
 
         // Vérifier si l'élément existe déjà dans le panier
-        $panierItem = Panier::where('user_id', Auth::id())
-            ->where('achetable_type', Livre::class)
+        $panierItem = Panierinviter::
+            where('achetable_type', Livre::class)
             ->where('achetable_id', $id)
             ->first();
 
@@ -68,15 +63,14 @@ class PanierController extends Controller
             $panierItem->save();
         } else {
             // Créer un nouvel élément
-            Panier::create([
-                'user_id' => Auth::id(),
+            Panierinviter::create([
                 'achetable_type' => Livre::class,
                 'achetable_id' => $id,
                 'quantite' => $quantite,
                 'prix_unitaire' => $livre->prix,
             ]);
         }
-        return redirect()->route('public.panier.index')->with('success', 'Livre ajouté au panier !');
+        return redirect()->route('public.panier.index-pysique.livre')->with('success', 'Livre ajouté au panier !');
     }
 
 
@@ -96,8 +90,7 @@ class PanierController extends Controller
         $quantite = $request->input('quantite', 1);
 
         // Vérifier si l'élément existe déjà dans le panier
-        $panierItem = Panier::where('user_id', Auth::id())
-            ->where('achetable_type', Formation::class)
+        $panierItem = Panierinviter::where('achetable_type', Formation::class)
             ->where('achetable_id', $id)
             ->first();
 
@@ -105,8 +98,7 @@ class PanierController extends Controller
             return redirect()->back()->with('error', 'Cette formation est déjà dans votre panier !');
         } else {
             // Créer un nouvel élément
-            Panier::create([
-                'user_id' => Auth::id(),
+            Panierinviter::create([
                 'achetable_type' => Formation::class,
                 'achetable_id' => $id,
                 'quantite' => $quantite,
@@ -114,7 +106,7 @@ class PanierController extends Controller
             ]);
         }
 
-        return redirect()->route('panier.index')->with('success', 'Formation ajoutée au panier !');
+        return redirect()->route('public.panier.index')->with('success', 'Formation ajoutée au panier !');
     }
 
     /**
@@ -126,8 +118,7 @@ class PanierController extends Controller
             'quantite' => 'required|integer|min:1|max:10',
         ]);
 
-        $panierItem = Panier::where('id', $id)
-            ->where('user_id', Auth::id())
+        $panierItem = Panierinviter::where('id', $id)
             ->firstOrFail();
 
         $panierItem->quantite = $request->input('quantite');
@@ -141,8 +132,7 @@ class PanierController extends Controller
      */
     public function destroy($id)
     {
-        $panierItem = Panier::where('id', $id)
-            ->where('user_id', Auth::id())
+        $panierItem = Panierinviter::where('id', $id)
             ->firstOrFail();
 
         $panierItem->delete();
@@ -155,7 +145,9 @@ class PanierController extends Controller
      */
     public function clear()
     {
-        Panier::where('user_id', Auth::id())->delete();
+        Panierinviter::
+            where('achetable_type', Livre::class)
+            ->delete();
 
         return redirect()->back()->with('success', 'Panier vidé !');
     }
@@ -177,8 +169,8 @@ class PanierController extends Controller
         $quantite = $request->input('quantite', 1);
 
         // Vérifier si l'élément existe déjà dans le panier
-        $panierItem = Panier::where('user_id', Auth::id())
-            ->where('achetable_type', Livre::class)
+        $panierItem = Panierinviter::
+            where('achetable_type', Livre::class)
             ->where('achetable_id', $id)
             ->first();
 
@@ -188,8 +180,7 @@ class PanierController extends Controller
             $panierItem->save();
         } else {
             // Créer un nouvel élément
-            Panier::create([
-                'user_id' => Auth::id(),
+            Panierinviter::create([
                 'achetable_type' => Livre::class,
                 'achetable_id' => $id,
                 'quantite' => $quantite,
@@ -216,8 +207,8 @@ class PanierController extends Controller
         $quantite = $request->input('quantite', 1);
 
         // Vérifier si l'élément existe déjà dans le panier
-        $panierItem = Panier::where('user_id', Auth::id())
-            ->where('achetable_type', Formation::class)
+        $panierItem = Panierinviter::
+            where('achetable_type', Formation::class)
             ->where('achetable_id', $id)
             ->first();
 
@@ -227,8 +218,7 @@ class PanierController extends Controller
             ]);
         } else {
             // Créer un nouvel élément
-            Panier::create([
-                'user_id' => Auth::id(),
+            Panierinviter::create([
                 'achetable_type' => Formation::class,
                 'achetable_id' => $id,
                 'quantite' => $quantite,

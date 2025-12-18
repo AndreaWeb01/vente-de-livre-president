@@ -2,6 +2,7 @@ import { useForm, router } from "@inertiajs/react";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 import { useTranslation } from "react-i18next";
+import Layout from "../components/Layout"
 
 export default function Login() {
   const { data, setData, post, processing, errors } = useForm({
@@ -19,6 +20,7 @@ export default function Login() {
   };
 
   return (
+    <Layout>
     <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center h-screen gap-4">
       <div className="md:flex items-center justify-center bg-primary text-white h-[100vh] shadow-[5px_0_10px_rgba(0,0,0,0.2)] hidden">
         <h2 className="text-center text-4xl font-bold leading-tight">
@@ -81,5 +83,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }

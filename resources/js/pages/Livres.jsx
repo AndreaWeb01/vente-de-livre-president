@@ -55,7 +55,7 @@ export default function Livres({ livres, livre }) {
 
         
             <section className='bg-bodyColor mt-6 md:mt-10'>
-                <div >
+                <div id="scrollToId">
                     <h4 className=" text-2xl md:text-4xl font-bold text-primary pt-16 md:pt-20 pb-16 md:pb-20 text-center md:w-[60%] w-[80%] mx-auto ">
                         {t("booksPage.trainingTitle")}
                     </h4>
@@ -76,7 +76,7 @@ export default function Livres({ livres, livre }) {
                         buttons={[
                             {
                               text: t("booksPage.wantBook"),
-                              to: route('public.panier.add-livre', livre.id, false, Ziggy),
+                              to: route('public.panier.add.livre', livre.id, false, Ziggy),
                               color: "bg-secondary",
                               method: "post"
                             },
@@ -107,15 +107,15 @@ export default function Livres({ livres, livre }) {
                         buttons={[
                             {
                                 text: t("booksPage.wantBook"),
-                                to: route('public.panier.add-livre', livre.id, false, Ziggy),
+                                to: route('public.panier.add-pysique.livre', livre.id, false, Ziggy),
                                 color: "bg-secondary",
                                 method: "post"
                               },
-                        {
+                            {
                             text: t("booksPage.wantTraining"),
                             to:'/formations',
                             color: "bg-primary",
-                          },
+                            },
                         ]}
                         
                     />

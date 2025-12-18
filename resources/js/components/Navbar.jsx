@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, router, usePage } from "@inertiajs/react";
 import logo from "../assets/logo-presi.png";
 import Button from "./Button";
@@ -6,11 +6,17 @@ import ProfilMenu from "./ProfilMenu";
 import { useTranslation } from "react-i18next";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { t, i18n } = useTranslation();
 
   const { url, props } = usePage();
-  const userName = props?.auth?.user?.name || null;
+  const user = props?.auth?.user;
+  const userName = useMemo(() => {
+    if (!user) return null;
+    if (user.name) return user.name;
+    const composed = [user.prenom, user.nom].filter(Boolean).join(" ").trim();
+    return composed || user.email || null;
+  }, [user]);
+  const isLoggedIn = Boolean(user);
 
   const menuLinks = [
     { name: t("common.books"), path: "/livres" },
@@ -20,29 +26,13 @@ export default function Navbar() {
     { name: t("common.phototheque"), path: "/phototheque" },
   ];
 
-  // Vérifie si connecté (localStorage)
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
-  }, []);
-
   // Verrouille le scroll si menu mobile ouvert
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "true");
-
-    const previousPage = sessionStorage.getItem("previousPage") || "/";
-    router.visit(previousPage);
-  };
-
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
-    router.visit("/"); // Retour accueil
+    router.post("/logout");
   };
 
   const handleMonCompteClick = () => {

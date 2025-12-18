@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
+import Layout from "../components/Layout";
 
 const schema = yup.object({
   nom: yup.string().required("Le nom est requis."),
@@ -65,6 +66,7 @@ export default function Inscription() {
   };
 
   return (
+    <Layout>
     <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center h-screen gap-4">
       {/* Section gauche (visuel) */}
       <div className="md:flex hidden items-center justify-center bg-primary text-white h-[100vh] shadow-[5px_0_10px_rgba(0,0,0,0.2)]">
@@ -170,5 +172,6 @@ export default function Inscription() {
         </p>
       </div>
     </div>
+    </Layout>
   );
 }
