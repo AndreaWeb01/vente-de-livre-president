@@ -19,6 +19,7 @@ class AccessController extends Controller
 
         $formations = $user->formationsAchetees()
             ->with(['user'])
+            ->where('type', 'en_ligne')
             ->where('est_actif', true)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -54,6 +55,7 @@ class AccessController extends Controller
     {
         $formation = Formation::with(['user'])
             ->where('id', $id)
+            ->where('type', 'en_ligne')
             ->where('est_actif', true)
             ->firstOrFail();
 
@@ -86,6 +88,7 @@ class AccessController extends Controller
     {
         $formation = Formation::with(['user'])
             ->where('id', $id)
+            ->where('type', 'en_ligne')
             ->where('est_actif', true)
             ->firstOrFail();
 
@@ -109,8 +112,8 @@ class AccessController extends Controller
             ->get();
 
         return Inertia::render('dashboard/Webinaires', [
-            'webinaires' => $webinaires,
-            'payer'=>$webinaires->url_video,
+            'webinaires' =>$webinaires,
+            
         ]);
     }
 }

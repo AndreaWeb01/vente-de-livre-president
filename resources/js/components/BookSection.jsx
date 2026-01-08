@@ -1,4 +1,5 @@
 import { Link, router } from "@inertiajs/react"
+import { useTranslation } from "react-i18next";
 
 
 function addToCart(url, payload) {
@@ -6,20 +7,20 @@ function addToCart(url, payload) {
 }
 
 export default function BookSection({ image, title, description, buttons, className, subtitle, price, imageRight = true, livre }) {
-
+  const { t } = useTranslation();
   // Utiliser les données du livre si disponibles, sinon utiliser les props
   const displayTitle = livre?.titre || title;
-  const displaySubtitle = livre?.auteur ? `Par ${livre.auteur.user?.prenom} ${livre.auteur.user?.nom}` : subtitle;
+  const displaySubtitle = livre?.auteur ? t("books.byAuthor", { firstName: livre.auteur.user?.prenom, lastName: livre.auteur.user?.nom }) : subtitle;
   const displayDescription = livre?.description || description;
-  const displayPrice = livre?.prix ? `${livre.prix} FCFA` : price;
-  const displayImage = image || livre?.photo;
+  const displayPrice = livre?.prix ? t("books.price", { price: livre.prix }) : price;
+  const displayImage = image || (livre?.photo ? `/storage/${livre.photo}` : undefined);
 
   const content = (
     <div className="flex flex-col justify-center space-y-6">
       <h2 className={`mb-4 ${className}`}>{displayTitle}</h2>
-      <p className="text-textColor font-semibold leading-relaxed">{displaySubtitle}</p>
-      <p className="text-textColor text-base leading-relaxed">{displayDescription}</p>
-      <p className="text-secondary font-bold leading-relaxed">{displayPrice}</p>
+      {displaySubtitle && <p className="text-textColor font-semibold leading-relaxed">{displaySubtitle}</p>}
+      {displayDescription && <p className="text-textColor text-base leading-relaxed">{displayDescription}</p>}
+      {displayPrice && <p className="text-secondary font-bold leading-relaxed">{displayPrice}</p>}
       <div className="flex gap-4 flex-wrap">
         {buttons?.map((btn, idx) => (
           btn?.method === 'post' ? (
@@ -45,11 +46,11 @@ export default function BookSection({ image, title, description, buttons, classN
     </div>
   );
 
-  const imageBlock = (
+  const imageBlock = displayImage ? (
     <div className="w-full md:w-[90%] lg:w-[80%] mx-auto">
       <img src={displayImage} alt={displayTitle} className="w-full object-cover rounded-2xl" />
     </div>
-  );
+  ) : null;
 
   return (
     <section className="mx-auto px-6 py-12  max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

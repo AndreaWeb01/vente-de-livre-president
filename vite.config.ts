@@ -20,6 +20,23 @@ export default defineConfig({
     esbuild: {
         jsx: 'automatic',
     },
+    // Configuration de build pour mieux découper les chunks et réduire l'avertissement
+    build: {
+        // Augmente simplement la limite de warning (en Ko) si votre app est volumineuse
+        // sans que ce soit problématique en production.
+        chunkSizeWarningLimit: 1024, // 1 Mo
+        rollupOptions: {
+            output: {
+                // Regroupe certaines dépendances lourdes dans des chunks dédiés
+                manualChunks: {
+                    react: ['react', 'react-dom'],
+                    inertia: ['@inertiajs/react'],
+                    i18n: ['react-i18next', 'i18next'],
+                    ziggy: ['ziggy-js'],
+                },
+            },
+        },
+    },
     server: {
         host: '127.0.0.1',
         hmr: {

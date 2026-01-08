@@ -4,8 +4,10 @@ import Button from "../components/Button";
 import TrainingDetail from "../components/TrainingDetail";
 import AccordionList from "../components/AccordionList";
 import Layout from "../components/Layout";
+import { useTranslation } from "react-i18next";
 
 export default function FormationDetail({ formation, id }) {
+  const { t } = useTranslation();
   const normalizedFormation = formation
     ? {
         id: formation.id,
@@ -19,13 +21,9 @@ export default function FormationDetail({ formation, id }) {
     <Layout>
         <section className='p-4'>
             <Hero
-                title="Nos formations"
-                subtitle="Formez-vous pour sécuriser vos projets fonciers
-                            Nos formations spécialisées vous offrent des connaissances pratiques et juridiques 
-                            indispensables pour comprendre le secteur foncier et immobilier en Côte d'Ivoire. 
-                            Que vous soyez particulier, investisseur ou professionnel, développez les bons réflexes, 
-                            maîtrisez les documents clés et évitez les pièges grâce à un savoir accessible et immédiatement applicable."
-                ctaText="Découvrez nos formations"
+                title={t("trainings.heroTitle")}
+                subtitle={t("trainings.heroSubtitle")}
+                ctaText={t("trainings.heroCTA")}
                 gradient="from-[#2E7D32] to-[#4AA441]"
                 image={coverFormation}
                 imageClassName= "absolute right-4  w-[40%] hidden lg:block z-20"
@@ -39,12 +37,12 @@ export default function FormationDetail({ formation, id }) {
             {normalizedFormation ? (
               <TrainingDetail formation={normalizedFormation} id={id} />
             ) : (
-              <p>Chargement de la formation...</p>
+              <p>{t("trainings.loading")}</p>
             )}
         </section>
 
         <section className="mt-20 md:mt-20 p-4">
-          <AccordionList title="Trois (3) grandes raisons pour lesquelles tout le monde participe à notre formation" />
+          <AccordionList title={t("trainings.reasonsTitle")} />
           <div className="flex justify-center mt-10">
               <Button label="Je m'inscris maintenant" color="orange" />
           </div>

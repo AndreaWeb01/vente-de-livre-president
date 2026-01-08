@@ -58,6 +58,7 @@ Route::get('webinaires', [App\Http\Controllers\Public\WebinaireController::class
 Route::get('webinaires/{id}', [App\Http\Controllers\Public\WebinaireController::class, 'show'])->name('webinaires.show');
 Route::get('phototheque', [App\Http\Controllers\Public\PhotothequeController::class, 'index'])->name('phototheque.index');
 
+
 // Routes de paiement
 /*Route::get('paieproduitphysique', function () {
     return Inertia::render('PaieProduitPhysique');
@@ -66,7 +67,7 @@ Route::get('phototheque', [App\Http\Controllers\Public\PhotothequeController::cl
 Route::get('paieproduitnumerique', function () {
     return Inertia::render('PaieProduitNumerique');
 })->name('paie.produit-numerique');*/
-
+Route::post('panier/livres/{id}', [PublicPanierController::class, 'addLivre'])->name('panier.add.livre');
 Route::prefix('public')->name('public.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [PublicDashboardController::class, 'index'])->name('dashboard');
     Route::get('panier', [PublicPanierController::class, 'index'])->name('panier.index');

@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { useTranslation } from "react-i18next";
 
 export default function TrainingCard({
   id,
@@ -6,8 +7,10 @@ export default function TrainingCard({
   title,
   description,
   showButton = true, 
-  buttonLabel = "Voir la formation", 
+  buttonLabel, 
 }) {
+  const { t } = useTranslation();
+  const resolvedLabel = buttonLabel ?? t("trainings.view");
   return (
     <div className="bg-bodyColor rounded-md w-100% md:w-75 p-4">
       <img
@@ -22,7 +25,7 @@ export default function TrainingCard({
       {showButton && (
         <Button
           to={`/formations/${id}`}
-          label={buttonLabel}
+          label={resolvedLabel}
           color="orange"
           ButtonClassName="text-white"
         />

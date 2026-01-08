@@ -9,12 +9,14 @@ import Layout from "../components/Layout"
 import { usePage, router } from "@inertiajs/react"
 import { route } from 'ziggy-js';
 import { Ziggy } from '../ziggy';
+import { useTranslation } from "react-i18next";
 
 
 
 export default function Livres({ livres, livre }) {
     const { props } = usePage();
     const { livresPhysiques, livresNumeriques } = props;
+    const { t } = useTranslation();
 
     // Si on a un livre spécifique (page de détail), on l'affiche
     if (livre) {
@@ -22,10 +24,10 @@ export default function Livres({ livres, livre }) {
             <Layout>
                 <div className="container mx-auto px-4 py-8">
                     <h1 className="text-3xl font-bold mb-4">{livre.titre}</h1>
-                    <p className="text-gray-600 mb-4">Par {livre.auteur?.user?.prenom} {livre.auteur?.user?.nom}</p>
+                    <p className="text-gray-600 mb-4">{t("books.byAuthor", { firstName: livre.auteur?.user?.prenom, lastName: livre.auteur?.user?.nom })}</p>
                     <p className="text-lg">{livre.description}</p>
                     <div className="mt-6">
-                        <span className="text-2xl font-bold text-primary">{livre.prix} FCFA</span>
+                        <span className="text-2xl font-bold text-primary">{t("books.price", { price: livre.prix })}</span>
                     </div>
                 </div>
             </Layout>
@@ -37,9 +39,8 @@ export default function Livres({ livres, livre }) {
             <Layout>
                 <section className='p-4'>
                     <Hero
-                        title="Découvrez les secrets juridiques et administratifs pour éviter les conflits et devenir propriétaire en toute sécurité"
-                        // subtitle="Les secrets enfin dévoilés pour être propriétaire !"
-                        ctaText="Je veux un livre"
+                        title={t("booksPage.heroTitle")}
+                        ctaText={t("booksPage.heroCTA")}
                         gradient="from-[#2E7D32] to-[#4AA441]"
                         image={OpenBookCover}
                         imageClassName="absolute right-0 -bottom-10 w-[45%] hidden lg:block z-20"
@@ -56,10 +57,9 @@ export default function Livres({ livres, livre }) {
             <section className='bg-bodyColor mt-6 md:mt-10'>
                 <div >
                     <h4 className=" text-2xl md:text-4xl font-bold text-primary pt-16 md:pt-20 pb-16 md:pb-20 text-center md:w-[60%] w-[80%] mx-auto ">
-                        Des formations qui vous aideront à atteindre vos objectifs
+                        {t("booksPage.trainingTitle")}
                     </h4>
-                    <p className="text-textColor  px-6">Ce livre est un guide qui facilite l’achat des terrains en Côte d’Ivoire. Il explique les règles qui permettent de comprendre le secteur du foncier ivoirien et donne des astuces aux lecteurs pour éviter les pièges des escrocs. Avec des illustrations pratiques, 
-                        cet ouvrage est un recueil indispensable pour les nouveaux acheteurs et les investisseurs expérimentés.</p>
+                    <p className="text-textColor  px-6">{t("booksPage.trainingDescription")}</p>
                     </div>
                     {livresNumeriques?.length > 0 && (
                     
@@ -68,23 +68,22 @@ export default function Livres({ livres, livre }) {
 
                     <BookSection
                         image={livre.photo ? `/storage/${livre.photo}` : numericBook}
-                        title="Version numérique (ebook)"
+                        title={t("booksPage.digitalTitle")}
                         className="text-2xl font-bold text-primary"
-                        subtitle="✨ Toujours à portée de main"
+                        subtitle={t("booksPage.digitalSubtitle")}
                         description={livre.description}
                         price={livre.prix + " FCFA"}                       
                         buttons={[
                             {
-                              text: "Je veux un livre",
+                              text: t("booksPage.wantBook"),
                               to: route('public.panier.add-livre', livre.id, false, Ziggy),
-                              color: "bg-primary",
+                              color: "bg-secondary",
                               method: "post"
                             },
                             {
-                              text: "Je veux une formation",
-                              to: route('formations.show', livre.id, false, Ziggy),
-                              color: "bg-secondary",
-                             
+                              text: t("booksPage.wantTraining"),
+                              to:'/formations',
+                              color: "bg-primary",
                             }
                         ]}
                         imageRight={false}
@@ -99,15 +98,15 @@ export default function Livres({ livres, livre }) {
                     {livresPhysiques.map((livre) => (
                     <BookSection
                         image={livre.photo ? `/storage/${livre.photo}` : numericBook}
-                        title="Version physique (livre papier)"
+                        title={t("booksPage.physicalTitle")}
                         className="text-2xl font-bold text-primary"
-                        subtitle="📖 Un  de prestige, à conserver dans votre bibliothèque"
+                        subtitle={t("booksPage.physicalSubtitle")}
                         description={livre.description}
                         price={livre.prix + " FCFA"}
                                     
                         buttons={[
-                        { text: "Je veux mon livre", color: "bg-secondary", onClick: () => alert("Livre physique choisi !") },
-                        { text: "Je veux une formation", color: "bg-primary", onClick: () => alert("Livre numérique choisi !") },
+                        { text: t("booksPage.wantMyBook"), color: "bg-secondary", onClick: () => alert("Livre physique choisi !") },
+                        { text: t("booksPage.wantTraining"), color: "bg-primary", onClick: () => alert("Livre numérique choisi !") },
                         ]}
                         
                     />
@@ -117,7 +116,7 @@ export default function Livres({ livres, livre }) {
                 )}
             </section>
                 <section>
-                    <TestimonialCarousel title="Ce que disent nos lecteurs" />
+                    <TestimonialCarousel title={t("booksPage.testimonialsTitle")} />
                 </section>
             </Layout>
         </>

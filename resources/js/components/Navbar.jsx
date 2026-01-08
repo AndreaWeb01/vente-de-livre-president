@@ -3,20 +3,24 @@ import { Link, router, usePage } from "@inertiajs/react";
 import logo from "../assets/logo-presi.png";
 import Button from "./Button";
 import ProfilMenu from "./ProfilMenu";
+import { useTranslation } from "react-i18next";
+import ReactCountryFlag from "react-country-flag";
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const { url, props } = usePage();
   const userName = props?.auth?.user?.name || null;
 
   const menuLinks = [
-    { name: "Livres", path: "/livres" },
-    { name: "Auteur", path: "/auteurs" },
-    { name: "Formations", path: "/formations" },
-    { name: "Webinaire", path: "/webinaires" },
-    { name: "Photothèque", path: "/phototheque" },
+    { name: t("common.books"), path: "/livres" },
+    { name: t("common.authors"), path: "/auteurs" },
+    { name: t("common.trainings"), path: "/formations" },
+    { name: t("common.webinar"), path: "/webinaires" },
+    { name: t("common.phototheque"), path: "/phototheque" },
   ];
 
   // Vérifie si connecté (localStorage)
@@ -77,9 +81,27 @@ export default function Navbar() {
 
         {/* CTA + Burger */}
         <div className="flex items-center gap-4">
+          {/* Sélecteur de langue */}
+          <select
+            className="border rounded px-2 py-1 text-lg"
+            value={i18n.language?.substring(0,2) || "fr"}
+            onChange={(e) => i18n.changeLanguage(e.target.value)}
+            aria-label="Language"
+          >
+            <option value="fr" aria-label="Français" title="Français">
+              <ReactCountryFlag countryCode="fr" style={{ width: 24, height: 16 }} />
+            </option>
+            <option value="en" aria-label="English" title="English">
+              <ReactCountryFlag countryCode="en" style={{ width: 24, height: 16 }} />
+            </option>
+            <option value="es" aria-label="Español" title="Español">
+              <ReactCountryFlag countryCode="es" style={{ width: 24, height: 16 }} />
+            </option>
+          </select>
+
           {!isLoggedIn || !userName ? (
             <Button
-              label="Mon compte"
+              label={t("common.account")}
               color="red"
               ButtonClassName="text-white"
               onClick={handleMonCompteClick}
@@ -93,7 +115,7 @@ export default function Navbar() {
             className="md:hidden block focus:outline-none text-2xl bg-primary text-white px-3 py-1.5 rounded-[5px]"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? "✖" : "☰"}
+            {isOpen ? t("common.close") : t("common.menu")}
           </button>
         </div>
       </div>

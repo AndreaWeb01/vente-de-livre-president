@@ -2,9 +2,11 @@ import Hero from "../components/Hero"
 import Layout from "../components/Layout"
 import Galerie from "../components/Galerie"
 import { usePage } from "@inertiajs/react"
+import { useTranslation } from "react-i18next";
 
 export default function Phototheque({ phototheques: propPhototheques }){
     const page = usePage();
+    const { t } = useTranslation();
     // Récupérer les phototheques depuis les props ou depuis usePage comme fallback
     const phototheques = propPhototheques || page.props.phototheques || [];
     
@@ -39,9 +41,9 @@ export default function Phototheque({ phototheques: propPhototheques }){
             <Layout>
                 <section className='p-4'>
                     <Hero
-                        title="Galerie d'évenements"
+                        title={t("phototheque.heroTitle")}
                         textClassName="text-3xl md:text-7xl font-bold leading-tight text-center"
-                        subtitle="Découvrez en image tout nos évenements de dédicaces, formation et bien d'autres"
+                        subtitle={t("phototheque.heroSubtitle")}
                         gradient="from-[#2E7D32] to-[#4AA441]"
                         subClassName="text-center text-2xl md:text-3xl"
                         divClassName="lg:w-[100%]"
@@ -55,8 +57,8 @@ export default function Phototheque({ phototheques: propPhototheques }){
                         </>
                     ) : (
                         <div className="text-center py-12">
-                            <p className="text-gray-500 text-lg">Aucune photo disponible pour le moment.</p>
-                            <p className="text-gray-400 text-sm mt-2">Nombre de phototheques reçues: {phototheques.length}</p>
+                            <p className="text-gray-500 text-lg">{t("phototheque.empty")}</p>
+                            <p className="text-gray-400 text-sm mt-2">{t("phototheque.count", { count: phototheques.length })}</p>
                         </div>
                     )}
                 </section>

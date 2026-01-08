@@ -16,12 +16,14 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { usePage } from "@inertiajs/react"
+import { useTranslation } from "react-i18next";
 
 
 
 export default function Webinaires(){
     const { props } = usePage()
     const { webinaires = [] } = props
+    const { t } = useTranslation();
     
     // Fonction pour formater la date
     const formatDate = (dateString) => {
@@ -50,7 +52,7 @@ export default function Webinaires(){
                      <Sidebar/>
                     <div>
                         <div className=" text-secondary ">
-                            <Icontext icon={ FaChalkboard} text="Mes webinaires à venir" textClass="font-bold text-[22px]"></Icontext>
+                            <Icontext icon={ FaChalkboard} text={t("webinarsPage.myUpcoming")} textClass="font-bold text-[22px]"></Icontext>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5">
                             {webinairesAVenir.length > 0 ? (
@@ -61,11 +63,11 @@ export default function Webinaires(){
                                     return (
                                         <Cadre key={webinaire.id || index} children={<>
                                             <WebinarDashCadre 
-                                                objet={estEnCours ? "Live" : "A venir"}
+                                                objet={estEnCours ? t("webinarsPage.live") : t("webinarsPage.upcoming")}
                                                 titre={webinaire.titre}
                                                 date={formatDate(webinaire.date)}
                                                 nombre={webinaire.achats_count || webinaire.achats?.length || 0}
-                                                labelButton={estEnCours ? "Rejoindre" : "s'inscrire"}
+                                                labelButton={estEnCours ? t("webinarsPage.join") : t("webinarsPage.register")}
                                                 colorBtn={estEnCours ? "green" : "white"}
                                                 ButtonClassName={estEnCours ? "text-white" : "text-textColor"}
                                             />
@@ -74,12 +76,12 @@ export default function Webinaires(){
                                 })
                             ) : (
                                 <div className="col-span-2 text-center py-8 text-gray-500">
-                                    Aucun webinaire à venir
+                                    {t("webinarsPage.noneUpcoming")}
                                 </div>
                             )}
                         </div>
                         <div className=" text-secondary my-5">
-                            <Icontext icon={ FaChalkboard} text="Replays des webinaires" textClass="font-bold text-[22px]"></Icontext>
+                            <Icontext icon={ FaChalkboard} text={t("webinarsPage.replaysTitle")} textClass="font-bold text-[22px]"></Icontext>
                         </div>
                        
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5">
@@ -90,13 +92,13 @@ export default function Webinaires(){
                                             id={webinaire.id}
                                             titre={webinaire.titre}
                                             image={webinaire.photo ? `/storage/${webinaire.photo}` : webinaire.image || trainingImg}
-                                            buttonText="Suivre le replay"
+                                            buttonText={t("webinarsPage.followReplay")}
                                         />
                                     </>} />
                                 ))
                             ) : (
                                 <div className="col-span-2 text-center py-8 text-gray-500">
-                                    Aucun replay disponible pour le moment
+                                    {t("webinarsPage.noReplayYet")}
                                 </div>
                             )}
                         </div>

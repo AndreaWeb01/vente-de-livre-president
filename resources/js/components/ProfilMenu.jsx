@@ -10,10 +10,12 @@ import {
 } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import MenuItem from "./MenuItem";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilMenu({ onLogout, userName }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const { t } = useTranslation();
 
   // Ferme le menu quand on clique à l’extérieur
   useEffect(() => {
@@ -41,12 +43,12 @@ export default function ProfilMenu({ onLogout, userName }) {
       {open && (
         <div className="absolute right-0 top-full mt-1 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
           <ul className="flex flex-col">
-            <MenuItem icon={<MdDashboard />} label="Tableau de bord" to="/dashboard" />
-            <MenuItem icon={<FaClipboardList />} label="Commandes" to="/commandes" />
-            <MenuItem icon={<FaBook />} label="Livre" to="/livreDash" />
-            <MenuItem icon={<FaGraduationCap />} label="Formation" to="/formationDash" />
-            <MenuItem icon={<FaChalkboard />} label="Webinaire" to="/webinaireDash" />
-            <MenuItem icon={<FaUser />} label="Profil" to="/profil" />
+            <MenuItem icon={<MdDashboard />} label={t("menu.dashboard")} to="/dashboard" />
+            <MenuItem icon={<FaClipboardList />} label={t("menu.orders")} to="/commandes" />
+            <MenuItem icon={<FaBook />} label={t("menu.book")} to="/livreDash" />
+            <MenuItem icon={<FaGraduationCap />} label={t("menu.training")} to="/formationDash" />
+            <MenuItem icon={<FaChalkboard />} label={t("menu.webinar")} to="/webinaireDash" />
+            <MenuItem icon={<FaUser />} label={t("menu.profile")} to="/profil" />
 
             <hr className="my-2" />
 
@@ -57,7 +59,7 @@ export default function ProfilMenu({ onLogout, userName }) {
                 className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-gray-100 w-full text-left"
               >
                 <FaSignOutAlt />
-                <span>Déconnexion</span>
+                <span>{t("menu.logout")}</span>
               </button>
             </li>
           </ul>

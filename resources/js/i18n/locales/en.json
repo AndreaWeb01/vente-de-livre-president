@@ -1,0 +1,259 @@
+{
+  "common": {
+    "books": "Books",
+    "authors": "Authors",
+    "trainings": "Trainings",
+    "webinar": "Webinar",
+    "phototheque": "Photo library",
+    "account": "My account",
+    "close": "Close",
+    "menu": "Menu",
+    "description": "Description"
+  },
+  "footer": {
+    "intro": "Investing in land is investing in the future. With our book and services, we give you the keys to build a solid, protected and compliant asset base. Your land security starts here.",
+    "usefulLinks": "Useful links",
+    "newsletterTitle": "Join our newsletter to never miss an update!",
+    "copyright": "All rights reserved. Firme Attou & Co © 2025"
+  },
+  "reader": {
+    "page": "Page",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading…",
+    "pdfError": "PDF loading error.",
+    "noBook": "No book to display."
+  },
+  "stats": {
+    "orders": "Orders"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "book": "Book",
+    "training": "Training",
+    "webinar": "Webinar",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "hello": "Hi",
+    "welcome": "Welcome to your dashboard!",
+    "activities": "Ongoing activities",
+    "myOngoingTrainings": "My ongoing trainings",
+    "continueTraining": "Continue training",
+    "nextWebinars": "Upcoming webinars",
+    "upcoming": "Upcoming",
+    "join": "Join",
+    "webinars": "Webinars"
+  },
+  "books": {
+    "myDigitalBook": "My digital book",
+    "noneAvailable": "No book available.",
+    "byAuthor": "By {{firstName}} {{lastName}}",
+    "price": "{{price}} FCFA"
+  },
+  "trainings": {
+    "loading": "Loading training...",
+    "type": "Type",
+    "previewVideo": "Preview video",
+    "videoUnsupported": "Your browser does not support video playback.",
+    "heroTitle": "Our trainings",
+    "heroSubtitle": "Train yourself to secure your land projects. Our specialized trainings provide practical and legal knowledge essential to understand the land and real estate sector. Develop the right reflexes, master key documents, and avoid pitfalls with accessible, immediately applicable knowledge.",
+    "heroCTA": "Discover our trainings",
+    "statTitle": "We provide quality trainings",
+    "statDescription": "The land and real estate sector in Ivory Coast is complex. Our trainings, designed by experts, cover acquisition, verification of documents (ACD, ADU, land records, certificates, etc.), dispute management, and fraud prevention. Interactive and adapted to each audience, they provide a clear, operational vision to make safe decisions.",
+    "discover": "Discover our trainings",
+    "view": "View training",
+    "testimonialsLine1": "They took our trainings",
+    "testimonialsLine2": "hear what they say",
+    "reasonsTitle": "Three (3) big reasons everyone joins our training",
+    "statImageAlt": "Training",
+    "statPeople": "People trained",
+    "noVideo": "No video available for this training."
+  },
+  "author": {
+    "field": "Field",
+    "booksBy": "Books by this author",
+    "noBooksForThisAuthor": "No books available for this author.",
+    "heroTitle": "Allou Boigny Nobel",
+    "heroSubtitle": "Writer and Specialist in Land and Real Estate Law!",
+    "contactMe": "Contact me",
+    "biography": "Biography",
+    "isAuthorOf": "He is the author of the book Buy land safely in Ivory Coast",
+    "bookDescription": "“Buy land safely in Ivory Coast” is a reference work highlighting land issues, essential acquisition rules, dispute resolution mechanisms, and pitfalls to avoid. Structured in 7 chapters and 155 pages, it clearly presents key documents such as ADU, land records, ACD, CMPF, and more.",
+    "wantBook": "I want the book",
+    "wantTraining": "I want a training",
+    "contactParagraph": "Do you have a question about the book? Want to know more about our trainings or organize a conference? Write to us and let’s move together towards a Ivory Coast better protected against land fraud."
+  },
+  "webinar": {
+    "noneAvailable": "No webinars available.",
+    "heroTitleLine1": "Join our",
+    "heroTitleLine2": "exclusive webinars",
+    "heroSubtitle": "Join our interactive sessions and enrich your knowledge",
+    "heroCTA": "Register for the next webinar",
+    "participateIs": "Participating in a webinar means",
+    "bullet1": "Live learning",
+    "bullet2": "Interaction with trainers",
+    "bullet3": "Replay available",
+    "nextTitle": "Next webinar",
+    "emptyTitle": "No webinars available for now",
+    "emptyDesc": "Come back soon to discover our next webinars.",
+    "testimonialsLine1": "They joined our webinars",
+    "testimonialsLine2": "hear what they say"
+  },
+  "webinarsPage": {
+    "myUpcoming": "My upcoming webinars",
+    "live": "Live",
+    "upcoming": "Upcoming",
+    "join": "Join",
+    "register": "Register",
+    "noneUpcoming": "No upcoming webinars",
+    "replaysTitle": "Webinar replays",
+    "followReplay": "Watch the replay",
+    "noReplayYet": "No replay available yet"
+  },
+  "webinars": {
+    "type": "Type: {{type}}",
+    "price": "{{price}} FCFA",
+    "previewVideo": "Preview video",
+    "videoUnsupported": "Your browser does not support video playback.",
+    "zoomLink": "Zoom link",
+    "joinZoom": "Join the webinar",
+    "heroTitle": "Our Webinars",
+    "heroSubtitle": "Join our interactive webinars. Discover live sessions about land issues, ask your questions, and build knowledge in a collaborative setting.",
+    "heroCTA": "Explore our webinars",
+    "statTitle": "Webinars designed for you",
+    "statDescription": "Join our themed webinars led by land experts. Benefit from real-life cases, live Q&A, and practical guidance to secure your projects.",
+    "availableTitle": "Available webinars",
+    "availableSubtitle": "Join our experts for interactive learning sessions"
+  },
+  "nav": {
+    "adminDashboard": "Admin Dashboard",
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "users": "Users",
+    "authors": "Authors",
+    "statistics": "Statistics",
+    "myTrainings": "My trainings",
+    "myBooks": "My books",
+    "home": "Home",
+    "cart": "My cart",
+    "myAccount": "My account",
+    "elearning": "E-Learning",
+    "elearningSubtitle": "Trainings & Books",
+    "adminPanel": "Admin Panel",
+    "siteManagement": "Site management"
+  },
+  "phototheque": {
+    "heroTitle": "Events gallery",
+    "heroSubtitle": "Discover in pictures our book signings, trainings and many more moments",
+    "empty": "No photos available yet.",
+    "count": "Number of photo collections received: {{count}}"
+  },
+  "bookLearn": {
+    "title": "What you will learn from the book",
+    "items": [
+      {
+        "title": "Understand the legal basics",
+        "description": "Discover essential land documents (ACD, ADU, mutation certificate, etc.) explained clearly and accessibly."
+      },
+      {
+        "title": "Master administrative steps",
+        "description": "Learn step by step the procedures to secure your land purchase, from approved subdivision to land transfer."
+      },
+      {
+        "title": "Avoid land fraud",
+        "description": "With practical cases and concrete advice, spot fake documents and protect your savings from common scams."
+      }
+    ]
+  },
+  "trainingsSection": {
+    "title": "Trainings that help you reach your goals",
+    "description": "Interactive trainings tailored to every audience provide a clear, actionable understanding of the land sector. Our goal: help you make confident, informed decisions.",
+    "cta": "Discover all our trainings",
+    "items": [
+      {
+        "title": "Personal coaching",
+        "description": "Learn the key rules to buy land safely."
+      },
+      {
+        "title": "Personal coaching",
+        "description": "Understand land pitfalls and how to avoid them."
+      },
+      {
+        "title": "Land seminar",
+        "description": "Deepen your legal knowledge."
+      },
+      {
+        "title": "Land seminar",
+        "description": "Deepen your legal knowledge."
+      }
+    ]
+  },
+  "booksPage": {
+    "heroTitle": "Discover the legal and administrative secrets to become a safe landowner",
+    "heroCTA": "I want a book",
+    "trainingTitle": "Trainings that help you reach your goals",
+    "trainingDescription": "This book guides you through buying land in Ivory Coast. It explains the rules and shares tips to avoid traps.",
+    "digitalTitle": "Digital version (ebook)",
+    "digitalSubtitle": "✨ Always at your fingertips",
+    "wantBook": "I want a book",
+    "wantTraining": "I want a training",
+    "physicalTitle": "Physical version (printed book)",
+    "physicalSubtitle": "📖 A premium book to keep in your library",
+    "wantMyBook": "I want my book",
+    "testimonialsTitle": "What our readers say"
+  },
+  "home": {
+    "heroTitle": "Buy land safely in Côte d'Ivoire",
+    "heroSubtitle": "The secrets finally revealed to become a homeowner!",
+    "bookSectionTitle": "Buy land safely in Côte d'Ivoire",
+    "bookSectionDescription": "This book makes land purchase easy. It explains the rules and offers tips to avoid scams.",
+    "bookSectionPhysical": "I want my physical book",
+    "bookSectionDigital": "I want my digital book",
+    "webinarTitle": "Join our next webinar",
+    "webinarDescription": "This Thursday at 1 pm.",
+    "webinarCTA": "Join our next webinar"
+  },
+  "accordion": {
+    "item1": {
+      "title": "A credible, trusted expertise",
+      "content": "Our trainings are designed by land law specialists. You receive reliable, up-to-date knowledge."
+    },
+    "item2": {
+      "title": "Immediately applicable knowledge",
+      "content": "Every module answers concrete needs: required documents, steps to follow, pitfalls to avoid."
+    },
+    "item3": {
+      "title": "A lasting investment for peace of mind",
+      "content": "Our trainings prevent costly mistakes and give you peace of mind to build your future."
+    }
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "welcomeBack": "Welcome back",
+    "emailPlaceholder": "Email or phone number",
+    "emailLabel": "Email or phone number",
+    "passwordPlaceholder": "Password",
+    "passwordLabel": "Password",
+    "loggingIn": "Logging in...",
+    "loginCTA": "Login",
+    "forgotPrompt": "I forgot my password.",
+    "resetLink": "Reset",
+    "registerCTA": "Sign up",
+    "errors": {
+      "invalidEmail": "Invalid email.",
+      "emailRequired": "Email is required."
+    },
+    "forgotTitle": "Forgot password",
+    "resetIntro": "I reset my password",
+    "sending": "Sending...",
+    "sendResetLink": "Send reset link",
+    "rememberPrompt": "I remember my password.",
+    "loginLink": "Login"
+  }
+}
+
+

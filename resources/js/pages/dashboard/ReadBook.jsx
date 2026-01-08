@@ -6,12 +6,14 @@ import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import Layout from "../../components/Layout";
+import { useTranslation } from "react-i18next";
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 
 export default function ReadBook() {
   const { props } = usePage();
+  const { t } = useTranslation();
   const livre = props?.livre || null;
   const pdfPath = props?.pdf_url || (livre ? `/storage/${livre.livrepdf}` : null);
   const [numPages, setNumPages] = useState(null);
@@ -64,13 +66,17 @@ export default function ReadBook() {
     <section className="p-4 mt-5 md:mt-5" onContextMenu={handleContextMenu}>
       <div className="flex gap-4 items-start" onContextMenu={handleContextMenu}>
         <Sidebar />
+        
         <div className="lg:h-screen flex-1 w-full" onContextMenu={handleContextMenu}>
-          {livre ? (
+          {livre ? (<>
+            <h1 className="text-3xl font-bold mb-6 text-secondary">
+              {livre.titre}
+            </h1>
             <div className="w-full select-none" onContextMenu={handleContextMenu}>
               {/* Barre de navigation */}
               <div className="flex items-center justify-between gap-2 mb-3">
                 <div className="text-sm text-gray-700">
-                  Page {pageNumber} {numPages ? `sur ${numPages}` : ""}
+                  {t("reader.page")} {pageNumber} {numPages ? `${t("reader.of")} ${numPages}` : ""}
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -79,7 +85,7 @@ export default function ReadBook() {
                     onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
                     disabled={pageNumber <= 1}
                   >
-                    Précédent
+                    {t("reader.previous")}
                   </button>
                   <button
                     type="button"
@@ -91,7 +97,7 @@ export default function ReadBook() {
                     }
                     disabled={numPages ? pageNumber >= numPages : false}
                   >
-                    Suivant
+                    {t("reader.next")}
                   </button>
                   <div className="w-px h-6 bg-gray-300" />
                   <button
@@ -128,8 +134,8 @@ export default function ReadBook() {
                   file={fileSpec}
                   onLoadSuccess={onDocumentLoadSuccess}
                   onLoadError={(err) => setErrorMsg(err.message)}
-                  loading={<div className="text-gray-500">Chargement…</div>}
-                  error={<div className="text-red-600">Erreur de chargement du PDF.</div>}
+                  loading={<div className="text-gray-500">{t("reader.loading")}</div>}
+                  error={<div className="text-red-600">{t("reader.pdfError")}</div>}
                   
                 >
                   <Page
@@ -146,10 +152,11 @@ export default function ReadBook() {
                 <div className="text-red-600 text-sm mt-3 text-center">{errorMsg}</div>
               )}
             </div>
-          ) : (
-            <div className="text-sm text-gray-600">Aucun livre à afficher.</div>
+         </> ) : (
+            <div className="text-sm text-gray-600">{t("reader.noBook")}</div>
           )}
         </div>
+
       </div>
     </section>
     </Layout>

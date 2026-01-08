@@ -6,18 +6,20 @@ import BookSection from '../components/BookSection.jsx'
 import TrainingSection from '../components/TrainingSection.jsx'
 import webinar from '../assets/webinar.jpg'
 import Layout from "../components/Layout.jsx"
+import { useTranslation } from "react-i18next";
 
 
 export default function Accueil(){
+    const { t } = useTranslation();
     return(
        <>
        <Layout>
     
             <section className='p-4'>
                 <Hero
-                    title="Achetez un terrain en toute sécurité en Côte d'Ivoire"
+                    title={t("home.heroTitle")}
                     textClassName="text-3xl md:text-6xl font-bold leading-tight"
-                    subtitle="Les secrets enfin dévoilés pour être propriétaire !"
+                    subtitle={t("home.heroSubtitle")}
                     backgroundImage={heroImage}
                     gradient="from-black/20 to-black/20"
                     image={bookCover}
@@ -30,14 +32,12 @@ export default function Accueil(){
                 <div>
                     <BookSection
                     image={openBook}
-                    title="Achetez un terrain en toute sécurité en Côte d'Ivoire"
+                    title={t("home.bookSectionTitle")}
                     className="text-2xl font-bold  bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent"
-                    description="Ce livre est un guide qui facilite l'achat des terrains en Côte d'Ivoire. 
-                    Il explique les règles qui permettent de comprendre le secteur du foncier ivoirien 
-                    et donne des astuces aux lecteurs pour éviter les pièges des escrocs."
+                    description={t("home.bookSectionDescription")}
                     buttons={[
-                            { text: "Je veux mon livre physique", color: "bg-secondary", to: "/livres" },
-                            { text: "Je veux mon livre numérique", color: "bg-primary", to: "/livres" },
+                            { text: t("home.bookSectionPhysical"), color: "bg-secondary", to: "/livres" },
+                            { text: t("home.bookSectionDigital"), color: "bg-primary", to: "/livres" },
                     ]}
                     imageRight={false}
                 />
@@ -50,11 +50,11 @@ export default function Accueil(){
             <section className='bg-bodyColor py-10 pt-26 md:py-24' style={{clipPath: "polygon(0 5%, 100% 23%, 100% 100%, 0% 100%)"}}>
                 <BookSection
                     image={webinar}
-                    title="Rejoignez notre prochain webinaire"
+                    title={t("home.webinarTitle")}
                     className="text-black font-semibold md:text-4xl text-2xl"
-                    description="Ce jeudi à 13H."
+                    description={t("home.webinarDescription")}
                     buttons={[
-                    { text: "Rejoignez notre prochain webinaire", color: "bg-secondary", onClick: () => alert("Livre physique choisi !") }
+                    { text: t("home.webinarCTA"), color: "bg-secondary", onClick: () => alert("Livre physique choisi !") }
                     ]}
                     imageRight={false}
                 />
