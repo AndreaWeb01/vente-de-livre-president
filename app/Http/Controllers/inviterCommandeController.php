@@ -13,7 +13,6 @@ use Inertia\Inertia;
 
 class inviterCommandeController extends Controller
 {
- 
     /**
      * Afficher le formulaire de commande
      */
