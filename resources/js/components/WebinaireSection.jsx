@@ -1,6 +1,13 @@
 
 import Button from "./Button";
-export default function WebinaireSection({image, title, showButton= true, buttonLabel="J'y participe", children}){
+export default function WebinaireSection({image, title, showButton= true, buttonLabel="J'y participe", scrollToId, children}){
+    const handleScroll = () => {
+        if (scrollToId) {
+            const section = document.getElementById(scrollToId);
+            if (section) section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return(<>
         <div className="mx-auto px-6 py-12  max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -10,6 +17,7 @@ export default function WebinaireSection({image, title, showButton= true, button
                 {children}
                    {showButton && (
                     <Button
+                    onClick={handleScroll}
                     label={buttonLabel}
                     color="orange"
                     ButtonClassName="text-white"

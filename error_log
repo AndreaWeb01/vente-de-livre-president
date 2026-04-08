@@ -1,0 +1,24 @@
+[19-Dec-2025 17:46:47 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:46:47 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:46:47 Europe/London] PHP Fatal error:  Uncaught Error: Failed opening required '/home/allouboi/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/allouboi/public_html/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:46:52 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:46:52 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:46:52 Europe/London] PHP Fatal error:  Uncaught Error: Failed opening required '/home/allouboi/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/allouboi/public_html/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:55:24 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:55:24 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:55:24 Europe/London] PHP Fatal error:  Uncaught Error: Failed opening required '/home/allouboi/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/allouboi/public_html/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:58:53 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:58:53 Europe/London] PHP Warning:  require(/home/allouboi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/allouboi/public_html/index.php on line 14
+[19-Dec-2025 17:58:53 Europe/London] PHP Fatal error:  Uncaught Error: Failed opening required '/home/allouboi/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/allouboi/public_html/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/allouboi/public_html/index.php on line 14

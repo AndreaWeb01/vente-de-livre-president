@@ -51,13 +51,10 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
+        \Illuminate\Support\Facades\Log::info('PublicCommandeController@store called', $request->all());
         $request->validate([
-            'mode_paiement' => 'required|string|in:mobile_money,card,cash',
-            'moneroo_method' => [
-                'nullable',
-                Rule::requiredIf(fn () => $request->input('mode_paiement') === 'mobile_money'),
-                Rule::in(['orange_ci', 'mtn_ci', 'wave_ci', 'moov_ci']),
-            ],
+            'mode_paiement' => 'nullable|string',
+            'moneroo_method' => 'nullable|string',
             'notes' => 'nullable|string|max:500',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -102,6 +99,7 @@ class CommandeController extends Controller
                 'adresse' => $request->input('adresse', $user->adresse),
                 'ville' => $request->input('ville', $user->ville),
                 'quartier' => $request->input('quartier', $user->quartier),
+                'pays' => $request->input('pays', 'CI'),
                 'total' => $total,
                 'statut' => 'en_attente',
                 'reference' => $reference,
@@ -135,20 +133,7 @@ class CommandeController extends Controller
     
             DB::commit();
 
-            if (in_array($modePaiement, ['mobile_money', 'card'], true)) {
-                $params = ['commande_id' => $commande->id];
 
-                if ($modePaiement === 'card') {
-                    $params['method'] = 'card';
-                }
-
-                if ($modePaiement === 'mobile_money') {
-                    $defaultMethod = config('moneroo.default_methods.0', 'orange_ci');
-                    $params['method'] = $request->input('moneroo_method', $defaultMethod);
-                }
-
-                return redirect()->route('payment.init', $params);
-            }
 
             return redirect()
                 ->route('public.commande.success', $commande->id)

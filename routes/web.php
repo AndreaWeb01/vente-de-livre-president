@@ -42,6 +42,7 @@ Route::prefix('public')->name('public.')->group(function () {
     Route::post('commande-livres-physique', [inviterCommandeController::class, 'store'])->name('commande.physique.store');
     Route::post('commande', [PublicCommandeController::class, 'store'])->name('commande.store');
     Route::get('commande-livres-physique/create', [inviterCommandeController::class, 'create'])->name('commande.physique.create');
+    Route::get('commande-livres-physique/{id}/success', [inviterCommandeController::class, 'success'])->name('commande.physique.success');
     Route::get('commande/{id}/success', [PublicCommandeController::class, 'success'])->name('commande.success');
     Route::get('commande/{id}', [PublicCommandeController::class, 'show'])->name('commande.show');
 
@@ -92,6 +93,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
     Route::get('commandes', [App\Http\Controllers\Admin\CommandeController::class, 'index'])->name('commandes.index');
     Route::get('commandes/{id}', [App\Http\Controllers\Admin\CommandeController::class, 'show'])->name('commandes.show');
     Route::put('commandes/{id}/status', [App\Http\Controllers\Admin\CommandeController::class, 'updateStatus'])->name('commandes.update-status');
+
+    // Commandes Invitées
+    Route::get('commandes-invites', [App\Http\Controllers\Admin\CommandeController::class, 'indexInviters'])->name('commandes-invites.index');
+    Route::get('commandes-invites/{id}', [App\Http\Controllers\Admin\CommandeController::class, 'showInviter'])->name('commandes-invites.show');
+    Route::put('commandes-invites/{id}/status', [App\Http\Controllers\Admin\CommandeController::class, 'updateStatusInviter'])->name('commandes-invites.update-status');
 });
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('mes-formations', [AccessController::class, 'mesFormations'])->name('mes.formations');

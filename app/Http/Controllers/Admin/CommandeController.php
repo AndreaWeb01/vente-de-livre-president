@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Commande;
+use App\Models\Commandeinviter;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -65,5 +66,62 @@ class CommandeController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Statut de la commande mis à jour !');
+    }
+
+    /**
+     * Afficher la liste des commandes invités
+     */
+    public function indexInviters(Request $request)
+    {
+        $query = Commandeinviter::with(['achats.achetable']);
+
+        // Filtres
+        if ($request->filled('search')) {
+            $query->where('reference', 'like', '%' . $request->search . '%')
+                  ->orWhere('nom', 'like', '%' . $request->search . '%')
+                  ->orWhere('prenom', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('statut')) {
+            $query->where('statut', $request->statut);
+        }
+
+        if ($request->filled('mode_paiement')) {
+            $query->where('mode_paiement', $request->mode_paiement);
+        }
+
+        $commandes = $query->orderBy('created_at', 'desc')->paginate(20);
+
+        return view('admin.commandes.inviters_index', compact('commandes'));
+    }
+
+    /**
+     * Afficher les détails d'une commande invité
+     */
+    public function showInviter($id)
+    {
+        $commande = Commandeinviter::with(['achats.achetable'])
+            ->findOrFail($id);
+
+        return view('admin.commandes.inviters_show', compact('commande'));
+    }
+
+    /**
+     * Mettre à jour le statut d'une commande invité
+     */
+    public function updateStatusInviter(Request $request, $id)
+    {
+        $request->validate([
+            'statut' => 'required|in:en_attente,payee,annulee'
+        ]);
+
+        $commande = Commandeinviter::findOrFail($id);
+        $commande->update([
+            'statut' => $request->statut,
+            'date_paiement' => $request->statut === 'payee' ? now() : null
+        ]);
+
+        return redirect()->back()->with('success', 'Statut de la commande invité mis à jour !');
     }
 }

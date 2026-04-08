@@ -117,7 +117,8 @@ export default function Livres({ livres, livre }) {
                             color: "bg-primary",
                             },
                         ]}
-                        
+                        imageRight={true}
+                        livre={livre}
                     />
                     ))}
                 </div>

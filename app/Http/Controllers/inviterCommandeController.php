@@ -13,7 +13,6 @@ use Inertia\Inertia;
 
 class inviterCommandeController extends Controller
 {
- 
     /**
      * Afficher le formulaire de commande
      */
@@ -47,13 +46,10 @@ class inviterCommandeController extends Controller
      */
     public function store(Request $request)
     {
+        \Illuminate\Support\Facades\Log::info('inviterCommandeController@store called', $request->all());
         $request->validate([
-            'mode_paiement' => 'required|string|in:mobile_money,carte_credit,espece',
-            'moneroo_method' => [
-                'nullable',
-                Rule::requiredIf(fn () => $request->input('mode_paiement') === 'mobile_money'),
-                Rule::in(['orange_ci', 'mtn_ci', 'wave_ci', 'moov_ci']),
-            ],
+            'mode_paiement' => 'nullable|string',
+            'moneroo_method' => 'nullable|string',
             'notes' => 'nullable|string|max:500',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -82,6 +78,10 @@ class inviterCommandeController extends Controller
             $reference = 'CMD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -8));
 
             $modePaiement = $request->input('mode_paiement');
+            // Mappage des valeurs du frontend vers les énumérations de la base de données invité
+            if ($modePaiement === 'card') $modePaiement = 'carte_credit';
+            if ($modePaiement === 'cash') $modePaiement = 'espece';
+            
             $notes = $request->input('notes');
 
             // Créer la commande avec les infos du formulaire
@@ -126,7 +126,7 @@ class inviterCommandeController extends Controller
     
             DB::commit();
 
-            return redirect()->route('commande.success', $commande->id)
+            return redirect()->route('public.commande.physique.success', $commande->id)
                 ->with('success', 'Commande invitée passée avec succès !');
     
         } catch (\Exception $e) {
@@ -140,7 +140,6 @@ class inviterCommandeController extends Controller
     {
         $commande = Commandeinviter::with(['achats.achetable'])
             ->where('id', $id)
-            ->where('user_id', Auth::id())
             ->firstOrFail();
 
         return Inertia::render('public/commande/success', [

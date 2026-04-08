@@ -1,6 +1,8 @@
+import { usePage } from "@inertiajs/react";
 import Button from "./Button";
 import Profil from "./Profil"
 import photoPresi from "../assets/photoPresi.png"
+import defaultWebinarImage from "../assets/webinar.jpg"
 
 export default function WebinarCard({
   id,
@@ -10,10 +12,17 @@ export default function WebinarCard({
   showButton = true, 
   buttonLabel = "Je m'inscris", 
 }) {
+  const { auth } = usePage().props;
+  const isAuth = auth && auth.user !== null;
+  const targetRoute = isAuth 
+    ? `/public/panier/formations/${id}` 
+    : `/login`; // Les formations/webinaires demandent un compte
+  const method = isAuth ? "post" : "get";
+
   return (
     <div className="bg-bodyColor rounded-md w-100% md:w-75 p-4">
       <img
-        src={photo ? `/storage/${photo}` : require("../assets/webinar.jpg")}
+        src={photo ? `/storage/${photo}` : defaultWebinarImage}
         alt={titre}
         className="w-[100%] rounded-[8px]"
       />
@@ -23,9 +32,9 @@ export default function WebinarCard({
       <Profil image={photoPresi} name="Mr Allou Boigny Nobel"/>
       {showButton && (
         <Button
-         to={`/public/panier/formations/${id}`}
+          to={targetRoute}
           label={buttonLabel}
-          methode="post"
+          methode={method}
           color="orange"
           ButtonClassName="text-white"
         />

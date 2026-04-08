@@ -1,13 +1,21 @@
-import { Link, router } from "@inertiajs/react"
+import { Link, router, usePage } from "@inertiajs/react"
 import { useTranslation } from "react-i18next";
 
 
-function addToCart(url, payload) {
-  router.post(url, payload)
-}
-
 export default function BookSection({ image, title, description, buttons, className, subtitle, price, imageRight = true, livre }) {
   const { t } = useTranslation();
+  const { auth } = usePage().props;
+  const isAuth = auth && auth.user !== null;
+
+  const handleAddToCart = (to, payload) => {
+    // Si c'est un livre numérique et que l'utilisateur n'est pas connecté
+    if (livre?.type === 'numérique' && !isAuth) {
+      router.get('/login');
+      return;
+    }
+    router.post(to, payload)
+  }
+
   // Utiliser les données du livre si disponibles, sinon utiliser les props
   const displayTitle = livre?.titre || title;
   const displaySubtitle = livre?.auteur ? t("books.byAuthor", { firstName: livre.auteur.user?.prenom, lastName: livre.auteur.user?.nom }) : subtitle;
@@ -28,7 +36,7 @@ export default function BookSection({ image, title, description, buttons, classN
               key={idx}
               type="button"
               className={`${btn.color} text-white md:text-[18px] px-2 lg:px-4 py-2 font-[600] rounded-[5px] hover:opacity-90 transition`}
-              onClick={() => addToCart(btn.to, { quantite: btn.quantite ?? 1 })}
+              onClick={() => handleAddToCart(btn.to, { quantite: btn.quantite ?? 1 })}
             >
               {btn.text}
             </button>

@@ -102,7 +102,7 @@ class PanierController extends Controller
             ->first();
 
         if ($panierItem) {
-            return redirect()->back()->with('error', 'Cette formation est déjà dans votre panier !');
+            return redirect()->route('public.panier.index')->with('info', 'Cette formation est déjà dans votre panier.');
         } else {
             // Créer un nouvel élément
             Panier::create([
@@ -114,7 +114,7 @@ class PanierController extends Controller
             ]);
         }
 
-        return redirect()->route('panier.index')->with('success', 'Formation ajoutée au panier !');
+        return redirect()->route('public.panier.index')->with('success', 'Formation ajoutée au panier !');
     }
 
     /**

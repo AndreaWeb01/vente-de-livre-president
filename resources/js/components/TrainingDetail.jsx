@@ -1,14 +1,22 @@
 import { trainings } from "../data/Trainings";
 import TrainingCard from "../components/TrainingCard";
 import Button from "./Button";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 export default function TrainingDetail({ formation, id }) {
     // Si formation n'est pas passée en props, chercher dans les données locales
     const trainingData = formation || trainings.find(item => item.id === parseInt(id));
+    const { auth } = usePage().props;
+    const isAuth = auth && auth.user !== null;
 
     const handleParticiper = () => {
         if (!trainingData || !trainingData.id) return;
+        
+        if (!isAuth) {
+            router.get('/login');
+            return;
+        }
+
         router.post(`/public/panier/formations/${trainingData.id}`, {
             quantite: 1,
         });

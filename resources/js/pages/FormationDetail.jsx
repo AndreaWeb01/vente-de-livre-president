@@ -5,9 +5,21 @@ import TrainingDetail from "../components/TrainingDetail";
 import AccordionList from "../components/AccordionList";
 import Layout from "../components/Layout";
 import { useTranslation } from "react-i18next";
+import { usePage, router } from "@inertiajs/react";
 
 export default function FormationDetail({ formation, id }) {
   const { t } = useTranslation();
+  const { auth } = usePage().props;
+  const isAuth = auth && auth.user !== null;
+
+  const handleInscrire = () => {
+    if (!isAuth) {
+      router.get('/login');
+      return;
+    }
+    router.post(`/public/panier/formations/${formation.id}`, { quantite: 1 });
+  };
+
   const normalizedFormation = formation
     ? {
         id: formation.id,
@@ -44,7 +56,12 @@ export default function FormationDetail({ formation, id }) {
         <section className="mt-20 md:mt-20 p-4">
           <AccordionList title={t("trainings.reasonsTitle")} />
           <div className="flex justify-center mt-10">
-              <Button label="Je m'inscris maintenant" color="orange" />
+              <Button 
+                label="Je m'inscris maintenant" 
+                color="orange" 
+                onClick={handleInscrire}
+                ButtonClassName="text-white"
+              />
           </div>
         </section>
     </Layout>

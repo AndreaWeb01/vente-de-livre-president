@@ -32,6 +32,7 @@ export default function Webinaire(){
                     </>}
                     subtitle={t("webinar.heroSubtitle")}
                     ctaText={t("webinar.heroCTA")}
+                    scrollToId="webinars-list"
                     gradient="from-[#2E7D32] to-[#4AA441]"
                     image={webinarCover}
                     imageClassName= "absolute right-6  w-[35%] hidden lg:block z-20"
@@ -43,6 +44,7 @@ export default function Webinaire(){
 
             <section className='mt-20 md:mt-20 p-4'>
                 <WebinaireSection
+                scrollToId="webinars-list"
                 title={t("webinar.participateIs")} 
                 children={<>
                     <Icontext icon={FaThumbtack} text={t("webinar.bullet1")} />
@@ -55,7 +57,7 @@ export default function Webinaire(){
             </section>
  
 
-        <section className="py-24 px-4">
+        <section id="webinars-list" className="py-24 px-4">
         <h2 className=" text-2xl md:text-4xl font-bold text-primary mb-16 md:mb-24 text-center md:w-[60%] w-[80%] mx-auto ">
             {t("webinar.nextTitle")}
         </h2>

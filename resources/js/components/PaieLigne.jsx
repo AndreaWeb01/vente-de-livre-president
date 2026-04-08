@@ -5,7 +5,7 @@ import * as yup from "yup";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import { Ziggy } from "../ziggy";
 import Button from "./Button";
@@ -25,24 +25,13 @@ const schema = yup
     prenom: yup.string().required("Le prénom est requis."),
     telephone: yup
       .string()
-      .required("Le téléphone est requis")
-      .matches(/^\d{8,15}$/, "Téléphone invalide. (8 à 15 chiffres)"),
+      .required("Le téléphone est requis"),
     email: yup.string().email("Email invalide").required("L'email est requis."),
     adresse: yup.string().nullable(),
     ville: yup.string().nullable(),
     quartier: yup.string().nullable(),
-    mode_paiement: yup.string().oneOf(["mobile_money", "carte_credit", "espece"]).required(),
-    moneroo_method: yup
-      .string()
-      .nullable()
-      .when("mode_paiement", {
-        is: "mobile_money",
-        then: (schema) =>
-          schema
-            .required("Choisissez un opérateur Mobile Money")
-            .oneOf(MOBILE_METHODS.map((m) => m.value)),
-        otherwise: (schema) => schema.nullable(),
-      }),
+    mode_paiement: yup.string().nullable(),
+    moneroo_method: yup.string().nullable(),
     notes: yup.string().nullable(),
   })
   .required();
@@ -85,16 +74,19 @@ export default function PaieLigne({ user }) {
     }
   }, [modePaiement, currentMethod, setValue]);
 
+  const pageProps = usePage().props;
+  // On se base uniquement sur l'authentification réelle fournie par Inertia
+  const isAuth = pageProps?.auth?.user !== undefined && pageProps?.auth?.user !== null;
+
   const onSubmit = (data) => {
     // Envoyer uniquement des chiffres (aucun E.164)
     const payload = { ...data, telephone: (data.telephone || '').replace(/\D/g, '') };
 
     console.log("Payload envoyé :", payload);
-
-    // Soumettre le formulaire au contrôleur
-    let postUrl = "/public/commande-livres-physique";
+    
+    let postUrl = isAuth ? "/public/commande" : "/public/commande-livres-physique";
     try {
-      postUrl = route("public.commande.physique.store", [], false, Ziggy);
+      postUrl = isAuth ? route("public.commande.store", [], false, Ziggy) : route("public.commande.physique.store", [], false, Ziggy);
     } catch (_) {}
     router.post(postUrl, payload, { preserveScroll: true });
   };
@@ -131,8 +123,8 @@ export default function PaieLigne({ user }) {
         error={errors.mode_paiement}
         options={[
           { value: "mobile_money", label: "Mobile Money" },
-          { value: "carte_credit", label: "Carte" },
-          { value: "espece", label: "Espèces" },
+          { value: "card", label: "Carte" },
+          { value: "cash", label: "Espèces" },
         ]}
       />
       {watch("mode_paiement") === "mobile_money" && (

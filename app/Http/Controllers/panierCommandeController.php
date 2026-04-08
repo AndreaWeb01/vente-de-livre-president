@@ -38,7 +38,7 @@ class panierCommandeController extends Controller
     /**
      * Ajouter un livre au panier
      */
-   public function addLivre(Request $request, $id)
+    public function addLivre(Request $request, $id)
     {
         $request->validate([
             'quantite' => 'integer|min:1|max:10',
@@ -47,6 +47,7 @@ class panierCommandeController extends Controller
         $livre = Livre::where('id', $id)
             ->where('est_actif', true)
             ->where('stock', '>', 0)
+            ->where('type', 'physique') // Restriction au type physique
             ->firstOrFail();
 
         $quantite = $request->input('quantite', 1);
@@ -71,42 +72,6 @@ class panierCommandeController extends Controller
             ]);
         }
         return redirect()->route('public.panier.index-pysique.livre')->with('success', 'Livre ajouté au panier !');
-    }
-
-
-    /**
-     * Ajouter une formation au panier
-     */
-  public function addFormation(Request $request, $id)
-    {
-        $request->validate([
-            'quantite' => 'integer|min:1|max:1', // Les formations sont généralement limitées à 1
-        ]);
-
-        $formation = Formation::where('id', $id)
-            ->where('est_actif', true)
-            ->firstOrFail();
-
-        $quantite = $request->input('quantite', 1);
-
-        // Vérifier si l'élément existe déjà dans le panier
-        $panierItem = Panierinviter::where('achetable_type', Formation::class)
-            ->where('achetable_id', $id)
-            ->first();
-
-        if ($panierItem) {
-            return redirect()->back()->with('error', 'Cette formation est déjà dans votre panier !');
-        } else {
-            // Créer un nouvel élément
-            Panierinviter::create([
-                'achetable_type' => Formation::class,
-                'achetable_id' => $id,
-                'quantite' => $quantite,
-                'prix_unitaire' => $formation->prix,
-            ]);
-        }
-
-        return redirect()->route('public.panier.index')->with('success', 'Formation ajoutée au panier !');
     }
 
     /**
