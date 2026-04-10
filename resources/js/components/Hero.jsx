@@ -11,12 +11,24 @@ function Hero({
   subClassName,  
   backgroundImage,
   backgroundClass,
-  gradient = "from-orange-500 via-pink-500 to-purple-600",
+  gradient = "from-orange-500 via-pink-500 to-purple-600" || "",
+  to,
 }) {
   const handleScroll = () => {
     if (scrollToId) {
       const section = document.getElementById(scrollToId);
       if (section) section.scrollIntoView({ behavior: "smooth" });
+    } else if (onCtaClick) {
+      onCtaClick();
+    }
+  };
+
+  const handleCtaClick = () => {
+    if (scrollToId) {
+      const section = document.getElementById(scrollToId);
+      if (section) section.scrollIntoView({ behavior: "smooth" });
+    } else if (to) {
+      router.visit(to);
     } else if (onCtaClick) {
       onCtaClick();
     }
@@ -45,7 +57,7 @@ function Hero({
 
         {ctaText && (
           <button
-            onClick={handleScroll}
+            onClick={handleCtaClick}
             className=" bg-secondary text-white  px-5 py-2.5 rounded-[5px] font-semibold shadow-lg "
           >
             {ctaText}

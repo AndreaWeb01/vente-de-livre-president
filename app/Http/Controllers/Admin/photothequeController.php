@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\phothotheque;
 use Illuminate\Http\Request;
 
-class photothequeController extends Controller
+class PhotothequeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,7 +40,7 @@ class photothequeController extends Controller
         ]);
         $photo = $request->file('photo');
         $photoName = time().'.'.$photo->extension();
-        $photo->move(public_path('images/phototheque'), $photoName);
+        $photo->storeAs('images/phototheque', $photoName);
         phothotheque::create([
             'titre' => $request->titre,
             'photo' => $photoName,

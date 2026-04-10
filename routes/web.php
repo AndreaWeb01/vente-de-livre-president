@@ -13,7 +13,7 @@ use App\Http\Controllers\Public\PanierController as PublicPanierController;
 use App\Http\Controllers\Public\CommandeController as PublicCommandeController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\Admin\PhotothequeController as AdminPhothothequeController;
+use App\Http\Controllers\Admin\PhotothequeController as AdminPhotothequeController;
 use App\Http\Controllers\inviterCommandeController;
 use App\Http\Controllers\panierCommandeController;
 use App\Http\Controllers\Public\AuthenticatedPublicController;
@@ -89,7 +89,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
     Route::resource('auteurs', AdminAuteurController::class);
     Route::resource('formations', AdminFormationController::class);
     Route::resource('livres', AdminLivreController::class);
-    Route::resource('phototheque', AdminPhothothequeController::class);
+    Route::resource('phototheque', AdminPhotothequeController::class);
     Route::get('commandes', [App\Http\Controllers\Admin\CommandeController::class, 'index'])->name('commandes.index');
     Route::get('commandes/{id}', [App\Http\Controllers\Admin\CommandeController::class, 'show'])->name('commandes.show');
     Route::put('commandes/{id}/status', [App\Http\Controllers\Admin\CommandeController::class, 'updateStatus'])->name('commandes.update-status');

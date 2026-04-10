@@ -46,6 +46,8 @@ export default function Livres({ livres, livre }) {
                         imageClassName="absolute right-0 -bottom-10 w-[45%] hidden lg:block z-20"
                         textClassName="text-2xl md:text-4xl font-bold leading-tight"
                         backgroundClass="h-[20rem] lg:h-[30rem] xl:h-[50rem]"
+                        scrollToId="livres-numeriques"
+                        
                     />
                 </section>
 
@@ -55,7 +57,7 @@ export default function Livres({ livres, livre }) {
 
         
             <section className='bg-bodyColor mt-6 md:mt-10'>
-                <div id="scrollToId">
+                <div id="livres-numeriques">
                     <h4 className=" text-2xl md:text-4xl font-bold text-primary pt-16 md:pt-20 pb-16 md:pb-20 text-center md:w-[60%] w-[80%] mx-auto ">
                         {t("booksPage.trainingTitle")}
                     </h4>
@@ -84,7 +86,7 @@ export default function Livres({ livres, livre }) {
                               text: t("booksPage.wantTraining"),
                               to:'/formations',
                               color: "bg-primary",
-                            }
+                            } 
                         ]}
                         imageRight={false}
                         livre={livre}

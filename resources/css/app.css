@@ -21,17 +21,16 @@
   --color-primary: #4AA441;
   --color-secondary: #ED7A0E;
   --color-textColor: #2A2928;
-  --color-bodyColor: #F9F9EA;
+  --color-bodyColor: #f9f9ea;
 }
 
 :root {
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
+  color-scheme: light;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--color-bodyColor);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,6 +48,7 @@ body {
   font-family: 'Times New Roman', serif;
   min-height: 100vh;
   color: var(--color-textColor);
+  background-color: #ffffffe5;
 }
 
 

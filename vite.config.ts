@@ -37,42 +37,46 @@ export default defineConfig({
                         return;
                     }
 
-                    // React / React DOM
-                    if (id.includes('react') || id.includes('react-dom')) {
-                        return 'react-vendor';
-                    }
-
-                    // Inertia
-                    if (id.includes('@inertiajs')) {
-                        return 'inertia';
-                    }
-
-                    // i18n (i18next, react-i18next, language detector)
-                    if (id.includes('i18next') || id.includes('react-i18next') || id.includes('i18next-browser-languagedetector')) {
-                        return 'i18n';
-                    }
-
-                    // UI primitives (Radix, Headless UI, etc.)
-                    if (id.includes('@radix-ui') || id.includes('@headlessui')) {
-                        return 'ui-primitives';
-                    }
-
-                    // Icônes Lucide (souvent volumineux)
+                    // 1. Specific bulky libraries first to prevent them from being sucked into 'react-core' or 'vendor'
                     if (id.includes('lucide-react')) {
                         return 'icons';
                     }
 
-                    // Lecteur PDF (react-pdf + pdfjs-dist)
+                    if (id.includes('@inertiajs')) {
+                        return 'inertia';
+                    }
+
+                    // 2. React Core - strictly match core packages (must stay together)
+                    // We use path segments to avoid matching things like 'react-hook-form' or 'react-i18next'
+                    if (
+                        id.includes('node_modules/react/') ||
+                        id.includes('node_modules/react-dom/') ||
+                        id.includes('node_modules/scheduler/') ||
+                        id.includes('node_modules/react-is/')
+                    ) {
+                        return 'react-core';
+                    }
+
+                    // 3. i18n
+                    if (id.includes('i18next')) {
+                        return 'i18n';
+                    }
+
+                    // 4. UI primitives
+                    if (id.includes('@radix-ui') || id.includes('@headlessui')) {
+                        return 'ui-primitives';
+                    }
+
+                    // 5. Specialized heavy components
                     if (id.includes('react-pdf') || id.includes('pdfjs-dist')) {
                         return 'pdf-viewer';
                     }
 
-                    // Video.js
-                    if (id.includes('video.js')) {
+                    if (id.includes('video.js') || id.includes('react-player') || id.includes('react-video')) {
                         return 'video-player';
                     }
 
-                    // Reste de node_modules
+                    // 6. Default to vendor for all other node_modules
                     return 'vendor';
                 },
             },

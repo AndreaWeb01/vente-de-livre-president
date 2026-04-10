@@ -54,6 +54,7 @@ export default function Formations({ formations, formation }){
                     textClassName="text-2xl md:text-5xl font-bold leading-tight"
                     subClassName="mb-6 lg:w-[90%] text-[16px]  "
                     backgroundClass="h-[25rem] lg:h-[30rem] xl:h-[50rem]"
+                    scrollToId="formations-list"
                 />
             </section>
 
@@ -67,7 +68,7 @@ export default function Formations({ formations, formation }){
                   
             </section>
             {formations && formations.data && formations.data.length > 0 && (
-            <section className="py-24 px-4">
+            <section id="formations-list" className="py-24 px-4">
                 <h2 className="text-2xl md:text-4xl font-bold text-primary mb-16 md:mb-24 text-center md:w-[60%] w-[80%] mx-auto">
                 {t("trainings.discover")}
                 </h2>

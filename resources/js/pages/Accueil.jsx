@@ -54,7 +54,8 @@ export default function Accueil(){
                     className="text-black font-semibold md:text-4xl text-2xl"
                     description={t("home.webinarDescription")}
                     buttons={[
-                    { text: t("home.webinarCTA"), color: "bg-secondary", onClick: () => alert("Livre physique choisi !") }
+                    { text: t("home.webinarCTA"), 
+                    color: "bg-secondary", to: "/webinaires" }
                     ]}
                     imageRight={false}
                 />
