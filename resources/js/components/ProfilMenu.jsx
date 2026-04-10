@@ -45,9 +45,9 @@ export default function ProfilMenu({ onLogout, userName }) {
           <ul className="flex flex-col">
             <MenuItem icon={<MdDashboard />} label={t("menu.dashboard")} to="/public/dashboard" />
             <MenuItem icon={<FaClipboardList />} label={t("menu.orders")} to="/public/commandes" />
-            <MenuItem icon={<FaBook />} label={t("menu.book")} to="/public/livreDash" />
-            <MenuItem icon={<FaGraduationCap />} label={t("menu.training")} to="/public/formationDash" />
-            <MenuItem icon={<FaChalkboard />} label={t("menu.webinar")} to="public/webinaireDash" />
+            <MenuItem icon={<FaBook />} label={t("menu.book")} to="/mes-livres" />
+            <MenuItem icon={<FaGraduationCap />} label={t("menu.training")} to="/mes-formations" />
+            <MenuItem icon={<FaChalkboard />} label={t("menu.webinar")} to="/mes-webinaires" />
             <MenuItem icon={<FaUser />} label={t("menu.profile")} to="/settings/profile" />
 
             <hr className="my-2" />

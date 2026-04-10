@@ -21,6 +21,20 @@ export default function ReadBook() {
   const [scale, setScale] = useState(1.0);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  const containerRef = useCallback((node) => {
+    if (node) {
+      setContainerWidth(node.getBoundingClientRect().width);
+      const observer = new ResizeObserver((entries) => {
+        if (entries[0]) {
+          setContainerWidth(entries[0].contentRect.width);
+        }
+      });
+      observer.observe(node);
+    }
+  }, []);
+
   const fileSpec = useMemo(() => {
     if (!pdfPath) return null;
     return pdfPath.startsWith("http")
@@ -64,21 +78,23 @@ export default function ReadBook() {
   return (
     <Layout>
     <section className="p-4 mt-5 md:mt-5" onContextMenu={handleContextMenu}>
-      <div className="flex gap-4 items-start" onContextMenu={handleContextMenu}>
-        <Sidebar />
+      <div className="flex flex-col md:flex-row gap-4 items-start" onContextMenu={handleContextMenu}>
+        <div className="hidden md:block">
+            <Sidebar />
+        </div>
         
-        <div className="lg:h-screen flex-1 w-full" onContextMenu={handleContextMenu}>
+        <div className="lg:h-screen flex-1 w-full overflow-hidden" onContextMenu={handleContextMenu}>
           {livre ? (<>
-            <h1 className="text-3xl font-bold mb-6 text-secondary">
+            <h1 className="text-xl md:text-3xl font-bold mb-6 text-secondary">
               {livre.titre}
             </h1>
             <div className="w-full select-none" onContextMenu={handleContextMenu}>
               {/* Barre de navigation */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="text-sm text-gray-700">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div className="text-sm text-gray-700 w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
                   {t("reader.page")} {pageNumber} {numPages ? `${t("reader.of")} ${numPages}` : ""}
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2 w-full sm:w-auto mx-auto sm:mx-0">
                   <button
                     type="button"
                     className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
@@ -99,7 +115,7 @@ export default function ReadBook() {
                   >
                     {t("reader.next")}
                   </button>
-                  <div className="w-px h-6 bg-gray-300" />
+                  <div className="w-px h-6 bg-gray-300 hidden sm:block" />
                   <button
                     type="button"
                     className="px-3 py-1 bg-gray-200 rounded"
@@ -129,7 +145,12 @@ export default function ReadBook() {
               </div>
 
               {/* Affichage du PDF */}
-              <div className="w-full flex justify-center">
+              <style>{`
+                .react-pdf__Page__canvas {
+                  max-width: none !important;
+                }
+              `}</style>
+              <div className="w-full flex justify-center bg-gray-50 rounded p-0 md:p-4 overflow-x-auto" ref={containerRef}>
                 <Document
                   file={fileSpec}
                   onLoadSuccess={onDocumentLoadSuccess}
@@ -141,6 +162,8 @@ export default function ReadBook() {
                   <Page
                     pageNumber={pageNumber}
                     scale={scale}
+                    width={containerWidth ? Math.min(containerWidth, 800) : undefined}
+                    devicePixelRatio={Math.max(window.devicePixelRatio || 1, 2)}
                     renderAnnotationLayer
                     renderTextLayer
                     className="shadow rounded"
@@ -153,7 +176,7 @@ export default function ReadBook() {
               )}
             </div>
          </> ) : (
-            <div className="text-sm text-gray-600">{t("reader.noBook")}</div>
+            <div className="text-sm text-gray-600 ">{t("reader.noBook")}</div>
           )}
         </div>
 
